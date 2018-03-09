@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :schools
   resources :question_options
   resources :questions
   resources :quizzes

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180309055712) do
+ActiveRecord::Schema.define(version: 20180309060621) do
 
   create_table "algorithms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 20180309055712) do
     t.bigint "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "amethod_id"
+    t.index ["amethod_id"], name: "index_algorithms_on_amethod_id"
   end
 
   create_table "amethods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -39,6 +41,8 @@ ActiveRecord::Schema.define(version: 20180309055712) do
     t.text "references"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "session_id"
+    t.index ["session_id"], name: "index_consultations_on_session_id"
   end
 
   create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -58,18 +62,37 @@ ActiveRecord::Schema.define(version: 20180309055712) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "question_id"
+    t.index ["question_id"], name: "index_question_options_on_question_id"
   end
 
   create_table "questions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "quiz_id"
+    t.index ["quiz_id"], name: "index_questions_on_quiz_id"
   end
 
   create_table "quizzes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "description"
     t.integer "approved"
     t.boolean "avaible"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "session_id"
+    t.index ["session_id"], name: "index_quizzes_on_session_id"
+  end
+
+  create_table "schools", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.text "location"
+    t.string "principal_name"
+    t.string "type"
+    t.string "grade"
+    t.string "code"
+    t.string "phone"
+    t.string "web_page"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -80,6 +103,8 @@ ActiveRecord::Schema.define(version: 20180309055712) do
     t.text "txt3"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "session_id"
+    t.index ["session_id"], name: "index_session_details_on_session_id"
   end
 
   create_table "sessions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -88,6 +113,8 @@ ActiveRecord::Schema.define(version: 20180309055712) do
     t.bigint "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "algorithm_id"
+    t.index ["algorithm_id"], name: "index_sessions_on_algorithm_id"
   end
 
   create_table "user_students", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -102,6 +129,8 @@ ActiveRecord::Schema.define(version: 20180309055712) do
     t.string "score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_user_students_on_user_id"
   end
 
   create_table "user_teachers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -111,6 +140,8 @@ ActiveRecord::Schema.define(version: 20180309055712) do
     t.string "control_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_user_teachers_on_user_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -137,10 +168,22 @@ ActiveRecord::Schema.define(version: 20180309055712) do
     t.string "score", limit: 30, default: "0"
     t.string "authentication_token", limit: 30
     t.bigint "group_id"
+    t.bigint "school_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["group_id"], name: "index_users_on_group_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["school_id"], name: "index_users_on_school_id"
   end
 
+  add_foreign_key "algorithms", "amethods"
+  add_foreign_key "consultations", "sessions"
+  add_foreign_key "question_options", "questions"
+  add_foreign_key "questions", "quizzes"
+  add_foreign_key "quizzes", "sessions"
+  add_foreign_key "session_details", "sessions"
+  add_foreign_key "sessions", "algorithms"
+  add_foreign_key "user_students", "users"
+  add_foreign_key "user_teachers", "users"
   add_foreign_key "users", "groups"
+  add_foreign_key "users", "schools"
 end
