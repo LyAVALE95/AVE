@@ -1,0 +1,2 @@
+class UserStudent < ApplicationRecord
+end
