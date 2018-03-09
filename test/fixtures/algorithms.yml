@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyString
+  level: 1
+  avaible: false
+  price: 
+  value: 
+
+two:
+  name: MyString
+  description: MyString
+  level: 1
+  avaible: false
+  price: 
+  value: 

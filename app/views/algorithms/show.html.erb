@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @algorithm.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @algorithm.description %>
+</p>
+
+<p>
+  <strong>Level:</strong>
+  <%= @algorithm.level %>
+</p>
+
+<p>
+  <strong>Avaible:</strong>
+  <%= @algorithm.avaible %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @algorithm.price %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @algorithm.value %>
+</p>
+
+<%= link_to 'Edit', edit_algorithm_path(@algorithm) %> |
+<%= link_to 'Back', algorithms_path %>

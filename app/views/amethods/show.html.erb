@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @amethod.name %>
+</p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @amethod.subject %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @amethod.description %>
+</p>
+
+<p>
+  <strong>Description subject:</strong>
+  <%= @amethod.description_subject %>
+</p>
+
+<p>
+  <strong>Skills:</strong>
+  <%= @amethod.skills %>
+</p>
+
+<%= link_to 'Edit', edit_amethod_path(@amethod) %> |
+<%= link_to 'Back', amethods_path %>

@@ -1,0 +1,47 @@
+<%= form_with(model: algorithm, local: true) do |form| %>
+  <% if algorithm.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(algorithm.errors.count, "error") %> prohibited this algorithm from being saved:</h2>
+
+      <ul>
+      <% algorithm.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :algorithm_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description, id: :algorithm_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :level %>
+    <%= form.number_field :level, id: :algorithm_level %>
+  </div>
+
+  <div class="field">
+    <%= form.label :avaible %>
+    <%= form.check_box :avaible, id: :algorithm_avaible %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.text_field :price, id: :algorithm_price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :value %>
+    <%= form.text_field :value, id: :algorithm_value %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

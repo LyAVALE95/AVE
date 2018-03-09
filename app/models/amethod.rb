@@ -1,0 +1,2 @@
+class Amethod < ApplicationRecord
+end
