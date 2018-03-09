@@ -1,0 +1,2 @@
+class SessionDetail < ApplicationRecord
+end

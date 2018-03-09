@@ -1,0 +1,32 @@
+<%= form_with(model: consultation, local: true) do |form| %>
+  <% if consultation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(consultation.errors.count, "error") %> prohibited this consultation from being saved:</h2>
+
+      <ul>
+      <% consultation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :links %>
+    <%= form.text_area :links, id: :consultation_links %>
+  </div>
+
+  <div class="field">
+    <%= form.label :books %>
+    <%= form.text_area :books, id: :consultation_books %>
+  </div>
+
+  <div class="field">
+    <%= form.label :references %>
+    <%= form.text_area :references, id: :consultation_references %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

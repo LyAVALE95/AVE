@@ -10,6 +10,34 @@
       </ul>
     </div>
   <% end %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :group_name %>
+  </div>
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description, id: :group_description %>
+  </div> 
+  <div class="field">
+    <%= form.label :schedule %>
+    <%= form.text_field :schedule, id: :group_schedule %>
+  </div> 
+  <div class="field">
+    <%= form.label :rooms %>
+    <%= form.text_field :rooms, id: :group_rooms %>
+  </div> 
+  <div class="field">
+    <%= form.label :semester %>
+    <%= form.text_field :semester, id: :group_semester %>
+  </div> 
+  <div class="field">
+    <%= form.label :career %>
+    <%= form.text_field :career, id: :group_career %>
+  </div> 
+  <div class="field">
+    <%= form.label :average %>
+    <%= form.text_field :average, id: :group_average %>
+  </div> 
 
   <div class="actions">
     <%= form.submit %>
