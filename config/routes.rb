@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :question_options
+  resources :questions
+  resources :quizzes
   resources :session_details
   resources :consultations
   resources :sessions
