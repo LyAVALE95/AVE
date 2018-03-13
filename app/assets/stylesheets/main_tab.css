@@ -1,0 +1,24 @@
+.navbar{	
+	margin-top: -50px;
+}
+.navbar#mainlogo img{
+	width: 100px; 
+	height: 90px;
+}
+#header .maintextbar{
+	margin-left: 50px;
+	
+}
+#header .maintextbar input{
+	margin-left: 10px;
+}
+#header input{
+	width: 550px;
+}
+#header{
+
+	display: inline; 	
+}
+#header a:hover {
+
+}

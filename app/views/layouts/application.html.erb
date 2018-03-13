@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AVEWeb</title>
+    <title>AVE</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <p class="notice"><%= notice %></p>
+<body>
+ <div class="col-lg-12 block" id="header">
+    <%= render 'layouts/site_header' %>
+    </div>
+    <br>
+    <div id="content" class="">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 block" id="page">
+           <p class="notice"><%= notice %></p>
        <p class="alert"><%= alert %></p>
-    <%= yield %>
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="footer">
+      Valeria| <span data-lang="lblFooter">Todos los derechos reservados</span>&emsp13;&emsp;
+    </div>
   </body>
 </html>
