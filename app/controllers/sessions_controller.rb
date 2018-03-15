@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+#class SessionsController < Devise::SessionsController
+
   before_action :set_session, only: [:show, :edit, :update, :destroy]
 
   # GET /sessions
@@ -60,6 +62,7 @@ class SessionsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -69,6 +72,6 @@ class SessionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def session_params
-      params.require(:session).permit(:name, :avaible, :price)
+      params.require(:session).permit(:name)
     end
 end

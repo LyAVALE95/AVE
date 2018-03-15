@@ -5,16 +5,18 @@
           </button>
           <img src="/AVElogob.png" id="mainlogo" width="80px" height="75px">
           <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0 item-list" >
-              <li class="nav-item active" >
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item" >
-                <a class="nav-link disabled" href="#">Salir</a>
-              </li>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0 item-list" >    
+            <li><% if user_signed_in? %>
+
+            <div id="datosusr" class="text-muted">
+              <span class="user "><span id="lblUsuario" data-lang="lblUsuario">Usuario</span>:
+              <span >
+                <%= current_user.email %>
+              </span>
+              </span>          
+            </div>
+       
+          <% end %></li>          
             </ul>
             <form class="form-inline my-2 my-lg-0">
                   <form>
@@ -32,7 +34,21 @@
        </nav>
 </div> 
 
-
+<br>
+  <div class="fixed-action-btn toolbar">
+    <a class="btn-floating btn-large red">
+      <i class="large material-icons">menu</i>
+    </a>
+    <ul>
+      <li class="waves-effect waves-light"><%= link_to "Salir", destroy_user_session_path, :method => :delete %></li>
+      <li class="waves-effect waves-light"><a href="#!"><i class="material-icons">book</i> Lecciones</a></li>
+      <li class="waves-effect waves-light"><a href="#!"><i class="material-icons">border_color</i>Ejercicios</a></li>
+      <li class="waves-effect waves-light"><a href="#!"><i class="material-icons">widgets</i>Algoritmo</a></li>
+      <li class="waves-effect waves-light"><a href="#!"><i class="material-icons">tap_and_play</i>Contactos</a></li>
+      <li class="waves-effect waves-light"><a href="#!"><i class="material-icons">note</i>Archivos</a></li>
+    </ul>
+  </div>
+        
 
 
          

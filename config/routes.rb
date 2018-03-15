@@ -11,9 +11,20 @@ Rails.application.routes.draw do
   resources :groups
   #devise_for :users
   devise_for :users, controllers: { registrations: "users/registrations",sessions: "users/sessions"}
+  devise_scope :user do  
+    match '/sessions/user', to: 'users/sessions#create', via: :post
+  end
   #devise_for :users, controllers: { sessions: 'users/sessions' }
   resources :user_teachers
   resources :user_students
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root to: "user_students#index"
+  authenticated :user do
+    #root :to => "invoices#index"
+      root to: "user_students#index"
+  end
+  root :to => redirect("/users/sign_in")
+    #post ':controller(/:action(/:id(.:format)))'
+    #get ':controller(/:action(/:id(.:format)))'
+  
+
 end
