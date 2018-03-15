@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180309060621) do
+ActiveRecord::Schema.define(version: 20180315134902) do
 
   create_table "algorithms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -169,6 +169,9 @@ ActiveRecord::Schema.define(version: 20180309060621) do
     t.string "authentication_token", limit: 30
     t.bigint "group_id"
     t.bigint "school_id"
+    t.string "rol", limit: 30, default: "student"
+    t.boolean "active", default: false
+    t.boolean "pro", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["group_id"], name: "index_users_on_group_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
