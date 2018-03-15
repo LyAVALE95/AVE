@@ -1,30 +1,40 @@
 <div id="header">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light bg-faded">
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="        navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <a class="navbar-brand" href="#"><img src="/AVElogob.png" id="mainlogo" width="60px" height="55px"></a>
-        
+          <img src="/AVElogob.png" id="mainlogo" width="80px" height="75px">
           <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-              <li class="nav-item active">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0 item-list" >
+              <li class="nav-item active" >
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
+              <li class="nav-item" >
+                <a class="nav-link disabled" href="#">Salir</a>
               </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                  <form>
+                   <div class="input-field">
+                     <input id="mainsearch" type="search" required> 
+                     <label class="label-icon" for="search"><i class="material-icons" id="search-icon">search</i></label>
+                     <i class="material-icons">close</i>
+                   </div>
+                     <a class="btn-floating waves-effect waves-light red circle-small"><i class="material-icons icon-small">search</i></a>
+                   </form>              
+             <!--  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
             </form>
           </div>
        </nav>
 </div> 
-        
+
+
+
+
          
 <!--
 <div id="mainNav" aria-expanded="false" class="collapse" style="height: 0px;">
