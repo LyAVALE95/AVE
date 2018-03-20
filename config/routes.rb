@@ -20,9 +20,11 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   authenticated :user do
     #root :to => "invoices#index"
-      root to: "user_students#index"
+      root to: "home#index"
   end
-  root :to => redirect("/users/sign_in")
+  #root :to => redirect("/users/sign_in")
+  get '/home/welcome', :to =>'home#welcome'
+  root :to => redirect("/home/welcome")
     #post ':controller(/:action(/:id(.:format)))'
     #get ':controller(/:action(/:id(.:format)))'
   

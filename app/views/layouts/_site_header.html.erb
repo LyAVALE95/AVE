@@ -1,12 +1,32 @@
 <div id="header">
+ <nav class="nav-extended navbar-light bg-light bg-faded">
+    <div class="nav-wrapper navbar">
+      <a href="#" class="brand-logo"><a href="/"><img src="/AVElogob.png" id="mainlogo" width="80px" height="75px"></a></a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="sass.html">Sass</a></li>
+        <li><a href="badges.html">Components</a></li>
+        <li><a href="collapsible.html">JavaScript</a></li>        
+      </ul>
+      <ul class="side-nav" id="mobile-demo">
+        <li><a href="sass.html">Sass</a></li>
+        <li><a href="badges.html">Components</a></li>
+        <li><a href="collapsible.html">JavaScript</a></li>
+      </ul>
+    </div>
+  </nav>
+  </div>
+<!--
+<div id="header">
     <nav class="navbar navbar-expand-lg navbar-light bg-light bg-faded">
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="        navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <img src="/AVElogob.png" id="mainlogo" width="80px" height="75px">
+          <a href="/"><img src="/AVElogob.png" id="mainlogo" width="80px" height="75px"></a>
           <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+          <% if user_signed_in? %>
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0 item-list" >    
-            <li><% if user_signed_in? %>
+            <li>
 
             <div id="datosusr" class="text-muted">
               <span class="user "><span id="lblUsuario" data-lang="lblUsuario">Usuario</span>:
@@ -16,39 +36,44 @@
               </span>          
             </div>
        
-          <% end %></li>          
+           </li>          
             </ul>
             <form class="form-inline my-2 my-lg-0">
                   <form>
                    <div class="input-field">
-                     <input id="mainsearch" type="search" required> 
-                     <label class="label-icon" for="search"><i class="material-icons" id="search-icon">search</i></label>
+                     <input id="mainsearch" type="search"  class="autocomplete" required> 
+                     <label class="label-icon" for="autocomplete-input"><i class="material-icons" id="search-icon">search</i></label>
                      <i class="material-icons">close</i>
                    </div>
                      <a class="btn-floating waves-effect waves-light red circle-small"><i class="material-icons icon-small">search</i></a>
-                   </form>              
-             <!--  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+                   </form>
+                <%else%>                
+                <div class="signup-login">
+                    <a href="/users/sign_in">Ingresar</a>
+                    <a href="/users/sign_up">Registrarse</a>                                    
+                </div>
+              <% end %>
             </form>
           </div>
        </nav>
-</div> 
+</div> -->
 
 <br>
+<% if user_signed_in? %>
   <div class="fixed-action-btn toolbar">
     <a class="btn-floating btn-large red">
       <i class="large material-icons">menu</i>
     </a>
     <ul>
       <li class="waves-effect waves-light"><%= link_to "Salir", destroy_user_session_path, :method => :delete %></li>
-      <li class="waves-effect waves-light"><a href="#!"><i class="material-icons">book</i> Lecciones</a></li>
-      <li class="waves-effect waves-light"><a href="#!"><i class="material-icons">border_color</i>Ejercicios</a></li>
-      <li class="waves-effect waves-light"><a href="#!"><i class="material-icons">widgets</i>Algoritmo</a></li>
-      <li class="waves-effect waves-light"><a href="#!"><i class="material-icons">tap_and_play</i>Contactos</a></li>
-      <li class="waves-effect waves-light"><a href="#!"><i class="material-icons">note</i>Archivos</a></li>
+      <li class="waves-effect waves-light"><a href="/sessions"><i class="material-icons">book</i> Lecciones</a></li>
+      <li class="waves-effect waves-light"><a href="/quizzes"><i class="material-icons">border_color</i>Ejercicios</a></li>
+      <li class="waves-effect waves-light"><a href="/algorithms"><i class="material-icons">widgets</i>Algoritmo</a></li>
+      <li class="waves-effect waves-light"><a href="/user_students"><i class="material-icons">tap_and_play</i>Contactos</a></li>
+      <li class="waves-effect waves-light"><a href="/session_details"><i class="material-icons">note</i>Archivos</a></li>
     </ul>
   </div>
-        
+<%end%>
 
 
          

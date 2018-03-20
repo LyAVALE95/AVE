@@ -15,16 +15,46 @@
     <%= form.label :name %>
     <%= form.text_field :name, id: :session_name %>
   </div>
-
+<!--
   <div class="field">
     <%= form.label :avaible %>
     <%= form.check_box :avaible, id: :session_avaible %>
   </div>
-
+-->
   <div class="field">
     <%= form.label :price %>
     <%= form.text_field :price, id: :session_price %>
   </div>
+
+   <div class="col-md-6 block">
+                <h3><%= t :session_detail_details%></h3>
+                <div class="controls">
+                  <%= form.fields_for :session_details do |session_details_form| %>
+                  
+                  <div class="form-group row">
+                    <%= session_details_form.label :txt1,'Título' , class: "control-label col-sm-4" %>
+                    <div class="col-sm-8">
+                      <%= session_details_form.text_field :txt1, class: "form-control", :value => "Titulo ejemplo" %>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <%= session_details_form.label :txt2,'Objetivo' , class: "control-label col-sm-4" %>
+                    <div class="col-sm-8">
+                      <%= session_details_form.text_field :txt2, class: "form-control", :value => "Aprovechamiento" %>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <%= session_details_form.label :txt3,'Contenido' , class: "control-label col-sm-4" %>
+                    <div class="col-sm-8">
+                      <%= session_details_form.text_field :txt3, class: "form-control", :value => "..." %>
+                    </div>
+                  </div>
+                  <% end %>
+                </div>
+
+  </div>
+
+
 
   <div class="actions">
     <%= form.submit %>

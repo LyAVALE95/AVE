@@ -12,6 +12,17 @@ class SessionsController < ApplicationController
   # GET /sessions/1
   # GET /sessions/1.json
   def show
+     #@details = Session.select('sessions.*, session_details.*').joins("join session_details")
+     #.where("session_details.session_id = 1 ",params[:id])
+       @details = Session.select('sessions.*, session_details.*').joins("join session_details")
+     .where("sessions.id = ? and session_details.session_id = ?",params[:id],params[:id])
+      #@details = Session.select("sessions.*,session_details.*").
+      #joins("join Session_detail").where("session_details.session_id=?",params[:id])
+   respond_to do |format|
+      format.html 
+      format.json { render json: @details }
+    end
+
   end
 
   # GET /sessions/new
@@ -72,6 +83,6 @@ class SessionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def session_params
-      params.require(:session).permit(:name)
+      params.require(:session).permit(:name, :price ,session_detail_attributes: [:txt1, :txt2, :txt3, :session_id])
     end
 end

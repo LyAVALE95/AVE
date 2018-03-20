@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Sessions</h1>
+<h1>Lecciones (Temas)</h1>
 
 <table>
-  <thead>
+  <!--<thead>
     <tr>
       <th>Name</th>
       <th>Avaible</th>
@@ -25,7 +25,20 @@
     <% end %>
   </tbody>
 </table>
-
+-->
+  <ul class="collection">
+   <% @sessions.each do |session| %>
+      <li class="collection-item avatar">
+      <img src="pencil.png" alt="" class="circle">
+        <h6><%= session.name %></h6>
+        <p><%= session.avaible %></p>
+        <p><%= session.price %></p>
+        <p><%= link_to 'Mostrar', session %>
+        |<%= link_to 'Editar', edit_session_path(session) %>
+        |<%= link_to 'Eliminar', session, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+      </li>
+    <% end %>
+  </ul>
 <br>
 
 <%= link_to 'New Session', new_session_path %>
