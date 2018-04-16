@@ -3,4 +3,8 @@ class HomeController < ApplicationController
 	end	
 	def welcome
 	end	
+	def promo
+	end	
+	def home
+	end	
 end

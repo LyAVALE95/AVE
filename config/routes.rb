@@ -23,8 +23,8 @@ Rails.application.routes.draw do
       root to: "home#index"
   end
   #root :to => redirect("/users/sign_in")
-  get '/home/welcome', :to =>'home#welcome'
-  root :to => redirect("/home/welcome")
+  get '/home/home', :to =>'home#home'
+  root :to => redirect("/home/home")
     #post ':controller(/:action(/:id(.:format)))'
     #get ':controller(/:action(/:id(.:format)))'
   

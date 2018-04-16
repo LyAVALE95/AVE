@@ -60,11 +60,10 @@
         
           <div class="field">
             <%= f.label :rol %><br />
-            <%= f.text_field :rol %>
-          </div>
+          <%= f.select :rol, options_for_select([["Teacher", "t"], ["Student", "s"]]) %>          </div>
       </div>
         <div class="actions">
-    <%= f.submit "Sign up" %>
+    <center><%= f.submit "Sign up" %></center>
   </div></div>
     </div>
   </div>
