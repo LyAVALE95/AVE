@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Users::RegistrationsController < Devise::RegistrationsController
+class Users::RegistrationsController < Devise::RegistrationsController   
   def new
     build_resource({})
     yield resource if block_given?
@@ -15,7 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def sign_up_params
     params.require(:user).permit(:email, :password, :password_confirmation,:names,:lastnames,:name,:control_number,:carrer,:grade,:algorithm_level,:course_level,:score,:rol)
     #params.require(:user).permit(:name, :last_name, :email, :password, :password_confirmation ,:user_img,:company_id)
-  end
+  end    
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 

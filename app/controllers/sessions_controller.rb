@@ -1,8 +1,9 @@
 class SessionsController < ApplicationController
 #class SessionsController < Devise::SessionsController
-
-  before_action :set_session, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_session, only: [:show, :edit, :update, :destroy] do
+    redirect_to new_user_session_path unless current_user
+  end
+  
   # GET /sessions
   # GET /sessions.json
   def index
