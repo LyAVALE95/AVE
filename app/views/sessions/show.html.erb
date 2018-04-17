@@ -1,38 +1,46 @@
-
 <p id="notice"><%= notice %></p>
 <%= link_to 'Edit', edit_session_path(@session) %> |
 <%= link_to 'Back', sessions_path %>
 <div class="row">
- <div class="col-md-8"><h1> <%= @session.name%></h1></div>
+ <div class="col-md-10"><h1> <%= @session.name%></h1>
+<h5 class="yellow-text text-darken-4"><%= @session.price%></h5>
+ </div>
         <div class="col-md-2">
-        <div class="card yellow lighten-1">
-            <div class="card-content black-text">
-             <b> Precio: <%= @session.price%></b>
-            </div>
-        </div>
-        </div>
-         <div class="col-md-2">
-        <div class="card green accent-1">
-            <div class="card-content black-text">
-             <b> Completado</b>
-            </div>
-        </div>
+        <a class="waves-effect waves-light yellow lighten-1 modal-trigger btn-large  grey-text text-darken-3" href="#modal1"
+        >
+          <b>+ Lección</b>
+        </a>        
         </div>
 </div>
+<div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Agregar lección</h4>
+      <%= render 'session_details/form', session_detail: @session_detail %>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close btn-danger waves-effect waves-green btn-flat">Cancelar</a>
+    </div>
+  </div>
+ <div class="row">
  <% @details.each do |d| %>
-<div class="row">
-        <div class="col s12 m6">
-          <div class="card  cyan darken-4">
-            <div class="card-content white-text">
-              <span class="card-title"><%= d.txt1%></span>
-              <p><%= d.txt2%> </p>
-            </div>            
-            <div class="card-action">
-              <%= link_to "Ver", controller: "session_details", action: "show", id: d.id  %>
-              <a href="#">Ir a los ejercicios</a>
-            </div>
-          </div>
-        </div>
-      </div>
+<div class="col-md-6" >
+
+  <div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="/backgrounds/beginning-blank-blank-page-45718.jpg" >
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4"><%= d.txt1%><i class="material-icons right">more_vert</i></span>
+      <p><%= link_to "Ver", controller: "session_details", action: "show", id: d.id  %></p>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Contenido de la lección<i class="material-icons right">close</i></span>
+      <p><a href="#">Ir a los ejercicios</a> </p>
+    </div>
+  </div>
+
+ </div>
+ 
 <%end %>
+</div>
 

@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   before_action :set_session, only: [:show, :edit, :update, :destroy] do
     redirect_to new_user_session_path unless current_user
   end
-  
+
   # GET /sessions
   # GET /sessions.json
   def index
@@ -15,6 +15,8 @@ class SessionsController < ApplicationController
   def show
      #@details = Session.select('sessions.*, session_details.*').joins("join session_details")
      #.where("session_details.session_id = 1 ",params[:id])
+     @session_detail = SessionDetail.new(session_id: params[:id])#(session_detail: SessionDetail)
+     @session_detail.save!
        @details = Session.select('sessions.*, session_details.*').joins("join session_details")
      .where("sessions.id = ? and session_details.session_id = ?",params[:id],params[:id])
       #@details = Session.select("sessions.*,session_details.*").
