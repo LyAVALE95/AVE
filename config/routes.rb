@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   #root :to => redirect("/users/sign_in")
   get '/home/home', :to =>'home#home'
   root :to => redirect("/home/home")
+  post 'sessions' => 'session_details#create'
     #post ':controller(/:action(/:id(.:format)))'
     #get ':controller(/:action(/:id(.:format)))'
   
