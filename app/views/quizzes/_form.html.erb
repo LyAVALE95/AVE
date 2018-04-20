@@ -12,18 +12,24 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :description %>
+    <%= form.label :description,'Descripción' %>
     <%= form.text_field :description, id: :quiz_description %>
   </div>
 
   <div class="field">
+  <label> 
     <%= form.label :approved %>
-    <%= form.number_field :approved, id: :quiz_approved %>
+    <%= form.check_box :approved, id: :quiz_approved %>
+    <span><%= form.label :approved, 'Aprobado' %></span>
+  </label> 
   </div>
 
-  <div class="field">
-    <%= form.label :avaible %>
-    <%= form.check_box :avaible, id: :quiz_avaible %>
+  <div class="field"> 
+  <label>   
+   <%= form.label :avaible %> 
+   <%= form.check_box :avaible,include_hidden: false, id: :quiz_avaible %>    
+   <span><%= form.label :avaible, 'Disponible' %></span>
+  </label>
   </div>
 
   <div class="actions">

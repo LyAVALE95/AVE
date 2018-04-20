@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
   def show
      #@details = Session.select('sessions.*, session_details.*').joins("join session_details")
      #.where("session_details.session_id = 1 ",params[:id])
-     @session_detail = SessionDetail.new(session_id: params[:id],txt3: 'Leo')#(session_detail: SessionDetail)
+     @session_detail = SessionDetail.new(session_id: params[:id])#(session_detail: SessionDetail)
      #@session_detail.save!
      #@session_detail = SessionDetail.session_detail.build
        @details = Session.select('sessions.*, session_details.*').joins("join session_details")

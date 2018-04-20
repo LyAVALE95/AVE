@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get '/home/home', :to =>'home#home'
   root :to => redirect("/home/home")
   post 'sessions' => 'session_details#create'
+  get '/home/alg', :to =>'home#alg'
     #post ':controller(/:action(/:id(.:format)))'
     #get ':controller(/:action(/:id(.:format)))'
   

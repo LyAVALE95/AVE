@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Algoritmo Selección AVE</title>
+
+    <link href="https://cdn.foundation5.zurb.com/foundation.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="malg.js"></script><script type="text/javascript" src="alg.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+
+  <body>
+  <div>Se ha desarrollado este método de asignación para la solución de problemas de transporte. </div>
+    <div ng-app="productsTableApp">
+          <div ng-controller="ProductsController">
+            <p>Bodegas/Fábricas: <br/>{{data}}
+            </p>
+            <!--<label>Método para la medición de costos de transporte en base a la capacidad de entrega y solicitud.</label>-->
+            
+                <input class="btnD btn btn-info"  type="button" value="+Bodega" ng-click="addColumn()"/>
+                <input class="btnD btn btn-info" type="button" value="+Fábrica" ng-click="addRow()"/>
+ <br>
+ <div id = "Pleccion"> </div>
+ <br>
+  <input class="btnD3 btn btn-primary"  type="button" style="visibility: {{showD3}};" ng-click="doRedo()" value="Volver a realizar este ejercicio"/>
+                <table id="DataFab" class=" table-bordered">
+                <thead>
+  				<tr>
+    			</tr>
+  				</thead>
+                    <tr ng-repeat="datum in data">
+                        <td width="120px"> <button style="visibility: {{showD}}; width: {{widthD}}" class="btnD btn btn-danger" data-ng-click="removeRow($index)">Eliminar fábrica</button></td>
+                        <th width="50px"> F{{$index}}: </th>
+                        <td ng-repeat="field in datum">
+                          	<input type="text" style="background-color: {{field.cellcolor}}; width: 100px;"
+                             ng-change="{{metodoinput}}"
+                             ng-model="field.valor"/>
+                  			<button width="120px" style="visibility: {{showD}}; width: {{widthD}}" class="btnD btn btn-danger" ng-click="removeColumn($index)">Eliminar Bodega</button>
+                  		 </td>
+                    </tr>
+                </table>
+                	<br>
+                <input class="btnDP btn btn-success" type="button"  value="Hecho" onclick="completeTableJS()" ng-click="completeTable()"/>
+                <input class="btnD3 btn btn-warning" type="button"  style="visibility: {{showD2}};" value="Regresar" ng-click="goBack()"/>
+               <!-- <input class="btnD2 btn btn-success"  type="button" onclick="completeTableJS()" value="Continuar"/>-->
+                <input class="btnD3 btn btn-success"  type="button" style="visibility: {{showD2}};" ng-click="doAssigment()" value="Asignación"/>
+
+                  <hr>
+   
+                <!--<table id="DataFab"  class="table table-bordered">
+                <thead>
+                <tr>              
+                </tr>
+                </thead>
+                <tr class="headerColumn"></tr>
+                    <tr ng-repeat="datum in data">
+                        <th width="50px">F{{$index}} </th>
+                        <td ng-repeat="field in datum">
+                            <p type="text" style="background-color: {{field.cellcolor}}"
+                             ng-model="field.costo"s>{{field.costo}}</p>
+                       </td>
+                    </tr>
+                </table>-->
+                             <br>
+                <hr>
+                <div id = "PleccionR"> </div>
+
+
+          		</div>
+     </div>
+   </body>
+</html>

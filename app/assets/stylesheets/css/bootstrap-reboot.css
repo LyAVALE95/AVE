@@ -251,7 +251,7 @@ button::-moz-focus-inner,
 }
 
 input[type="radio"],
-input[type="checkbox"] {
+input[type="checkbox2"] {
   box-sizing: border-box;
   padding: 0;
 }
