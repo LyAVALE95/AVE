@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Score:</strong>
+  <%= @user_quiz.score %>
+</p>
+
+<%= link_to 'Edit', edit_user_quiz_path(@user_quiz) %> |
+<%= link_to 'Back', user_quizzes_path %>

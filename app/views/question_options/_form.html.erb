@@ -10,6 +10,10 @@
       </ul>
     </div>
   <% end %>
+  <div class="field d-none">
+    <%= form.label :question_id %>
+    <%= form.text_area :question_id, id: :question_option_question_id %>
+  </div>
 
   <div class="field">
     <%= form.label :value %>

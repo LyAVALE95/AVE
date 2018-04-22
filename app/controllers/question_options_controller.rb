@@ -69,6 +69,6 @@ class QuestionOptionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_option_params
-      params.require(:question_option).permit(:value, :description)
+      params.require(:question_option).permit(:value, :description,:question_id)
     end
 end

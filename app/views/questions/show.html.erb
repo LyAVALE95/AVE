@@ -1,9 +1,22 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Description:</strong>
+<h1 class="teal-text text-lighten-1">
   <%= @question.description %>
-</p>
+</h1>
+<br>
+<div class="row">
+<div class="col-md-7">
+<h4>Agregar pregunta</h4>
+ <%= render 'question_options/form', question_option: @question_option %>
+</div>
+<div class="col-md-5">
+<h5>Opciones</h5><ol class="collection">
+   <% @question_options.each do |q| %>
+   <!--<a href="/questions/" class="collection-item" id=q.id >Articles</a>-->
+   <li class="collection-item"><%= link_to q.description, class: 'collection-item',controller: "questions", action: "show", id: q.id %></li>
+   <%end%></ol>
+</div> 
+</div>
 
 <%= link_to 'Edit', edit_question_path(@question) %> |
 <%= link_to 'Back', questions_path %>

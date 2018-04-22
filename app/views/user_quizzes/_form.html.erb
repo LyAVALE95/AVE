@@ -1,0 +1,22 @@
+<%= form_with(model: user_quiz, local: true) do |form| %>
+  <% if user_quiz.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user_quiz.errors.count, "error") %> prohibited this user_quiz from being saved:</h2>
+
+      <ul>
+      <% user_quiz.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :score %>
+    <%= form.text_field :score, id: :user_quiz_score %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

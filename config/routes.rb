@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :user_quizzes
   resources :schools
   resources :question_options
   resources :questions
@@ -26,6 +27,9 @@ Rails.application.routes.draw do
   get '/home/home', :to =>'home#home'
   root :to => redirect("/home/home")
   post 'sessions' => 'session_details#create'
+  post 'quizzes' => 'questions#create'
+  get 'quizzes' => 'questions#index'
+  post 'questions' => 'question_options#create'
   get '/home/alg', :to =>'home#alg'
     #post ':controller(/:action(/:id(.:format)))'
     #get ':controller(/:action(/:id(.:format)))'

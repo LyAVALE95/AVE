@@ -117,6 +117,12 @@ ActiveRecord::Schema.define(version: 20180315134902) do
     t.index ["algorithm_id"], name: "index_sessions_on_algorithm_id"
   end
 
+  create_table "user_quizzes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.float "score", limit: 24
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "user_students", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "names"
     t.string "lastnames"
@@ -130,7 +136,9 @@ ActiveRecord::Schema.define(version: 20180315134902) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.bigint "user_quiz_id"
     t.index ["user_id"], name: "index_user_students_on_user_id"
+    t.index ["user_quiz_id"], name: "index_user_students_on_user_quiz_id"
   end
 
   create_table "user_teachers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

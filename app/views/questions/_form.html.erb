@@ -10,13 +10,17 @@
       </ul>
     </div>
   <% end %>
-
+<div class="field d-none">
+    <%= form.label :quiz_id %>
+    <%= form.text_area :quiz_id, id: :question_quiz_id %>
+  </div>
   <div class="field">
     <%= form.label :description %>
     <%= form.text_area :description, id: :question_description %>
   </div>
-
+<center>
   <div class="actions">
     <%= form.submit %>
   </div>
+</center>
 <% end %>

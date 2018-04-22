@@ -1,19 +1,32 @@
 <p id="notice"><%= notice %></p>
+<div class="row card">
+<div class="col-md-8">
+<h3 class="class="pink-text text-lighten-1">
+ #<%= @quiz.id %>: <%= @quiz.description %>
+</h3>
+</div>
+<div class="col-md-4">
+<h6 class="teal-text text-darken-3">
+  Approved<%= @quiz.approved %>
+</h6>
 
-<p>
-  <strong>Description:</strong>
-  <%= @quiz.description %>
-</p>
-
-<p>
-  <strong>Approved:</strong>
-  <%= @quiz.approved %>
-</p>
-
-<p>
-  <strong>Avaible:</strong>
-  <%= @quiz.avaible %>
-</p>
-
+<h6 class="teal-text text-darken-3">
+  Avaible: <%= @quiz.avaible %>
+</h6>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6 card">
+      <h4>Agregar pregunta</h4>
+      <%= render 'questions/form', question: @question %>
+</div>
+<div class="col-md-6 card">
+<h5>Preguntas</h5><ol class="collection">
+   <% @questions.each do |q| %>
+   <!--<a href="/questions/" class="collection-item" id=q.id >Articles</a>-->
+   <li><%= link_to q.description, class: 'collection-item',controller: "questions", action: "show", id: q.id %></li>
+   <%end%></ol>
+</div>
+</div
 <%= link_to 'Edit', edit_quiz_path(@quiz) %> |
 <%= link_to 'Back', quizzes_path %>
