@@ -24,6 +24,11 @@
   <strong>Skills:</strong>
   <%= @amethod.skills %>
 </p>
+<p>
+  <strong>Skills:</strong>
+  <%= $cmethods %>
+</p>
+<%= button_to 'To 1', amethods_count_path, method: :post %>
 
 <%= link_to 'Edit', edit_amethod_path(@amethod) %> |
 <%= link_to 'Back', amethods_path %>

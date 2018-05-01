@@ -28,8 +28,10 @@ class SessionDetailsController < ApplicationController
 
     respond_to do |format|
       if @session_detail.save
-        format.html { redirect_to @session_detail, notice: 'Session detail was successfully created.' }
-        format.json { render :show, status: :created, location: @session_detail }
+        #format.html { redirect_to @session_detail, notice: 'Session detail was successfully created.' }
+        #format.json { render :show, status: :created, location: @session_detail }
+        format.html { redirect_to amethods_url, notice: 'Session detail was successfully created.' }
+        format.json { head :no_content, status: :created, location: @session_detail }
       else
         format.html { render :new }
         format.json { render json: @session_detail.errors, status: :unprocessable_entity }

@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Amethods</h1>
-
+<%= link_to 'New Amethod', new_amethod_path, id: "new_link" %>
 <table>
   <thead>
     <tr>
@@ -29,7 +29,14 @@
     <% end %>
   </tbody>
 </table>
-
+<div class="row">
+  <div class="col-md-6">
+<%= render 'session_details/form', session_detail: @session_detail %>
+  </div>
+   <div class="col-md-6">
+<%= render 'session_details/index', session_details: @session_details %>
+  </div>
+</div>
 <br>
 
-<%= link_to 'New Amethod', new_amethod_path %>
+

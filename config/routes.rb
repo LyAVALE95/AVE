@@ -33,6 +33,6 @@ Rails.application.routes.draw do
   get '/home/alg', :to =>'home#alg'
     #post ':controller(/:action(/:id(.:format)))'
     #get ':controller(/:action(/:id(.:format)))'
-  
+  post 'amethods/count'
 
 end

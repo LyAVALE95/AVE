@@ -3,13 +3,25 @@ class AmethodsController < ApplicationController
 
   # GET /amethods
   # GET /amethods.json
+  $cmethods = 0
   def index
     @amethods = Amethod.all
+    @session_details = SessionDetail.all
+    @session_detail = SessionDetail.new()
+  end
+
+  def count 
+    $cmethods = 1
+    #redirect_to amethod_url(@amethod)
   end
 
   # GET /amethods/1
   # GET /amethods/1.json
   def show
+    #$cmethods = 0
+  end
+  def news 
+
   end
 
   # GET /amethods/new
@@ -30,6 +42,7 @@ class AmethodsController < ApplicationController
       if @amethod.save
         format.html { redirect_to @amethod, notice: 'Amethod was successfully created.' }
         format.json { render :show, status: :created, location: @amethod }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @amethod.errors, status: :unprocessable_entity }
