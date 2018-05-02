@@ -15,7 +15,7 @@ class QuizzesController < ApplicationController
     @questions = Quiz.select('quizzes.*, questions.*').joins("join questions")
      .where("quizzes.id = ? and questions.quiz_id = ?",params[:id],params[:id])
     @question_options = Question.select('questions.*, question_options.*').joins("join question_options")
-     .where("questions.id = ? and question_options.question_id = ?",params[:search],params[:search])
+     .where("questions.quiz_id = ? and question_options.question_id = questions.id",params[:id])
       #@details = Session.select("sessions.*,session_details.*").
       #joins("join Session_detail").where("session_details.session_id=?",params[:id])
    respond_to do |format|

@@ -24,7 +24,7 @@
         <td><%= amethod.skills %></td>
         <td><%= link_to 'Show', amethod %></td>
         <td><%= link_to 'Edit', edit_amethod_path(amethod) %></td>
-        <td><%= link_to 'Destroy', amethod, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', amethod, class: 'destroyamethods', method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

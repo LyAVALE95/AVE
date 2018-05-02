@@ -16,15 +16,20 @@
 </div>
 </div>
 <div class="row">
-<div class="col-md-6 card">
+<div class="col-md-6 card" id="addquestions" >
       <h4>Agregar pregunta</h4>
-      <%= render 'questions/form', question: @question %>
+        <a id="btnAddQuestionField"  class="btn-floating  waves-effect waves-light pink"><i class="material-icons">add</i></a>
+      <!--<%= render 'questions/form', question: @question %>-->
 </div>
 <div class="col-md-6 card">
 <h5>Preguntas</h5><ol class="collection">
    <% @questions.each do |q| %>
    <!--<a href="/questions/" class="collection-item" id=q.id >Articles</a>-->
-   <li><%= link_to q.description, class: 'collection-item',controller: "questions", action: "show", id: q.id %></li>
+   <li><%= link_to q.description, class: 'collection-item',controller: "questions", action: "show", id: q.id %></li> <ul class="collection">
+    <% @question_options.each do |qp| %>
+   <!--<a href="/questions/" class="collection-item" id=q.id >Articles</a>-->
+   <li><%= link_to qp.description, class: 'collection-item',controller: "question_options", action: "show", id: qp.id %></li>
+   <%end%></ul>
    <%end%></ol>
 </div>
 </div
