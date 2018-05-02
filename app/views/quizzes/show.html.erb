@@ -18,7 +18,9 @@
 <div class="row">
 <div class="col-md-6 card" id="addquestions" >
       <h4>Agregar pregunta</h4>
-        <a id="btnAddQuestionField"  class="btn-floating  waves-effect waves-light pink"><i class="material-icons">add</i></a>
+      <div class="pull-right row" style='display:inline-block;'>
+        <a id="btnAddQuestionField"  class="col-md-10 btn-floating btn-large  waves-effect waves-light pink"><i class="material-icons">add</i></a>
+        <a id="btnSaveQuestionsAndOptions" style='display:inline-block;margin-left:10px;align-content: right;' class="btn-floating  waves-effect btn-large waves-light green"><i class="material-icons">save</i></a></div>
       <!--<%= render 'questions/form', question: @question %>-->
 </div>
 <div class="col-md-6 card">
@@ -28,7 +30,8 @@
    <li><%= link_to q.description, class: 'collection-item',controller: "questions", action: "show", id: q.id %></li> <ul class="collection">
     <% @question_options.each do |qp| %>
    <!--<a href="/questions/" class="collection-item" id=q.id >Articles</a>-->
-   <li><%= link_to qp.description, class: 'collection-item',controller: "question_options", action: "show", id: qp.id %></li>
+   <% if q.id == qp.question_id %>
+   <li><%= link_to qp.description, class: 'collection-item',controller: "question_options", action: "show", id: qp.id %><%end%></li>
    <%end%></ul>
    <%end%></ol>
 </div>

@@ -12,7 +12,7 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
   </head>
 
-<body>
+<body <%= "data-params-id=#{params[:id]}" if params.has_key?(:id) %>>
  <div class="col-lg-12 block" id="header">
     <%= render 'layouts/site_header' %>
     </div>
