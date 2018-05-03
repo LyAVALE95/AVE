@@ -6,6 +6,8 @@
 	}	
 }*/
 $(document).ready(function(){
+
+	var tempo = $('#TempId').text();
 	var dataId = $('body').data('params-id');
 	var Questioncounter = 0;
 	$('.destroyamethods').on('click', function(){
@@ -17,14 +19,28 @@ $(document).ready(function(){
 			}
 		});
 	});
-	/*SAVE THE QUESTIONS*/
+	/*LOOK LAST QUESTION
+	$.ajax({
+				url: '/questions/getlast',
+				type: 'GET',
+				contentType: "application/json",
+				successs: function(r){
+					alert("Get" + r);
+				}, error: function(error) {
+                	alert("Error" + error);
+                }				               
+				});*/
+
 	$('#btnSaveQuestionsAndOptions').on('click', function(){
+	var QuestionAdded = 0;
 	for(i=0;i<=Questioncounter;i++){
 		var myQ='#Q'+i;
 		var myQO='#QO'+i;
+		console.log(lasquestionindex);
 		if($(myQ).length){
 			$("div" + myQ + " input#"+i).each(function(){
 				console.log(this.value);
+				QuestionAdded++;
 				$.ajax({
 				url: '/questions/',
 				type: 'POST',
@@ -43,22 +59,55 @@ $(document).ready(function(){
 				});
 			});
 		}
+		var lasquestionindex = parseInt(tempo) + QuestionAdded;
+		/*SAVE OPTIONS TO THAT QUESTION*/
 		$( "div"+ myQO+" input[type=text]").each(function() {
 			console.log(this.value);
-		});		
-	}			
+			$.ajax({
+				url: '/question_options/',
+				type: 'POST',
+				contentType: "application/json",
+				data: JSON.stringify({
+					question_option: { 
+					description: this.value,
+					question_id: lasquestionindex,
+					commit: "Create Question"
+					}}),
+				successs: function(r){
+					alert(this.value + '..Guardado');
+				}, error: function(error) {
+                	alert(error);
+                }				               
+				});
+		});				
+	}
 	});
-	/*APPEND TEXT BOX FOR QUESTION IN QUIZ */
+	
 	$('#btnAddQuestionField').on('click', function(){
 		Questioncounter++;
 		var tempiddivQ= 'Q' + Questioncounter;
 		$("#addquestions").append("<div id='Q"+Questioncounter+"' style='display:inline-block;'>"
-		+"<input class='QuestionQuiz col-md-10' id='"+Questioncounter
+		+"<input class='QUESTION QuestionQuiz col-md-10' id='"+Questioncounter
 		+"' style='border-bottom: 5px solid pink;'/>"
 		+"<button type='button' class='btnAddQuestionOption btn-floating col-md-1 btn btn-info' onclick='addOptionQuiz(&#039QO"+Questioncounter+"&#039)'>+</button>"
 		+"<button type='button' class='col-md-1 btn-floating btn btn-danger red' onclick='removeOption(&#039Q"+Questioncounter+"&#039)'>x</button><div id='QO"+Questioncounter+"'></div></div>");
-	});
+	
+		});
 });
+function getNumQ()
+{
+	alert($("div" + myQ + " input.QUESTION").length());
+
+
+}
+	/*SAVE THE QUESTIONS*/
+
+function saveQuestionsAndOptions(){
+	
+}
+/*APPEND TEXT BOX FOR QUESTION IN QUIZ */
+function addQuestionField(){
+	}
 function addOptionQuiz(Pers){
 var tempdiv = "#" +Pers;
 $(tempdiv).append(

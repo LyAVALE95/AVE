@@ -3,6 +3,7 @@ class QuestionsController < ApplicationController
 
   # GET /questions
   # GET /questions.json
+  $lastquestion
   def index
     @questions = Question.all
   end
@@ -37,6 +38,7 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
+        $lastquestion = @question.id
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
         format.json { render :show, status: :created, location: @question }
       else

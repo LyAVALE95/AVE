@@ -3,6 +3,7 @@ class QuizzesController < ApplicationController
 
   # GET /quizzes
   # GET /quizzes.json
+  $quizid
   def index
     @quizzes = Quiz.all
   end
@@ -10,6 +11,7 @@ class QuizzesController < ApplicationController
   # GET /quizzes/1
   # GET /quizzes/1.json
   def show
+    $quizid = Question.last.id
     @question = Question.new(quiz_id: params[:id])
     #@question_option = QuestionOption.new(quiz_id: params[:id])
     @questions = Quiz.select('quizzes.*, questions.*').joins("join questions")
