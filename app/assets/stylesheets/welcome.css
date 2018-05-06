@@ -86,8 +86,46 @@
 	box-shadow: 2px 3px #c3c6cc;
 	margin: 30px 0px 30px 0px;
 }
-
+.mycard{
+	background-color: white;
+	border-radius: 5px;
+	border: 1px solid #f48fb1;
+	box-shadow: 2px 3px #c3c6cc;
+	margin: 30px 0px 30px 0px;
+	width: 400px;
+	margin-top: -40px;
+	margin-left: -150px;
+}
+.mycard ul{
+	list-style-type: disc;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+    columns: 2;
+    list-style-position: inside;
+}
+.mycard hr{
+	/*margin: initial;*/
+}
+.mycard li{
+	/*width: 200px;
+	height: 40px;*/
+	float: left;
+    width: 100%;//
+}
+.mycard li a{
+	display: ruby;
+}
 /*
 .promo{
 	height: 400px;
 }*/
+#content{
+	margin-top: -70px;
+	margin-left: 20px;
+}
+.basicinfo{
+	size: 8pt;
+	font-size: 10px;
+	border:1px;
+	align-content: center;
+}

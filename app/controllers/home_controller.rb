@@ -9,4 +9,6 @@ class HomeController < ApplicationController
 	end	
 	def alg
 	end	
+	def myuser
+	end	
 end

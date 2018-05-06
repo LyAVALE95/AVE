@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   get 'quizzes' => 'questions#index'
   post 'questions' => 'question_options#create'
   get '/home/alg', :to =>'home#alg'
+  get '/home/myuser', :to =>'home#myuser'
     #post ':controller(/:action(/:id(.:format)))'
     #get ':controller(/:action(/:id(.:format)))'
   post 'amethods/count'
