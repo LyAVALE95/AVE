@@ -83,4 +83,14 @@
     margin-left: 40px;
 }
 /*Main header*/
-
+#nav-mobile{
+	margin-right: 0px;
+}
+#submenu{
+	margin-top: -55px;
+}
+#subsubmenu{
+	border-radius: 10px;
+	background-color: white;
+	box-shadow: 5px 5px 2px grey;
+}

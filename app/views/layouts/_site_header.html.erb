@@ -2,9 +2,20 @@
 <div id="header">
  <nav class="nav-extended navbar-light bg-light bg-faded">
     <div class="nav-wrapper navbar">
-      <a href="#" class="brand-logo"><a href="/"><img src="/AVElogob.png" id="mainlogo" width="80px" height="75px"></a></a>
+      <a href="#" class="brand-logo"><a href="/" onclick="goandrefresh()"><img src="/AVElogob.png" id="mainlogo" width="80px" height="75px"></a></a>
       <!-- <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a> -->
-      <ul id="nav-mobile" class="right hide-on-med-and-down">       
+
+      <div class="row" id="nav-mobile">
+        <div class="col-md-1">
+      <a href="/"  class="brand-logo right"><i class="medium material-icons blue-text">notifications</i></a></div>
+      <div class="col-md-1">
+      <a href="" onmouseover="showmenu()" onmouseleave="hidemenu()" id="submenu_link" class="brand-logo right"><i class="medium material-icons red-text">more_vert</i></a></div>
+      <div class="col-md-2"><a href=""><img src="/profiles/girl.png" width="50px" height="50px" /></a></div>
+      
+      </div>
+
+
+            <!--<ul id="nav-mobile" class="right hide-on-med-and-down">       
               
         <ul style="display: inline-grid;">
         <li><a href="/">Usuario: <%= current_user.names%></a></li>
@@ -13,8 +24,8 @@
           <li class="blue-text"><a href="/users">Usuarios</a></li>
           <li class="blue-text"><a href="/quizzes">Cuestionarios</a></li>
           <li class="blue-text"><a href="/sessions">Lecciones</a></li>
-          <li class="red-text"><%= link_to "Salir", destroy_user_session_path, :method => :delete %></li>
-      </ul>
+          <li class="red-text"><b><%= link_to "Salir", destroy_user_session_path, :method => :delete %></b></li>
+      </ul>-->
 <!-- 
       <ul class="side-nav" id="mobile-demo">
         <li><a href="sass.html">Sass</a></li>
@@ -24,6 +35,34 @@
     </div>
   </nav>
   </div>
+
+  <div class="row " id="submenu" style="display: none;" >
+    <div class="col-md-4 offset-8 " onmouseover="showmenu()" onmouseleave="hidemenu()">
+      <div class="row" id="subsubmenu">
+        <div class="col-md-12"><center><h5 class="red-text text-accent-1">Menu</h5></center>
+          <hr></div>
+          <div class="col-md-6">
+            <ul>
+            <li><a href="/exercises"><i class="material-icons">apps</i>Ejercicios</a></li>
+            <li><a href="/exercises"><i class="material-icons">border_color</i>Algoritmo</a></li>
+              <li><a href="/exercises"><i class="material-icons">bookmark_border</i>Lecciones</a></li>
+              <li><a href="/exercises"><i class="material-icons">fitness_center</i>Cuestionarios</a></li>
+              <li><a href="/exercises"><i class="material-icons">equalizer</i>Reportes</a></li>
+          </ul>
+          </div>
+           <div class="col-md-6">
+            <ul>
+            <li><a href="/exercises"><i class="material-icons">account_circle</i>Mi cuenta</a></li>
+            <li><a href="/exercises"><i class="material-icons">build</i>Configuracion</a></li>
+            <li><a href="/exercises"><i class="material-icons">movie</i>Material</a></li>
+             <li><a href="/exercises"><i class="material-icons">archive</i>Documentacion</a></li>
+            <li class="red-text"><b><i class="material-icons">keyboard_tab</i><%= link_to "Salir", destroy_user_session_path, :method => :delete %></b></li>
+          </ul>
+          </div>
+        </div>
+    </div>
+  </div>
+  
            <%else%>      
                 <div class="signup-login">
                 <a href="/">Inicio </a>

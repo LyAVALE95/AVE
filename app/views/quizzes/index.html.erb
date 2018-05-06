@@ -32,7 +32,7 @@
         <h6><%= quiz.description %></h6>
         <p><%= quiz.approved %></p>
         <p><%= quiz.avaible %></p>
-        <p><%= link_to 'Mostrar', quiz%>|
+        <p><%= link_to 'Mostrar', quiz, :onclick => "goandrefresh()"%>|
         <%= link_to 'Editar', edit_quiz_path(quiz) %>
         |<%= link_to 'Eliminar', quiz, method: :delete, data: { confirm: 'Are you sure?' } %></p>
       </li>

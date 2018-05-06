@@ -9,3 +9,14 @@ $( document ).ready(function() {
     });
     $('.carousel.carousel-slider').carousel({fullWidth: true});
   });
+
+function showmenu(){
+  //alert("Querollo");
+  $("#submenu").css("display", "block");
+  //$("#submenu").css("margin-bottom", "-205px");
+}
+function hidemenu(){
+  //alert("Querollo");
+  $("#submenu").css("display", "none");
+  //$("#submenu").css("margin-bottom", "205px");
+}
