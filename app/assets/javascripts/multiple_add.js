@@ -52,9 +52,9 @@ $(document).ready(function(){
 					commit: "Create Question"
 					}}),
 				successs: function(r){
-					alert(this.value + '..Guardado');
+					//alert(this.value + '..Guardado');
 				}, error: function(error) {
-                	alert(error);
+                	//alert(error);
                 }				               
 				});
 			});
@@ -62,7 +62,17 @@ $(document).ready(function(){
 		var lasquestionindex = parseInt(tempo) + QuestionAdded;
 		/*SAVE OPTIONS TO THAT QUESTION*/
 		$( "div"+ myQO+" input[type=text]").each(function() {
+			var QOR= $(this).next('p').find('.iscorrect');
 			console.log(this.value);
+			var thep = $(this).next('p');
+			//console.log($(thep).find('.iscorrect').prop('nodeName'));
+			//console.log($(this).next().next().next().next().find('.iscorrect').prop('nodeName'));
+			if ($(QOR).is(":checked"))
+			{
+  				QOR = "1";
+			}else{
+				QOR = "0";
+			}
 			$.ajax({
 				url: '/question_options/',
 				type: 'POST',
@@ -71,12 +81,13 @@ $(document).ready(function(){
 					question_option: { 
 					description: this.value,
 					question_id: lasquestionindex,
+					value: QOR,
 					commit: "Create Question"
 					}}),
 				successs: function(r){
-					alert(this.value + '..Guardado');
+					//alert(this.value + '..Guardado');
 				}, error: function(error) {
-                	alert(error);
+                	console.log(error);
                 }				               
 				});
 		});				
@@ -96,7 +107,7 @@ $(document).ready(function(){
 });
 function getNumQ()
 {
-	alert($("div" + myQ + " input.QUESTION").length());
+	//alert($("div" + myQ + " input.QUESTION").length());
 
 
 }
@@ -114,6 +125,8 @@ $(tempdiv).append(
 		"<div class='O"+Pers+"' id='O"+Pers+"' style='display:inline-block;'>"
 		+"<input type='text' id='QO"+Pers+"' class='QuestionQuiz col-md-10 O"+ Pers
 		+"' style='border-bottom: 4px solid light-blue;'/>"
+		+"<p><label>"
+		+ "<input type='radio' class='iscorrect' name='MG"+Pers+"' id='QOR"+Pers+"' /><span>C</span></p>"
 		+"<button type='button' class='col-md-2 btn-floating btn btn-sm btn-danger red' onclick='removeOption(&#039O"+Pers+"&#039)'>x</button></div> ");
 var idq = $(this).parent().prop('class');
 }
@@ -124,4 +137,7 @@ var r=confirm('Seguro que desea eliminar?');
 	console.log(tempdiv);
 	$(tempdiv).remove();
 	}
+}
+function reloadthisPage(){
+	 location.reload();
 }

@@ -16,13 +16,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :value %>
-    <%= form.number_field :value, id: :question_option_value %>
+    <%= form.label :value,'Valor' %>
+   <%= form.select :value , options_for_select([["Correcta", "1"], ["Incorrecta", "0"]]) %> 
   </div>
 
   <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description, id: :question_option_description %>
+    <%= form.label :description,'Descripcion' %>
+    <%= form.text_area :description , id: :question_option_description%>  
   </div>
 
   <div class="actions">

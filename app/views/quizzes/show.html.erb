@@ -1,12 +1,14 @@
 <p id="notice"><%= notice %></p>
-<div class="row card">
-<div class="col-md-8">
+<div class="row card pink lighten-1">
+<div class="col-md-12">
 <div id="TempId" style="display:none"><%=  $quizid %></div>
-<h3 class="class="pink-text text-lighten-1">
+<center>
+<h2 class="yellow-text text-lighten-5">
  #<%= @quiz.id %>: <%= @quiz.description %>
-</h3>
+</h2>
+</center>
 </div>
-<div class="col-md-4">
+<div class="col-md-4" style="display:none">
 <h6 class="teal-text text-darken-3">
   Approved<%= @quiz.approved %>
 </h6>
@@ -18,7 +20,7 @@
 </div>
 <div class="row">
 <div class="col-md-6 card" id="addquestions" >
-      <h4>Agregar pregunta</h4>
+      <center><h4>Agregar pregunta</h4></center>
       <div class="pull-right row" style='display:inline-block;'>
         <a id="btnAddQuestionField" onclick="addQuestionField()" class="col-md-10 btn-floating btn-large  waves-effect waves-light pink"><i class="material-icons">add</i></a>
         <a id="btnSaveQuestionsAndOptions" onclick="saveQuestionsAndOptions()" style='display:inline-block;margin-left:10px;align-content: right;' class="btn-floating  waves-effect btn-large waves-light green"><i class="material-icons">save</i></a>
@@ -33,7 +35,9 @@
     <% @question_options.each do |qp| %>
    <!--<a href="/questions/" class="collection-item" id=q.id >Articles</a>-->
    <% if q.id == qp.question_id %>
-   <li><%= link_to qp.description, class: 'collection-item',controller: "question_options", action: "show", id: qp.id %><%end%></li>
+   <li>
+    <%if qp.value == 1 %>  <i class="tiny material-icons green-text text-darken-2 light-green lighten-4">check</i>
+    <b><%= link_to qp.description, class: 'collection-item',controller: "question_options", action: "show", id: qp.id %></b><%else%><%= link_to qp.description, class: 'collection-item',controller: "question_options", action: "show", id: qp.id %><%end%><%end%></li>
    <%end%></ul>
    <%end%></ol>
 </div>

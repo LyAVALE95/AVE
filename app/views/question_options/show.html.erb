@@ -1,14 +1,15 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Value:</strong>
-  <%= @question_option.value %>
-</p>
-
-<p>
+<div class="row">
+<div class="col-md-offset-1"><a class="waves-effect waves-light btn btn-large teal lighten-1" href="/quizzes"><i class="material-icons left">school</i>Cuestionarios</a></div>
+<div class="col-md-2"><a class="waves-effect waves-light btn btn-large yellow lighten-1" href="/exercises"><i class="material-icons left">tag_faces</i>Ejercicios</a></div>
+<div class=""><a class="waves-effect waves-light btn btn-large pink lighten-1" href="/more"><i class="material-icons left">theaters</i>Enlaces</a></div>
+</div>
+<h1>
+<%if @question_option.value == 1 %>  <i class="medium material-icons green-text text-darken-2">check</i><%else%> <i class="medium material-icons red-text text-darken-2">clear</i><%end%>&nbsp;&nbsp;
   <strong>Description:</strong>
   <%= @question_option.description %>
-</p>
+</h1>
+
 
 <%= link_to 'Edit', edit_question_option_path(@question_option) %> |
 <%= link_to 'Back', question_options_path %>
