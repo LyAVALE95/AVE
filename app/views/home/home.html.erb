@@ -2,7 +2,11 @@
 <html>
 <head>
 	<title>Inicio</title>
+	<% if user_signed_in? %>
 	   <div class="container" style="padding-left: 60px; margin-top: -60px; padding-bottom: 50px;">
+	   <% else %>
+	   <div class="container" style="padding-left: 60px; padding-bottom: 50px;">
+	   <%end%>
             <img src="/icons/AVE_LOGO.png" id="mainlogo" width="480px" height="275px"></div>
 </head>
 <body class="fixed-background-body">

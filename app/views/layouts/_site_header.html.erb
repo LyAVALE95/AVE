@@ -1,94 +1,84 @@
   <% if user_signed_in? %>
 <div id="header">
- <nav class="nav-extended navbar-light bg-light bg-faded">
-    <div class="nav-wrapper navbar">
-      <a href="#" class="brand-logo"><a href="/" onclick="goandrefresh()"><img src="/AVElogob.png" id="mainlogo" width="80px" height="75px"></a></a>
-      <!-- <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a> -->
-      <div class="row" id="nav-mobile">
-        <a href="" style="margin-right: 30px;">Ayuda</a>
-      <div class="col-md-1">
-      <a href="/"  class="brand-logo right"><i class="medium material-icons red-text text-accent-1">notifications</i></a></div>
-      <!-- <div class="col-md-1">
-     <a href="" onmouseover="showmenu()" onmouseleave="hidemenu()" id="submenu_link" class="brand-logo right"><i class="medium material-icons red-text">more_vert</i></a></div>-->
-      <li class="dropdown"><span class="red-text text-accent-3"></span>
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-        <span class="caret"></span></a>
-        <div class="dropdown-menu mycard" style="">
-          <center><h5 class="red-text text-accent-1">Menu</h5></center>
+ <!--Navbar-->
+ <div class="row">
+<nav class="navbar navbar-expand-lg navbar-dark primary-color">
+
+    <!-- Navbar brand -->
+    <a class="navbar-brand" href="#">Navbar</a>
+
+    <!-- Collapse button -->
+
+      <a id="buttonToggleCollapse" onclick="showmethemagic()" data-target="mobile-demo" class="sidenav-trigger"
+      ><i class="material-icons">menu</i></a>
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Inicio
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/sessions">Lecciones</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/quizzes">Cuestionarios</a>
+            </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/reports">Reportes</a>
+            </li>
+
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opciones</a>
+                <div class="dropdown-menu dropdown-primary mycard" aria-labelledby="navbarDropdownMenuLink">
+                    <center><h5 class="red-text text-accent-1">Menu</h5></center>
           <hr>
            <ul>
           <li><a href="/exercises"><i class="material-icons">apps</i>Ejercicios</a></li>
           <li><a href="/exercises"><i class="material-icons">border_color</i>Algoritmo</a></li>
           <li><a href="/sessions"><i class="material-icons">bookmark_border</i>Lecciones</a></li>
-          <li><a href="/quizzes"><i class="material-icons">fitness_center</i>Cuestionarios</a></li>
-          <li><a href="/reports"><i class="material-icons">equalizer</i>Reportes</a></li>
+          <li><a href="/quizzes" ><i class="material-icons">fitness_center</i>Cuestionarios</a></li>
+          <li><a href="/reports" class="grey-text text-darken-1"><i class="material-icons">equalizer</i>Reportes</a></li>
           <li><a href="/exercises"><i class="material-icons">account_circle</i>Mi cuenta</a></li>
           <li><a href="/exercises"><i class="material-icons">build</i>Configuracion</a></li>
           <li><a href="/exercises"><i class="material-icons">movie</i>Material</a></li>
           <li><a href="/exercises"><i class="material-icons">archive</i>Documentacion</a></li>
-          <li><a href="/exercises"><i class="material-icons red-text text-accent-3">input</i><%= link_to "Salir", destroy_user_session_path, :method => :delete %></a></li>
+          <li><a href="/exercises" class="red-text"><i class="material-icons red-text">input</i><%= link_to "Salir", destroy_user_session_path, :method => :delete, :class=>"red-text" %></a></li>
         </ul>
-        </div>
-       
-      </li>
-      <div class="col-md-2"><a href=""><img src="/profiles/girl.png" width="50px" height="50px" /></a></div>
-        <ul class="basicinfo" style="display: inline-grid; margin-left: 20px;">
-        <li><a href="/"><%= current_user.name %></a></li>
-        <li><a href="/"><%= current_user.control_number %></a></li>
-        <li><a href="/"> <%= current_user.score %></a></li>      
+                </div>
+            </li>
+             <li class="nav-item">
+               <ul class="basicinfo" style="display: inline-grid; margin-left: 20px;">
+                <li><a href="/"><%= current_user.name %></a></li>
+                <li><a href="/"> <%= current_user.score %></a></li>      
+                </ul>
+            </li>
+
+
         </ul>
+        <!-- Links -->
 
-      
-      </div>
-
-
-            <!--<ul id="nav-mobile" class="right hide-on-med-and-down">       
-              
-        <ul style="display: inline-grid;">
-        <li><a href="/">Usuario: <%= current_user.names%></a></li>
-        <li><a href="/">Usuario: <%= current_user.control_number%></a></li>
-        </ul> 
-          <li class="blue-text"><a href="/users">Usuarios</a></li>
-          <li class="blue-text"><a href="/quizzes">Cuestionarios</a></li>
-          <li class="blue-text"><a href="/sessions">Lecciones</a></li>
-          <li class="red-text"><b><%= link_to "Salir", destroy_user_session_path, :method => :delete %></b></li>
-      </ul>-->
-<!-- 
-      <ul class="side-nav" id="mobile-demo">
-        <li><a href="sass.html">Sass</a></li>
-        <li><a href="badges.html">Components</a></li>
-        <li><a href="collapsible.html">JavaScript</a></li>
-      </ul> -->
+        <form class="form-inline">
+            <div class="md-form mt-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+        </form>
     </div>
-  </nav>
-  </div>
+    <!-- Collapsible content -->
+    <ul class="sidenav" id="mobile-demo">
+    <li><a href="sass.html">Sass</a></li>
+    <li><a href="badges.html">Components</a></li>
+    <li><a href="collapsible.html">Javascript</a></li>
+    <li><a href="mobile.html">Mobile</a></li>
+  </ul>
 
-  <div class="row " id="submenu" style="display: none;" >
-    <div class="col-md-4 offset-8 " onmouseover="showmenu()" onmouseleave="hidemenu()">
-      <div class="row" id="subsubmenu">
-        <div class="col-md-12"><center><h5 class="red-text text-accent-1">Menu</h5></center>
-          <hr></div>
-          <div class="col-md-6">
-            <ul>
-            <li><a href="/exercises"><i class="material-icons">apps</i>Ejercicios</a></li>
-            <li><a href="/exercises"><i class="material-icons">border_color</i>Algoritmo</a></li>
-              <li><a href="/exercises"><i class="material-icons">bookmark_border</i>Lecciones</a></li>
-              <li><a href="/exercises"><i class="material-icons">fitness_center</i>Cuestionarios</a></li>
-              <li><a href="/exercises"><i class="material-icons">equalizer</i>Reportes</a></li>
-          </ul>
-          </div>
-           <div class="col-md-6">
-            <ul>
-            <li><a href="/exercises"><i class="material-icons">account_circle</i>Mi cuenta</a></li>
-            <li><a href="/exercises"><i class="material-icons">build</i>Configuracion</a></li>
-            <li><a href="/exercises"><i class="material-icons">movie</i>Material</a></li>
-             <li><a href="/exercises"><i class="material-icons">archive</i>Documentacion</a></li>
-            <li class="red-text"><b><i class="material-icons">keyboard_tab</i><%= link_to "Salir", destroy_user_session_path, :method => :delete %></b></li>
-          </ul>
-          </div>
-        </div>
-    </div>
-  </div>
+</nav>
+<!--/.Navbar-->
+</div>
   
            <%else%>      
                 <div class="signup-login">

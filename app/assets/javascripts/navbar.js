@@ -20,3 +20,12 @@ function hidemenu(){
   $("#submenu").css("display", "none");
   //$("#submenu").css("margin-bottom", "205px");
 }
+function showmethemagic(){
+  var marginleft = $("#mobile-demo").css("margin-left");
+  if(marginleft=="150px"){
+    $("#mobile-demo").css("margin-left","0px");
+  $("#mobile-demo").css("width","0px");
+  }else{
+  $("#mobile-demo").css("margin-left","150px");
+  $("#mobile-demo").css("width","150px");}
+}
