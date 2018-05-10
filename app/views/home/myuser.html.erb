@@ -1,7 +1,43 @@
-<h5>Mi usuario</h5>
-<p>Nombre: <%= current_user.names%></p>
-<p>#Control: <%= current_user.control_number%></p>
+<div class="row">
+	<div class="col-12 pink lighten-1 card white-text"><center><h2>Mi usuario</h2></center></div>
+</div>
+<div class="row">
+	<div class="col-12 col-md-2 card">
+		<center>
+			<h4 class="pink-text text-lighten-1">Mi usuario</h4>
+			<img src="/profiles/girl.png" width="120" height="120" />
+		</center></div>
+	<div class="col-12 col-md-4 card">
+		<div class="row">
+		<h4 class="pink-text text-lighten-1"><center>Datos</center></h4></div>
+		<div class="col-12 row">
+		<div class="col-1">	
+		</div>
+		<div class="col-8">
+		<p>Nombre: <%= @myuser.name%> <%= @myuser.lastnames%></p>
+		<p>#Control: <%= @myuser.control_number%></p>
+		<p>Carrera: <%= current_user.carrer%></p>
+		<p>ID: <%= current_user.id%></p>
+		</div>
+		</div>
+	</div>
+	<div class="col-12 col-md-4 card pink lighten-1 card white-text">
+		<div class="row">
+		<h4><center>Mi avance</center></h4></div>
+		<div class="col-12 row">
+		<div class="col-1"></div>
+		<div class="col-1"></div>
+		<div class="col-10">
+		</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	
+</div>
+
+<p>Nombre: <%= @myuser.name%> <%= @myuser.lastnames%></p>
+<p>#Control: <%= @myuser.control_number%></p>
 <p>Carrera: <%= current_user.carrer%></p>
-<p>Total: <%= current_user.score%></p>
-<p>Rol: <%= current_user.rol%></p>
 <p>ID: <%= current_user.id%></p>
+

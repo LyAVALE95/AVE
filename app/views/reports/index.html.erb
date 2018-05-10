@@ -1,0 +1,86 @@
+<center>
+	<h1>Reportes</h1>
+<div class="row card">
+	<div class="col-2 col-md-2">
+		<h5 class="pink-text"><b>Tipo</b></h5>
+		<select name="carlist" form="carform">
+  			<option value="students">Estudiantes</option>
+			<option value="students">Clases</option>
+			<option value="students">Tutorias</option>
+  			<option value="students">Calificaciones</option>  			
+		</select>
+		<br>
+	</div>
+	<div class="col-10 col-md-10">
+		
+	</div>
+</div>
+<div class="row">
+	<div class="col-12 col-md-5 card">
+		<div id = "container" style = "width: 550px; height: 400px; margin: 0 auto"></div>
+	</div>
+	<div class="col-md-1">
+		
+	</div>
+	<div class="col-12 col-md-6 col-md-offset-1 card">
+		
+	</div>
+</div>
+<div class="row card">
+	<div class="col-12 col-md-12">
+		
+	</div>
+</div>
+
+<script language = "JavaScript">
+         $(document).ready(function() {
+            var chart = {
+               plotBackgroundColor: null,
+               plotBorderWidth: null,
+               plotShadow: false
+            };
+            var title = {
+               text: 'Browser market shares at a specific website, 2014'   
+            };      
+            var tooltip = {
+               pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            };
+            var plotOptions = {
+               pie: {
+                  allowPointSelect: true,
+                  cursor: 'pointer',
+                  
+                  dataLabels: {
+                     enabled: false           
+                  },
+                  
+                  showInLegend: true
+               }
+            };
+            var series = [{
+               type: 'pie',
+               name: 'Browser share',
+               data: [
+                  ['Firefox',   45.0],
+                  ['IE',       26.8],
+                  {
+                     name: 'Chrome',
+                     y: 12.8,
+                     sliced: true,
+                     selected: true
+                  },
+                  ['Safari',    8.5],
+                  ['Opera',     6.2],
+                  ['Others',   0.7]
+               ]
+            }];     
+            var json = {};   
+            json.chart = chart; 
+            json.title = title;     
+            json.tooltip = tooltip;  
+            json.series = series;
+            json.plotOptions = plotOptions;
+            $('#container').highcharts(json);  
+         });
+      </script>
+</center>

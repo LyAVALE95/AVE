@@ -13,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private
   # Modified Devise params for user login
   def sign_up_params
-    params.require(:user).permit(:email, :password, :password_confirmation,:names,:lastnames,:name,:control_number,:carrer,:grade,:algorithm_level,:course_level,:score,:rol)
+    params.require(:user).permit(:email, :password, :password_confirmation,:names,:lastnames,:name,:control_number,:carrer,:grade,:algorithm_level,:course_level,:score,:rol,:user_id)
     #params.require(:user).permit(:name, :last_name, :email, :password, :password_confirmation ,:user_img,:company_id)
   end    
   # before_action :configure_sign_up_params, only: [:create]
