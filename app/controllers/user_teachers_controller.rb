@@ -42,6 +42,7 @@ class UserTeachersController < ApplicationController
   def update
     respond_to do |format|
       if @user_teacher.update(user_teacher_params)
+        current_user.update_attributes(name: @user_teacher.name)
         format.html { redirect_to @user_teacher, notice: 'User teacher was successfully updated.' }
         format.json { render :show, status: :ok, location: @user_teacher }
       else
@@ -68,7 +69,7 @@ class UserTeachersController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def user_teacher_params
-      params.require(:user_student).permit(:names,:lastnames,:name,:control_number,:user_id)
+    def user_teacher_params 
+      params.fetch(:user_teacher,{}).permit(:names,:lastnames,:name,:control_number,:user_id)
     end
 end

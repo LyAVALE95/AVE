@@ -22,3 +22,6 @@ h4{
 h5{
 	font-size:1.2vw;
 }
+a.whitened:hover{
+	background-color: #f5f5f5;
+}

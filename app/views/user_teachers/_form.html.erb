@@ -10,7 +10,18 @@
       </ul>
     </div>
   <% end %>
-
+ <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :ut_name %>
+  </div>
+ <div class="field">
+    <%= form.label :lastnames %>
+    <%= form.text_field :lastnames, id: :ut_lname %>
+  </div>
+   <div class="field">
+    <%= form.label :control_number %>
+    <%= form.text_field :control_number, id: :cn_name %>
+  </div>
   <div class="actions">
     <%= form.submit %>
   </div>

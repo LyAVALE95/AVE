@@ -127,7 +127,7 @@ $(tempdiv).append(
 		+"' style='border-bottom: 4px solid light-blue;'/>"
 		+"<p><label>"
 		+ "<input type='radio' class='iscorrect' name='MG"+Pers+"' id='QOR"+Pers+"' /><span>C</span></p>"
-		+"<button type='button' class='col-md-2 btn-floating btn btn-sm btn-danger red' onclick='removeOption(&#039O"+Pers+"&#039)'>x</button></div> ");
+		+"<button type='button' class='col-md-3 btn-floating btn btn-sm btn-danger red' onclick='removeOption(&#039O"+Pers+"&#039)'>x</button></div> ");
 var idq = $(this).parent().prop('class');
 }
 function removeOption(Pers){

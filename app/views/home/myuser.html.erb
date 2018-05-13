@@ -1,43 +1,29 @@
 <div class="row">
-	<div class="col-12 pink lighten-1 card white-text"><center><h2>Mi usuario</h2></center></div>
+	<div class="col-12 pink lighten-4 card"><center><h2>Mi usuario</h2></center></div>
 </div>
 <div class="row">
-	<div class="col-12 col-md-2 card">
-		<center>
-			<h4 class="pink-text text-lighten-1">Mi usuario</h4>
-			<img src="/profiles/girl.png" width="120" height="120" />
-		</center></div>
-	<div class="col-12 col-md-4 card">
-		<div class="row">
-		<h4 class="pink-text text-lighten-1"><center>Datos</center></h4></div>
-		<div class="col-12 row">
-		<div class="col-1">	
-		</div>
-		<div class="col-8">
-		<p>Nombre: <%= @myuser.name%> <%= @myuser.lastnames%></p>
-		<p>#Control: <%= @myuser.control_number%></p>
-		<p>Carrera: <%= current_user.carrer%></p>
-		<p>ID: <%= current_user.id%></p>
-		</div>
-		</div>
-	</div>
-	<div class="col-12 col-md-4 card pink lighten-1 card white-text">
-		<div class="row">
-		<h4><center>Mi avance</center></h4></div>
-		<div class="col-12 row">
-		<div class="col-1"></div>
-		<div class="col-1"></div>
-		<div class="col-10">
-		</div>
-		</div>
-	</div>
-</div>
-<div class="row">
-	
-</div>
+<div class=" col-12 col-md-4 card"><center>
+  <h4 class="pink-text text-lighten-1">Mi usuario</h4>
+  <img src="/profiles/girl.png" alt="John" width="120" height="120">
+  <h4><%= @myuser.name%> <%= @myuser.lastnames%> <a href="#modalusr" class=" modal-trigger whitened"> <i class="small material-icons lime-text text-darken-2">edit</i></a> </h4>
+  <h5 class="title">#<%= @myuser.control_number%></h5>
+  <p>Carrera:<%= current_user.carrer%></p>
+  
+  <a href="#"><i class="fa fa-twitter"></i></a> 
+  <a href="#"><i class="fa fa-linkedin"></i></a> 
+  <a href="#"><i class="fa fa-facebook"></i></a> 
+</div></center></div>
 
-<p>Nombre: <%= @myuser.name%> <%= @myuser.lastnames%></p>
-<p>#Control: <%= @myuser.control_number%></p>
-<p>Carrera: <%= current_user.carrer%></p>
-<p>ID: <%= current_user.id%></p>
-
+<div id="modalusr" class="modal">
+    <div class="modal-content">
+      <h4>Editar mi usuario<i class="small material-icons lime-text text-darken-2">edit</i></h4>
+      <%if current_user.rol=='t'%>
+      <%= render 'user_teachers/form', user_teacher: @myuser %>
+      <%else%>
+      Es alumno
+      <%end%>
+    </div>
+    <div class="modal-footer">
+     <!-- <a href="" class="modal-action modal-close btn-danger waves-effect waves-green btn-flat">Cancelar</a>-->
+    </div>
+</div>	
