@@ -10,6 +10,7 @@
       </ul>
     </div>
   <% end %>
+    <center><div id="avatarn"> </div></center>
  <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name, id: :ut_name %>
@@ -22,9 +23,7 @@
     <%= form.label :control_number %>
     <%= form.text_field :control_number, id: :cn_name %>
   </div>
-  <center>
-    <div id="avatarn"> 
-  </div></center><br>
+  <br>
   <div class="actions">
     <%= form.submit id:'btnSave' %>
   </div>
@@ -33,24 +32,72 @@
             
         var iconSelect;
 
-        window.onload = function(){        
+        window.onload = function(){     
             iconSelect = new IconSelect("avatarn", 
                 {'selectedIconWidth':48,
                 'selectedIconHeight':48,
                 'selectedBoxPadding':1,
-                'iconsWidth':23,
-                'iconsHeight':23,
+                'iconsWidth':50,
+                'iconsHeight':50,
                 'boxIconSpace':1,
                 'vectoralIconNumber':4,
                 'horizontalIconNumber':4});
 
             var icons = [];
             icons.push({'iconFilePath':'/avatar_teacher/052-man.png', 'iconValue':"/avatar_teacher/052-man.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-woman.png', 'iconValue':"/avatar_teacher/052-woman.png"});
             icons.push({'iconFilePath':'/avatar_teacher/052-man-1.png', 'iconValue':"/avatar_teacher/052-man-1.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-woman-1.png', 'iconValue':"/avatar_teacher/052-woman-1.png"});
             icons.push({'iconFilePath':'/avatar_teacher/052-man-2.png', 'iconValue':'/avatar_teacher/052-man-2.png'});
+            icons.push({'iconFilePath':'/avatar_teacher/052-woman-2.png', 'iconValue':"/avatar_teacher/052-woman-2.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-man-3.png', 'iconValue':'/avatar_teacher/052-man-3.png'});
+            icons.push({'iconFilePath':'/avatar_teacher/052-woman-3.png', 'iconValue':"/avatar_teacher/052-woman-3.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-man-4.png', 'iconValue':'/avatar_teacher/052-man-4.png'});
+            icons.push({'iconFilePath':'/avatar_teacher/052-woman-4.png', 'iconValue':"/avatar_teacher/052-woman-4.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-man-5.png', 'iconValue':'/avatar_teacher/052-man-5.png'});
+            icons.push({'iconFilePath':'/avatar_teacher/052-woman-5.png', 'iconValue':"/avatar_teacher/052-woman-5.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-man-6.png', 'iconValue':'/avatar_teacher/052-man-6.png'});
+            icons.push({'iconFilePath':'/avatar_teacher/052-woman-6.png', 'iconValue':"/avatar_teacher/052-woman-6.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-man-7.png', 'iconValue':'/avatar_teacher/052-man-7.png'});
+            icons.push({'iconFilePath':'/avatar_teacher/052-woman-7.png', 'iconValue':"/avatar_teacher/052-woman-7.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-man-8.png', 'iconValue':'/avatar_teacher/052-man-8.png'});
+            icons.push({'iconFilePath':'/avatar_teacher/052-woman-8.png', 'iconValue':"/avatar_teacher/052-woman-8.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-man-9.png', 'iconValue':'/avatar_teacher/052-man-9.png'});
+            icons.push({'iconFilePath':'/avatar_teacher/052-woman-9.png', 'iconValue':"/avatar_teacher/052-woman-9.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-man-10.png', 'iconValue':'/avatar_teacher/052-man-10.png'});
+            icons.push({'iconFilePath':'/avatar_teacher/052-woman-10.png', 'iconValue':"/avatar_teacher/052-woman-10.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-man-11.png', 'iconValue':'/avatar_teacher/052-man-11.png'});
+            icons.push({'iconFilePath':'/avatar_teacher/052-woman-11.png', 'iconValue':"/avatar_teacher/052-woman-11.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-man-12.png', 'iconValue':'/avatar_teacher/052-man-12.png'});
+            icons.push({'iconFilePath':'/avatar_teacher/052-woman-12.png', 'iconValue':"/avatar_teacher/052-woman-12.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-man-13.png', 'iconValue':'/avatar_teacher/052-man-13.png'});
+            icons.push({'iconFilePath':'/avatar_teacher/052-woman-13.png', 'iconValue':"/avatar_teacher/052-woman-13.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-man-14.png', 'iconValue':'/avatar_teacher/052-man-14.png'});
+            icons.push({'iconFilePath':'/avatar_teacher/052-woman-14.png', 'iconValue':"/avatar_teacher/052-woman-14.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-man-15.png', 'iconValue':'/avatar_teacher/052-man-15.png'});
+            icons.push({'iconFilePath':'/avatar_teacher/052-woman-15.png', 'iconValue':"/avatar_teacher/052-woman-15.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-man-16.png', 'iconValue':'/avatar_teacher/052-man-16.png'});
+            icons.push({'iconFilePath':'/avatar_teacher/052-woman-16.png', 'iconValue':"/avatar_teacher/052-woman-16.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-man-17.png', 'iconValue':'/avatar_teacher/052-man-17.png'});
+            icons.push({'iconFilePath':'/avatar_teacher/052-woman-17.png', 'iconValue':"/avatar_teacher/052-woman-17.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-man-18.png', 'iconValue':'/avatar_teacher/052-man-18.png'});
+            icons.push({'iconFilePath':'/avatar_teacher/052-woman-18.png', 'iconValue':"/avatar_teacher/052-woman-18.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-man-19.png', 'iconValue':'/avatar_teacher/052-man-19.png'});
+            icons.push({'iconFilePath':'/avatar_teacher/052-woman-19.png', 'iconValue':"/avatar_teacher/052-woman-19.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-man-20.png', 'iconValue':'/avatar_teacher/052-man-20.png'});
+            icons.push({'iconFilePath':'/avatar_teacher/052-woman-20.png', 'iconValue':"/avatar_teacher/052-woman-20.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-man-21.png', 'iconValue':'/avatar_teacher/052-man-21.png'});
+            icons.push({'iconFilePath':'/avatar_teacher/052-woman-21.png', 'iconValue':"/avatar_teacher/052-woman-21.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-man-22.png', 'iconValue':'/avatar_teacher/052-man-22.png'});
+            icons.push({'iconFilePath':'/avatar_teacher/052-woman-22.png', 'iconValue':"/avatar_teacher/052-woman-22.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-man-23.png', 'iconValue':'/avatar_teacher/052-man-23.png'});
+            icons.push({'iconFilePath':'/avatar_teacher/052-woman-23.png', 'iconValue':"/avatar_teacher/052-woman-23.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-man-24.png', 'iconValue':'/avatar_teacher/052-man-24.png'});
+            icons.push({'iconFilePath':'/avatar_teacher/052-woman-25.png', 'iconValue':"/avatar_teacher/052-woman-25.png"});
             iconSelect.refresh(icons);
-            var mypicdiv1 = $('div#avatarn').find('img').prop('src');
+            var mypicdiv1 = $('img').attr('src');
             console.log("R" + mypicdiv1);
+            $('div#avatarn div.selected-icon img').prop('src',mypicdiv1);
             $("#btnSave").click(function(){
               var myurl = document.URL;
               var mypic = $('div#avatarn').find('img').prop('src');
@@ -75,4 +122,7 @@
             });
 
         };
+        $(document).ready(function(){
+          
+        });
         </script>
