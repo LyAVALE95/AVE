@@ -22,7 +22,57 @@
     <%= form.label :control_number %>
     <%= form.text_field :control_number, id: :cn_name %>
   </div>
+  <center>
+    <div id="avatarn"> 
+  </div></center><br>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit id:'btnSave' %>
   </div>
 <% end %>
+        <script>
+            
+        var iconSelect;
+
+        window.onload = function(){        
+            iconSelect = new IconSelect("avatarn", 
+                {'selectedIconWidth':48,
+                'selectedIconHeight':48,
+                'selectedBoxPadding':1,
+                'iconsWidth':23,
+                'iconsHeight':23,
+                'boxIconSpace':1,
+                'vectoralIconNumber':4,
+                'horizontalIconNumber':4});
+
+            var icons = [];
+            icons.push({'iconFilePath':'/avatar_teacher/052-man.png', 'iconValue':"/avatar_teacher/052-man.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-man-1.png', 'iconValue':"/avatar_teacher/052-man-1.png"});
+            icons.push({'iconFilePath':'/avatar_teacher/052-man-2.png', 'iconValue':'/avatar_teacher/052-man-2.png'});
+            iconSelect.refresh(icons);
+            var mypicdiv1 = $('div#avatarn').find('img').prop('src');
+            console.log("R" + mypicdiv1);
+            $("#btnSave").click(function(){
+              var myurl = document.URL;
+              var mypic = $('div#avatarn').find('img').prop('src');
+              console.log("my ul: " +myurl);
+              console.log("my pic: " + mypic);
+                  $.ajax({
+                    url: '/user_teachers/4',
+                    type: 'PUT',
+                    contentType: 'application/json',
+                    dataType: "script",
+                    data: JSON.stringify({
+                      user_teacher: { 
+                      avatarn: mypic,
+                      commit: "Update Picture"
+                      },_method:'put'}),
+                    successs: function(r){
+                      //alert(this.value + '..Guardado');
+                    }, error: function(error) {
+                  //alert(error);
+                  }                      
+                });
+            });
+
+        };
+        </script>

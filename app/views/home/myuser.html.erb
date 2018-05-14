@@ -4,7 +4,7 @@
 <div class="row">
 <div class=" col-12 col-md-4 card"><center>
   <h4 class="pink-text text-lighten-1">Mi usuario</h4>
-  <img src="/profiles/girl.png" alt="John" width="120" height="120">
+  <%= image_tag(@myuser.avatarn, :alt => "rss feed",:width => "120px") %>
   <h4><%= @myuser.name%> <%= @myuser.lastnames%> <a href="#modalusr" class=" modal-trigger whitened"> <i class="small material-icons lime-text text-darken-2">edit</i></a> </h4>
   <h5 class="title">#<%= @myuser.control_number%></h5>
   <p>Carrera:<%= current_user.carrer%></p>
