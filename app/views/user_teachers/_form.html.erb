@@ -11,6 +11,10 @@
     </div>
   <% end %>
     <center><div id="avatarn"> </div></center>
+ <div class="field" style="display: none;">
+    <%= form.label :id %>
+    <%= form.text_field :id, id: :ut_id %>
+  </div>
  <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name, id: :ut_name %>
@@ -24,9 +28,10 @@
     <%= form.text_field :control_number, id: :cn_name %>
   </div>
   <br>
+  <center>
   <div class="actions">
-    <%= form.submit id:'btnSave' %>
-  </div>
+    <%= form.submit  id:'btnSave', :class => 'btn btn-warning', :value => "Guardar cambios" %>
+  </div></center>
 <% end %>
         <script>
             
@@ -96,15 +101,16 @@
             icons.push({'iconFilePath':'/avatar_teacher/052-woman-25.png', 'iconValue':"/avatar_teacher/052-woman-25.png"});
             iconSelect.refresh(icons);
             var mypicdiv1 = $('img').attr('src');
-            console.log("R" + mypicdiv1);
+            var myid = "/user_teachers/" + $('input#ut_id').val() + "/";
             $('div#avatarn div.selected-icon img').prop('src',mypicdiv1);
             $("#btnSave").click(function(){
-              var myurl = document.URL;
+              var myurl = "/" +
+              document.URL.substring(document.URL.indexOf('user_teacher'),document.URL.indexOf('edit'));
               var mypic = $('div#avatarn').find('img').prop('src');
               console.log("my ul: " +myurl);
               console.log("my pic: " + mypic);
                   $.ajax({
-                    url: '/user_teachers/4',
+                    url: myid,
                     type: 'PUT',
                     contentType: 'application/json',
                     dataType: "script",

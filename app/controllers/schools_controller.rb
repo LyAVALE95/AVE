@@ -28,6 +28,7 @@ class SchoolsController < ApplicationController
 
     respond_to do |format|
       if @school.save
+        current_user.update_attributes(school_id: @school.id)
         format.html { redirect_to @school, notice: 'School was successfully created.' }
         format.json { render :show, status: :created, location: @school }
       else
@@ -42,7 +43,7 @@ class SchoolsController < ApplicationController
   def update
     respond_to do |format|
       if @school.update(school_params)
-        format.html { redirect_to @school, notice: 'School was successfully updated.' }
+        format.html { redirect_to "/myuser", notice: 'School was successfully updated.' }
         format.json { render :show, status: :ok, location: @school }
       else
         format.html { render :edit }
@@ -69,6 +70,6 @@ class SchoolsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def school_params
-      params.require(:school).permit(:name, :location, :principal_name, :type, :grade, :code, :phone, :web_page)
+      params.require(:school).permit(:name, :location, :principal_name, :typeSchool, :grade, :code, :phone, :web_page)
     end
 end

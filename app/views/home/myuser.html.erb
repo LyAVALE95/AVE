@@ -12,7 +12,64 @@
   <a href="#"><i class="fa fa-twitter"></i></a> 
   <a href="#"><i class="fa fa-linkedin"></i></a> 
   <a href="#"><i class="fa fa-facebook"></i></a> 
-</div></center></div>
+</div></center>
+<div class="col-md-1"></div>
+<div class=" col-12 col-md-3">
+<center>
+<%if current_user.rol == "t"%>
+   <h4 class="teal-text text-lighten-1">Mi escuela  <button href="#modalschool" class=" modal-trigger whitened yellow"> <i class="small material-icons lime-text text-darken-2">edit</i></button></h4>
+<%else%>
+    <h4 class="teal-text text-lighten-1">Escuela</h4>
+<%end%>
+<%if @myschool%>
+<h4><%= @myschool.name%></h4>
+<h6>Código: <%= @myschool.code%></h6>
+<h6>Teléfono: <%= @myschool.phone%></h6>
+<h6>Página web: <%= @myschool.web_page%></h6>
+<%else%>
+<h4 class="grey-text text-darken-2">No tiene ninguna escuela</h4>
+<a href="/schools/new" class="amber accent-4 btn btn-large btn-warning"> (+) Agregar escuela</a>
+<%end%></center>
+</div>
+<div class=" col-12 col-md-4">
+<center>
+<%if current_user.rol == "t"%>
+   <h4 class="teal-text text-lighten-1">Mis grupos</h4>
+<%else%>
+    <h4 class="teal-text text-lighten-1">Mi grupo</h4>
+<%end%>
+<a href="/groups/new" class="deep-orange lighten-4 btn btn-large btn-warning"> (+) Agregar grupo</a><br>
+<%if @mygroups%>
+<table>
+  <thead>
+    <tr>
+     <th>Nombre</th>
+     <th>Descripción</th>
+     <th>Horario</th>
+     <th>Semestre</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @mygroups.each do |group| %>
+      <tr>
+        <td><%= group.name %></td>
+        <td><%= group.description %></td>
+        <td><%= group.schedule %></td>
+        <td><%= group.semester %></td>
+        <td><%= link_to 'Mostrar', group %></td>
+        <td><%= link_to 'Editar', edit_group_path(group) %></td>
+        <td><%= link_to 'Eliminar', group, method: :delete, data: { confirm: '¿Está seguro(a)?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%else%>
+<h4 class="grey-text text-darken-2">No tiene ningún grupo</h4>
+<%end%></center>
+</div>
+</div>
 
 <div id="modalusr" class="modal">
     <div class="modal-content">
@@ -27,3 +84,17 @@
      <!-- <a href="" class="modal-action modal-close btn-danger waves-effect waves-green btn-flat">Cancelar</a>-->
     </div>
 </div>	
+
+<div id="modalschool" class="modal">
+    <div class="modal-content">
+      <h4>Editar mi escuela<i class="small material-icons lime-text text-darken-2">edit</i></h4>
+      <%if current_user.rol=='t'%>
+      <%= render 'schools/form', school: @myschool %>
+      <%else%>
+      Es alumno
+      <%end%>
+    </div>
+    <div class="modal-footer">
+     <!-- <a href="" class="modal-action modal-close btn-danger waves-effect waves-green btn-flat">Cancelar</a>-->
+    </div>
+</div>  

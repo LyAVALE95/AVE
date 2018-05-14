@@ -43,7 +43,7 @@ class UserTeachersController < ApplicationController
     respond_to do |format|
       if @user_teacher.update(user_teacher_params)
         current_user.update_attributes(name: @user_teacher.name)
-        format.html { redirect_to @user_teacher, notice: 'User teacher was successfully updated.' }
+        format.html { redirect_to "/myuser", notice: 'User teacher was successfully updated.' }
         format.json { render :show, status: :ok, location: @user_teacher }
       else
         format.html { render :edit }

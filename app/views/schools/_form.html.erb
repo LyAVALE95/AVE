@@ -27,8 +27,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :type %>
-    <%= form.text_field :type, id: :school_type %>
+    <%= form.label :typeSchool %>
+    <%= form.text_field :typeSchool, id: :school_type %>
   </div>
 
   <div class="field">
@@ -52,6 +52,8 @@
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+  <center>
+       <%= form.submit  id:'btnSave', :class => 'btn btn-warning', :value => "Guardar cambios" %>
+  </center>
   </div>
 <% end %>

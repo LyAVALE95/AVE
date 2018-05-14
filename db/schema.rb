@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180514030908) do
+ActiveRecord::Schema.define(version: 20180514074427) do
 
   create_table "algorithms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 20180514030908) do
     t.string "name"
     t.text "location"
     t.string "principal_name"
-    t.string "type"
+    t.string "typeSchool"
     t.string "grade"
     t.string "code"
     t.string "phone"
@@ -121,6 +121,17 @@ ActiveRecord::Schema.define(version: 20180514030908) do
     t.float "score", limit: 24
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_sgs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.bigint "school_id"
+    t.bigint "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_user_sgs_on_group_id"
+    t.index ["school_id"], name: "index_user_sgs_on_school_id"
+    t.index ["user_id"], name: "index_user_sgs_on_user_id"
   end
 
   create_table "user_students", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -197,6 +208,9 @@ ActiveRecord::Schema.define(version: 20180514030908) do
   add_foreign_key "quizzes", "sessions"
   add_foreign_key "session_details", "sessions"
   add_foreign_key "sessions", "algorithms"
+  add_foreign_key "user_sgs", "groups"
+  add_foreign_key "user_sgs", "schools"
+  add_foreign_key "user_sgs", "users"
   add_foreign_key "user_students", "users"
   add_foreign_key "user_teachers", "users"
   add_foreign_key "users", "groups"

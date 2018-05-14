@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :user_sgs
   resources :user_quizzes
   resources :schools
   resources :question_options
