@@ -9,7 +9,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update_resource(resource, params)
     resource.update_without_password(params)
   end
- 
+ def updatemyusr
+    respond_to do |format|
+      if current_user.update_attributes(school_id: school, group_id: group  )
+        format.html { redirect_to "/myuser", notice: 'Usuario actualizado correctamente' }
+        format.json { render :show, status: :ok, location: '/myuser'}
+      else
+        format.html { render :edit }
+      end
+      end
+  end
   private
   # Modified Devise params for user login
   def sign_up_params

@@ -9,6 +9,23 @@ class HomeController < ApplicationController
 	end	
 	def alg
 	end	
+	
+
+	def getmygroups
+		@mygroupsby = UserSg.select("user_sgs.school_id,user_sgs.user_id,groups.*").joins("join groups")
+		.where("user_sgs.school_id=? and user_sgs.group_id = groups.id ",params[:id])
+		respond_to do |format|
+      	  format.html 
+    	  format.json { render json: @mygroupsby}
+    	end
+	end	 
+	def getmyteachers
+		@myteachers = User.where("school_id=?",params[:id]) 
+		respond_to do |format|
+      	  format.html 
+    	  format.json { render json: @myteachers}
+    	end
+	end	
 	def myuser
 		@myuser = current_user 
 		if @myuser.rol == "s"
