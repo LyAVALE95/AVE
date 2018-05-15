@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>User Sgs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>School</th>
+      <th>Group</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_sgs.each do |user_sg| %>
+      <tr>
+        <td><%= user_sg.user %></td>
+        <td><%= user_sg.school %></td>
+        <td><%= user_sg.group %></td>
+        <td><%= link_to 'Show', user_sg %></td>
+        <td><%= link_to 'Edit', edit_user_sg_path(user_sg) %></td>
+        <td><%= link_to 'Destroy', user_sg, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User Sg', new_user_sg_path %>

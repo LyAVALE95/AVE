@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @user_sg.user %>
+</p>
+
+<p>
+  <strong>School:</strong>
+  <%= @user_sg.school %>
+</p>
+
+<p>
+  <strong>Group:</strong>
+  <%= @user_sg.group %>
+</p>
+
+<%= link_to 'Edit', edit_user_sg_path(@user_sg) %> |
+<%= link_to 'Back', user_sgs_path %>

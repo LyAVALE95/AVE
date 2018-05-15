@@ -13,11 +13,10 @@
   <a href="#"><i class="fa fa-linkedin"></i></a> 
   <a href="#"><i class="fa fa-facebook"></i></a> 
 </div></center>
-<div class="col-md-1"></div>
-<div class=" col-12 col-md-3">
+<div class=" col-12 col-md-3 card">
 <center>
 <%if current_user.rol == "t"%>
-   <h4 class="teal-text text-lighten-1">Mi escuela  <button href="#modalschool" class=" modal-trigger whitened yellow"> <i class="small material-icons lime-text text-darken-2">edit</i></button></h4>
+   <h4 class="teal-text text-lighten-1">Mi escuela  <button href="#modalschool" class=" modal-trigger btn-floating waves-effect waves-light whitened yellow"> <i class="small material-icons lime-text text-darken-2">edit</i></button></h4>
 <%else%>
     <h4 class="teal-text text-lighten-1">Escuela</h4>
 <%end%>
@@ -29,42 +28,32 @@
 <%else%>
 <h4 class="grey-text text-darken-2">No tiene ninguna escuela</h4>
 <a href="/schools/new" class="amber accent-4 btn btn-large btn-warning"> (+) Agregar escuela</a>
-<%end%></center>
+<%end%><br><br>
+<a href="/groups/new" class="yellow lighten-2 black-text btn btn-large btn-warning"> (+) Agregar grupo</a></center>
 </div>
-<div class=" col-12 col-md-4">
+<div class=" col-12 col-md-5 card">
 <center>
 <%if current_user.rol == "t"%>
    <h4 class="teal-text text-lighten-1">Mis grupos</h4>
 <%else%>
     <h4 class="teal-text text-lighten-1">Mi grupo</h4>
 <%end%>
-<a href="/groups/new" class="deep-orange lighten-4 btn btn-large btn-warning"> (+) Agregar grupo</a><br>
 <%if @mygroups%>
-<table>
-  <thead>
-    <tr>
-     <th>Nombre</th>
-     <th>Descripción</th>
-     <th>Horario</th>
-     <th>Semestre</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @mygroups.each do |group| %>
-      <tr>
-        <td><%= group.name %></td>
-        <td><%= group.description %></td>
-        <td><%= group.schedule %></td>
-        <td><%= group.semester %></td>
-        <td><%= link_to 'Mostrar', group %></td>
-        <td><%= link_to 'Editar', edit_group_path(group) %></td>
-        <td><%= link_to 'Eliminar', group, method: :delete, data: { confirm: '¿Está seguro(a)?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<ul class="collapsible">
+   <% @mygroups.each do |group| %>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">expand_more</i><%= group.name %></div>
+      <div class="collapsible-body">       
+        <p>Descripción: <%= group.description %></p>
+        <p>Horario: <%= group.schedule %></p>
+        <p>Semestre: <%= group.semester %></p><br>
+      <%= link_to 'Mostrar', group %>
+      <%= link_to 'Editar', edit_group_path(group) %>
+      <%= link_to 'Eliminar', group, method: :delete, data: { confirm: '¿Está seguro(a)?' } %>
+      </div>
+    </li>
+    <%end%>
+  </ul>
 <%else%>
 <h4 class="grey-text text-darken-2">No tiene ningún grupo</h4>
 <%end%></center>

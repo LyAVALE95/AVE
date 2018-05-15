@@ -1,0 +1,2 @@
+module UserSGsHelper
+end
