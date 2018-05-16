@@ -11,8 +11,12 @@
     </div>
   <% end %>
 
+<div class="field" style="display: none;">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id, id: :session_user_id, value: current_user.id %>
+  </div>
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label :name,'Nombre' %>
     <%= form.text_field :name, id: :session_name %>
   </div>
 <!--
@@ -22,10 +26,10 @@
   </div>
 -->
   <div class="field">
-    <%= form.label :price %>
-    <%= form.text_field :price, id: :session_price %>
+    <%= form.label :price, 'Puntaje aprovatorio (Por exámen de lección)' %>
+    <%= form.number_field :price, id: :session_price %>
   </div>
-
+<!--
    <div class="col-md-6 block">
                 <h3><%= t :session_detail_details%></h3>
                 <div class="controls">
@@ -53,10 +57,11 @@
                 </div>
 
   </div>
+-->
 
 
-
+  <center>
   <div class="actions">
-    <%= form.submit %>
-  </div>
+    <%= form.submit  id:'btnSave', :class => 'btn btn-warning', :value => "Guardar cambios" %>
+  </div></center>
 <% end %>

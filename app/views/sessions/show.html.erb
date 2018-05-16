@@ -3,13 +3,18 @@
 <%= link_to 'Back', sessions_path %>
 <div class="row">
  <div class="col-md-10 col-sm-6"><h1> <%= @session.name%></h1>
-<h5 class="yellow-text text-darken-4"><%= @session.price%></h5>
+ <h5 class="yellow-text text-darken-4">Puntaje necesario:<%= @session.price%> (Por exámen)</h5>
  </div>
         <div class="col-md-2 col-sm-4">
+        <%if current_user.rol == "t"%>
         <a class="waves-effect waves-light yellow lighten-1 modal-trigger btn-large  grey-text text-darken-3" href="#modal1"
         >
           <b>+ Lección</b>
-        </a>        
+        </a> <br><br>
+        <a class="waves-effect waves-light yellow lighten-1 modal-trigger btn-large  grey-text text-darken-3" href="#modalq"
+        >
+          <b>+ Examen</b>
+        </a><%end%>        
         </div>
 </div>
 <div id="modal1" class="modal">
@@ -20,6 +25,44 @@
     <div class="modal-footer">
      <!-- <a href="" class="modal-action modal-close btn-danger waves-effect waves-green btn-flat">Cancelar</a>-->
     </div>
+  </div>
+  <div id="modalq" class="modal">
+    <div class="modal-content">
+      <h4>Agregar examen</h4>
+      <%= render 'quizzes/form', quiz: @session_quiz %>
+    </div>
+    <div class="modal-footer">
+     <!-- <a href="" class="modal-action modal-close btn-danger waves-effect waves-green btn-flat">Cancelar</a>-->
+    </div>
+  </div>
+  <div class="col-12">
+  <%if @quizzes.count == 0 %>
+  <center><h4 class="grey-text">No hay ningún exámen relacionado</h4></center>
+  <%else%>    
+    <h4 class="pink-text">Mis examenes</h4>
+     <div class="row">
+         <% @quizzes.each do |q| %>
+            <div class="col-12 col-md-4">
+          <h2 class="header"></h2>
+          <div class="card horizontal">
+            <div class="card-image">
+              
+            </div>
+            <div class="card-stacked">
+              <div class="card-content" style="display: inline-block;">
+              <img src="/icons/test.png" width="80px" height="80px">
+                <span><b><%= q.description %></b></span>
+              </div>
+              <div class="card-action">
+                <a href="#"><%= link_to 'Mostrar', q %></a>
+              </div>
+            </div>
+          </div>
+            </div>
+        <%end%>
+        </div>
+
+  <%end%>
   </div>
  <div class="row">
  <% @details.each do |d| %>

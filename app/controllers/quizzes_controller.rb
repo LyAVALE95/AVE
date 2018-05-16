@@ -5,7 +5,8 @@ class QuizzesController < ApplicationController
   # GET /quizzes.json
   $quizid
   def index
-    @quizzes = Quiz.all
+    #@quizzes = Quiz.all
+    @quizzes = Quiz.where('')
   end
 
   # GET /quizzes/1
@@ -83,6 +84,6 @@ class QuizzesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def quiz_params
-      params.require(:quiz).permit(:description, :approved, :avaible)
+      params.require(:quiz).permit(:description, :approved, :avaible,:session_id,:user_id,:user_teacher_id)
     end
 end

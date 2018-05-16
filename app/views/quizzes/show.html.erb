@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<%if current_user.rol == "t"%>
 <div class="row card pink lighten-1">
 <div class="col-md-12 col-sm-2 ">
 <div id="TempId" style="display:none"><%=  $quizid %></div>
@@ -42,5 +43,26 @@
    <%end%></ol>
 </div>
 </div
-<%= link_to 'Edit', edit_quiz_path(@quiz) %> |
-<%= link_to 'Back', quizzes_path %>
+<%= link_to 'Editar', edit_quiz_path(@quiz) %> |
+<%= link_to 'Ir a los examenes', quizzes_path %>
+<%else%>
+<div class="row card pink lighten-1">
+<div class="col-md-12 col-sm-2 ">
+<div id="TempId" style="display:none"><%=  $quizid %></div>
+<center>
+<h2 class="yellow-text text-lighten-5">
+ #<%= @quiz.id %>: <%= @quiz.description %>
+</h2>
+</center>
+</div>
+<div class="col-md-4" style="display:none">
+<h6 class="teal-text text-darken-3">
+  Approved<%= @quiz.approved %>
+</h6>
+
+<h6 class="teal-text text-darken-3">
+  Avaible: <%= @quiz.avaible %>
+</h6>
+</div>
+</div>
+<%end%>
