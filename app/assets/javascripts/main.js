@@ -21,10 +21,11 @@ $( document ).ready(function() {
        .mouseleave(function() {
            $( "#search-icon" ).css({ 'color': '#2e2e1f'});
        });
+});
        //Autocomplete
 
             // Radialize the colors
-Highcharts.setOptions({
+/*Highcharts.setOptions({
     colors: Highcharts.map(Highcharts.getOptions().colors, function (color) {
         return {
             radialGradient: {
@@ -82,3 +83,4 @@ Highcharts.setOptions({
               });
 });
 
+*/

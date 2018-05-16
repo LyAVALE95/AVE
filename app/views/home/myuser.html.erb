@@ -68,7 +68,7 @@
       <%if current_user.rol=='t'%>
       <%= render 'user_teachers/form', user_teacher: @myuser %>
       <%else%>
-      Es alumno
+      <%= render 'user_students/form', user_student: @myuser %>
       <%end%>
     </div>
     <div class="modal-footer">
@@ -175,9 +175,6 @@ function saveStudentData(){
       }                      
     });
   }
-window.onload = function() {
-  
-};
 
 $(document).ready(function(){
   $("#toGrp").click(function(){

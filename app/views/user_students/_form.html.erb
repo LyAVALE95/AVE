@@ -10,8 +10,92 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="actions">
-    <%= form.submit %>
+ <center><div id="avatarn"> </div></center>
+ <div class="field" style="display: none;">
+    <%= form.label :id %>
+    <%= form.text_field :id, id: :us_id %>
   </div>
+ <div class="field">
+    <%= form.label :name,'Nombre(s)' %>
+    <%= form.text_field :name, id: :us_name %>
+  </div>
+ <div class="field">
+    <%= form.label :lastnames,'Apellido(s)' %>
+    <%= form.text_field :lastnames, id: :us_lname %>
+  </div>
+   <div class="field">
+    <%= form.label :control_number,'Número de control' %>
+    <%= form.text_field :control_number, id: :us_cn_name %>
+  </div>
+  <div class="field">
+    <%= form.label :career,'Carrera' %>
+    <%= form.text_field :career, id: :us_carrer %>
+  </div>
+  <div class="field">
+    <%= form.label :grade,'Semestre' %>
+    <%= form.text_field :grade, id: :us_grade %>
+  </div>  
+  <br>
+  <center>
+  <div class="actions">
+    <%= form.submit  id:'btnSave', :class => 'btn btn-warning', :value => "Guardar cambios" %>
+  </div></center>
 <% end %>
+<script>
+            
+        var iconSelect;
+
+        window.onload = function(){     
+            iconSelect = new IconSelect("avatarn", 
+                {'selectedIconWidth':48,
+                'selectedIconHeight':48,
+                'selectedBoxPadding':1,
+                'iconsWidth':50,
+                'iconsHeight':50,
+                'boxIconSpace':1,
+                'vectoralIconNumber':4,
+                'horizontalIconNumber':4});
+
+            var icons = [];
+            icons.push({'iconFilePath':'/avatar_student/boy.png', 'iconValue':"/avatar_student/boy.png"});
+            icons.push({'iconFilePath':'/avatar_student/girl.png', 'iconValue':"/avatar_student/girl.png"});
+            icons.push({'iconFilePath':'/avatar_student/boy-1.png', 'iconValue':"/avatar_student/boy-1.png"});
+            icons.push({'iconFilePath':'/avatar_student/boy-2.png', 'iconValue':"/avatar_student/boy-2.png"});
+            icons.push({'iconFilePath':'/avatar_student/boy-3.png', 'iconValue':"/avatar_student/boy-3.png"});
+            icons.push({'iconFilePath':'/avatar_student/boy-4.png', 'iconValue':"/avatar_student/boy-4.png"});
+            icons.push({'iconFilePath':'/avatar_student/boy-5.png', 'iconValue':"/avatar_student/boy-5.png"});
+            
+            iconSelect.refresh(icons);
+            var mypicdiv1 = $('img').attr('src');
+            var myid = "/user_students/" + $('input#us_id').val() + "/";
+            $('div#avatarn div.selected-icon img').prop('src',mypicdiv1);
+            $("#btnSave").click(function(){
+              var myurl = "/" +
+              document.URL.substring(document.URL.indexOf('user_student'),document.URL.indexOf('edit'));
+              var mypic = $('div#avatarn').find('img').prop('src');
+              console.log("my ul: " +myurl);
+              console.log("my pic: " + mypic);
+                  $.ajax({
+                    url: myid,
+                    type: 'PUT',
+                    contentType: 'application/json',
+                    dataType: "script",
+                    data: JSON.stringify({
+                      user_student: { 
+                      avatarn: mypic,
+                      commit: "Update Picture"
+                      },_method:'put'}),
+                    successs: function(r){
+                      //alert(this.value + '..Guardado');
+                    }, error: function(error) {
+                  //alert(error);
+                  }                      
+                });
+            });
+
+        };
+        $(document).ready(function(){
+          
+        });
+        </script>
+
