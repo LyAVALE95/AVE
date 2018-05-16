@@ -6,7 +6,13 @@ class QuizzesController < ApplicationController
   $quizid
   def index
     #@quizzes = Quiz.all
-    @quizzes = Quiz.where('')
+    if current_user.rol == 't'
+    @quizzes = Quiz.where("user_id = ?",current_user.id)
+    else
+       @quizzes = Quiz.select('quizzes.*, user_teachers.id,user_teachers.user_id,user_students.id,user_students.user_teacher_id')
+      .joins('join user_students').where('user_students.user_id = ?',current_user.id)
+      .joins('join user_teachers').where('user_teachers.id=user_students.user_teacher_id and user_teachers.user_id=quizzes.user_id')
+    end
   end
 
   # GET /quizzes/1
