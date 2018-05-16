@@ -4,13 +4,13 @@ $("#submenu_link").on("click", function(){
 
 function goandrefresh(){
 	 setInterval(function() {
-    cache_clear()
-  }, 500);
+    cache_clear();
+  }, 1000);
 }
 function goandrefresh2(){
 	window.location.reload(true);
 	 setInterval(function() {
-    cache_clear()
+    cache_clear();
   }, 1000);
 }
 function cache_clear() {

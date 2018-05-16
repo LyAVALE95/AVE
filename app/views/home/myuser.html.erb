@@ -79,7 +79,7 @@
 <div id="modalschool" class="modal">
     <div class="modal-content">
       <h4>Editar mi escuela<i class="small material-icons lime-text text-darken-2">edit</i></h4>
-      <%if current_user.rol=='t'%>
+      <%if current_user.rol=='t' && @myschool%>
       <%= render 'schools/form', school: @myschool %>
       <%else%>
       Es alumno

@@ -25,6 +25,9 @@
     <% end %>
   </tbody>
 </table>-->
+<% if @quizzes.size == 0 %>
+<h4 class="grey-text">Aún no tiene examenes</h4>
+<%end%>
 <ul class="collection">
    <% @quizzes.each do |quiz| %>
       <li class="collection-item avatar">
@@ -32,13 +35,14 @@
         <h6><%= quiz.description %></h6>
         <p><%= quiz.approved %></p>
         <p><%= quiz.avaible %></p>
-        <p><%= link_to 'Mostrar', quiz, :onclick => "goandrefresh()"%>|
+        <p><%= link_to 'Mostrar', quiz, :onclick => "goandrefresh()"%>
+        <%if current_user.rol == "t"%>|
         <%= link_to 'Editar', edit_quiz_path(quiz) %>
-        |<%= link_to 'Eliminar', quiz, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+        |<%= link_to 'Eliminar', quiz, method: :delete, data: { confirm: 'Are you sure?' } %><%end%></p>
       </li>
     <% end %>
   </ul>
 
 <br>
 
-<%= link_to 'New Quiz', new_quiz_path %>
+
