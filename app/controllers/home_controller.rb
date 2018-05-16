@@ -20,7 +20,10 @@ class HomeController < ApplicationController
     	end
 	end	 
 	def getmyteachers
-		@myteachers = User.where("school_id=?",params[:id]) 
+		#@myteachers = User.where("school_id=?",params[:id]) 
+		@myteachers = User.select("users.*,user_teachers.user_id, user_teachers.id as tid")
+		.joins("join user_teachers")
+		.where("school_id=? and user_teachers.user_id=users.id",params[:id]) 
 		respond_to do |format|
       	  format.html 
     	  format.json { render json: @myteachers}
@@ -31,14 +34,20 @@ class HomeController < ApplicationController
 		if @myuser.rol == "s"
 			@myuser = UserStudent.select("users.id,user_students.*").joins("join users")
 			.where("users.id=? and user_students.user_id=?",current_user.id,current_user.id).first
+			@myschool = School.select("user_students.school_id,user_students.user_id,schools.*")
+			.joins("join user_students")
+			.where("user_students.user_id=? and schools.id=user_students.school_id",current_user.id).first
+			@mygroups = Group.select("user_students.school_id,user_students.user_id,groups.*")
+			.joins("join user_students")
+			.where("user_students.user_id=? and groups.id=user_students.group_id",current_user.id)
 		else 
 			@myuser = UserTeacher.select("users.id,user_teachers.*").joins("join users")
 			.where("users.id=? and user_teachers.user_id=?",current_user.id,current_user.id).first
-		end
-		@myschool = School.select("users.id,schools.*").joins("join users")
+			@myschool = School.select("users.id,schools.*").joins("join users")
 			.where("users.id=? and schools.id=users.school_id",current_user.id).first
-		@mygroups = Group.select("user_sgs.*,groups.*").joins("join user_sgs")
-			.where("user_sgs.user_id=? and groups.id=user_sgs.group_id",current_user.id)		
+			@mygroups = Group.select("user_sgs.*,groups.*").joins("join user_sgs")
+			.where("user_sgs.user_id=? and groups.id=user_sgs.group_id",current_user.id)
+		end
 		respond_to do |format|
       	  format.html 
     	  format.json { render json: @mygroups}

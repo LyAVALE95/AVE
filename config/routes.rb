@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   get '/myuser', :to =>'home#myuser'
   get '/getmygroups/:id' =>'home#getmygroups'
   get '/getmyteachers/:id' =>'home#getmyteachers'
-  put 'myuserupdatedata' => 'user#updatemyusr'
+  put '/myuserupdatedata/:id' => 'user_students#updatemyusr'
     #post ':controller(/:action(/:id(.:format)))'
     #get ':controller(/:action(/:id(.:format)))'
   post 'amethods/count'

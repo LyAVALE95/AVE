@@ -1,6 +1,8 @@
 class UserStudentsController < ApplicationController
   before_action :set_user_student, only: [:show, :edit, :update, :destroy]
-
+  $school
+  $group
+  $user_id
   # GET /user_students
   # GET /user_students.json
   def index
@@ -10,6 +12,18 @@ class UserStudentsController < ApplicationController
   # GET /user_students/1
   # GET /user_students/1.json
   def show
+  end
+
+  def updatemyusr
+     @user_student = UserStudent.where("user_students.user_id = ?",params[:id])
+    respond_to do |format|
+      if @user_student.update(user_student_params)
+        format.html { redirect_to "/myuser", notice: 'Usuario actualizado correctamente' }
+        format.json { render :show, status: :ok, location: '/myuser'}
+      else
+        format.html { render :edit }
+      end
+      end
   end
 
   # GET /user_students/new
@@ -70,6 +84,6 @@ class UserStudentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_student_params
       #params.fetch(:user_student, {})
-      params.require(:user_student).permit(:names,:lastnames,:name,:control_number,:carrer,:grade,:algorithm_level,:course_level,:score,:user_id)
+      params.require(:user_student).permit(:names,:lastnames,:name,:control_number,:carrer,:grade,:algorithm_level,:course_level,:score,:user_id,:school_id,:group_id,:user_teacher_id)
     end
 end 

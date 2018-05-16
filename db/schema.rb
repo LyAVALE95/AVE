@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180514074427) do
+ActiveRecord::Schema.define(version: 20180515111936) do
 
   create_table "algorithms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -150,8 +150,14 @@ ActiveRecord::Schema.define(version: 20180514074427) do
     t.bigint "user_quiz_id"
     t.integer "avatar", default: 0
     t.string "avatarn", default: "/avatar_student/boy.png"
+    t.bigint "group_id"
+    t.bigint "school_id"
+    t.bigint "user_teacher_id"
+    t.index ["group_id"], name: "index_user_students_on_group_id"
+    t.index ["school_id"], name: "index_user_students_on_school_id"
     t.index ["user_id"], name: "index_user_students_on_user_id"
     t.index ["user_quiz_id"], name: "index_user_students_on_user_quiz_id"
+    t.index ["user_teacher_id"], name: "index_user_students_on_user_teacher_id"
   end
 
   create_table "user_teachers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -211,6 +217,9 @@ ActiveRecord::Schema.define(version: 20180514074427) do
   add_foreign_key "user_sgs", "groups"
   add_foreign_key "user_sgs", "schools"
   add_foreign_key "user_sgs", "users"
+  add_foreign_key "user_students", "groups"
+  add_foreign_key "user_students", "schools"
+  add_foreign_key "user_students", "user_teachers"
   add_foreign_key "user_students", "users"
   add_foreign_key "user_teachers", "users"
   add_foreign_key "users", "groups"

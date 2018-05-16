@@ -94,19 +94,20 @@
 <div id="modaluserall" class="modal">
     <div class="modal-content">
       <h4>Unirme a un grupo<i class="small material-icons lime-text text-darken-2">edit</i></h4>
-      <%if current_user.rol=='s'%>
+      <%if current_user.rol=='s'%>    
+      <p id="myusrid" style="display: none;"><%= current_user.id %></p>  
       <div ng-app="studentApp" ng-controller="studentCtrl">
-        <select ng-model="studentCtrlSchool" ng-change="changeSchool()">
+        <select id="sschool" ng-model="studentCtrlSchool" ng-change="changeSchool()">
           <option ng-repeat="x in schools" value="{{x.id}}">{{x.name}}</option>
         </select>
-        <select ng-model="studentCtrlTeacher" ng-change="changeTeacher()">
-          <option ng-repeat="x in myteachers" value="{{x.id}}">{{x.name}}</option>
+        <select id="steacher" ng-model="studentCtrlTeacher" ng-change="changeTeacher()">
+          <option ng-repeat="x in myteachers" valuetid="{{x.tid}}" value="{{x.id}}">{{x.name}}</option>
         </select>
-        <select ng-model="studentCtrlGroup" ng-change="changeGroup()">
+        <select id="sgroup" ng-model="studentCtrlGroup" ng-change="changeGroup()">
           <option ng-repeat="x in mygroups" value="{{x.id}}">{{x.name}}</option>
         </select>
         {{urlp}}
-        <center><button class="btn" ng-click="guardar()"> Guardar</button></center>
+        <center><button class="btn" onclick="saveStudentData()"> Guardar</button></center>
       </div>
       <%end%>
     </div>
@@ -133,17 +134,51 @@ app.controller('studentCtrl', function($scope, $http) {
         $scope.urlp = "/getmygroups/"+ $scope.studentCtrlSchool + ".json"
          $http.get($scope.urlp).then(function (response) {
           $scope.mygroups = response.data;
-    });
+    }); 
     }
-      $scope.guardar = function() {
+
+    /*$scope.guardar = function() {
+        var myusrid = $("#myusrid").text();
+        console.log(myusrid);
         $scope.urlp = "/myuserupdatedata/"+ $scope.studentCtrlSchool +"/"+$scope.studentCtrlGroup
-     $http.put("/myuserupdatedata/", { school: $scope.studentCtrlSchool , group: $scope.studentCtrlGroup }).then(function (response) {
+     $http.put("/myuserupdatedata/", JSON.stringify( {user_student: { $user_id: myusrid, $school: $scope.studentCtrlSchool , $group: $scope.studentCtrlGroup }})).then(function (response) {
         console.log('all is good', response.data);
       }, function (error) {
         console.log('an error occurred', error.data);
       });
-    }
-});
+    }*/
+
+}); 
+function saveStudentData(){
+    var myusrid = $("#myusrid").text();
+    myusrid = "/myuserupdatedata/" + myusrid
+    var myschool = $("#sschool").val();
+    var myteacher =  $('#steacher option:selected').attr('valuetid');
+    //$("#steacher").val();
+    var mygroup = $("#sgroup").val();
+      $.ajax({
+        url: myusrid,
+        type: 'PUT',
+        contentType: 'application/json',
+        dataType: "script",
+        data: JSON.stringify({
+          user_student: { 
+          group_id: mygroup,
+          user_teacher_id: myteacher,
+          school_id: myschool,
+          commit: "Update Student data"
+          },_method:'put'}),
+        successs: function(r){
+          //alert(this.value + '..Guardado');
+        }, error: function(error) {
+      //alert(error);
+      }                      
+    });
+  }
+window.onload = function() {
+  
+};
+
 $(document).ready(function(){
   $("#toGrp").click(function(){
     var myOption = $("#myOption").val();
