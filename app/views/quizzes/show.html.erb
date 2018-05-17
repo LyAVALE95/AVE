@@ -42,17 +42,17 @@
    <%end%></ul>
    <%end%></ol>
 </div>
-</div
+</div>
 <%= link_to 'Editar', edit_quiz_path(@quiz) %> |
 <%= link_to 'Ir a los examenes', quizzes_path %>
 <%else%>
-<div class="row card pink lighten-1">
+<div class="row card blue lighten-1">
 <div class="col-md-12 col-sm-2 ">
 <div id="TempId" style="display:none"><%=  $quizid %></div>
 <center>
-<h2 class="yellow-text text-lighten-5">
+<h4 class="yellow-text text-lighten-5">
  #<%= @quiz.id %>: <%= @quiz.description %>
-</h2>
+</h4>
 </center>
 </div>
 <div class="col-md-4" style="display:none">
@@ -65,4 +65,56 @@
 </h6>
 </div>
 </div>
+<div class="col-12 card" id="Quiz">
+<a style="display:none" id="myuserid"><%= current_user.id%></a>
+
+<h5>Preguntas</h5><ol class="collection">
+   <% @questions.each do |q| %>
+   <!--<a href="/questions/" class="collection-item" id=q.id >Articles</a>-->
+   <li class="orange-text text-darken-4"><h6><%q.id%>.<%= q.description %></h6></li> <ul class="collection">
+    <select>
+    <% @question_options.each do |qp| %>
+   <!--<a href="/questions/" class="collection-item" id=q.id >Articles</a>-->
+  
+      <% if q.id == qp.question_id %>
+      <option value= <%= qp.value%> ><%= qp.description %></option>
+      <%end%>
+      <%end%>
+    </select>
+   </ul>
+   <%end%></ol>
+   <center><button onclick="goAhead()" class="btn btn-large btn-warning orange lighten-2">Listo</button></center>
+   <br>
+</div>
 <%end%>
+<script type="text/javascript">
+function goAhead() {
+    var myuserid = $("#myuserid").text();
+    var quizid = document.URL.substring(document.URL.lastIndexOf("/")+1);
+    var preguntas = $("#Quiz select").length;
+    var respuestasc = $('#Quiz select option:selected[value="1"]').length;
+    var calificacion = (respuestasc/preguntas)*100;
+    //alert(calificacion);
+    var r = confirm("¿Estás seguro(a)?");
+      if (r == true) {
+        alert(Math.round(calificacion));
+          $.ajax({
+        url: '/user_quizzes/',
+        type: 'POST',
+        contentType: "application/json",
+        data: JSON.stringify({
+          user_quiz: { 
+          score: Math.round(calificacion),
+          user_id: myuserid,
+          quiz_id: quizid,
+          commit: "Create Quiz Record"
+          }}),
+        successs: function(r){
+          //alert(this.value + '..Guardado');
+        }, error: function(error) {
+                  //alert(error);
+                }                      
+        });
+      } 
+  }  
+</script>

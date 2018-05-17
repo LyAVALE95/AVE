@@ -12,6 +12,14 @@
   <% end %>
 
   <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id, id: :user_quiz_id %>
+  </div>
+  <div class="field">
+    <%= form.label :quiz_id %>
+    <%= form.text_field :quiz_id, id: :user_quiz_quiz %>
+  </div>
+  <div class="field">
     <%= form.label :score %>
     <%= form.text_field :score, id: :user_quiz_score %>
   </div>

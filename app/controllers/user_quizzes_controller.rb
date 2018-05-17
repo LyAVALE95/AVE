@@ -69,6 +69,6 @@ class UserQuizzesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_quiz_params
-      params.require(:user_quiz).permit(:score)
+      params.fetch(:user_quiz,{}).permit(:score,:user_id,:quiz_id)
     end
 end

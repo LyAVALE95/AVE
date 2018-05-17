@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180516072746) do
+ActiveRecord::Schema.define(version: 20180517050032) do
 
   create_table "algorithms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -129,6 +129,10 @@ ActiveRecord::Schema.define(version: 20180516072746) do
     t.float "score", limit: 24
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "quiz_id"
+    t.index ["quiz_id"], name: "index_user_quizzes_on_quiz_id"
+    t.index ["user_id"], name: "index_user_quizzes_on_user_id"
   end
 
   create_table "user_sgs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -226,6 +230,8 @@ ActiveRecord::Schema.define(version: 20180516072746) do
   add_foreign_key "sessions", "algorithms"
   add_foreign_key "sessions", "user_teachers"
   add_foreign_key "sessions", "users"
+  add_foreign_key "user_quizzes", "quizzes"
+  add_foreign_key "user_quizzes", "users"
   add_foreign_key "user_sgs", "groups"
   add_foreign_key "user_sgs", "schools"
   add_foreign_key "user_sgs", "users"
