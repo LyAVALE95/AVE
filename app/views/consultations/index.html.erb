@@ -1,6 +1,45 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Consultations</h1>
+<h1>Documentos</h1>
+<%= link_to 'Nuevo documento', new_consultation_path,:class => 'btn yellow btn-warning' %>
+<div class="row">
+  <div class="col-3">
+    <center><h4 class="teal-text text-darken-1">Enlaces</h4>
+       <%if @consultations.count == 0 %>
+       <h4 class="grey-text">____</h4>
+       <%end%>
+       <% @consultations.each do |consultation| %>
+       <div class="card">
+         
+       </div>
+       <%end%>
+    </center>
+  </div>
+    <div class="col-4">
+    <center><h4 class="red-text text-darken-1">Libros</h4>
+       <%if @consultations.count == 0 %>
+       <h4 class="grey-text">____</h4>
+       <%end%>
+       <% @consultations.each do |consultation| %>
+       <div class="card">
+         
+       </div>
+       <%end%>
+    </center>
+  </div>
+    <div class="col-4">
+    <center><h4 class="lime-text text-darken-1">Referencias</h4>
+       <%if @consultations.count == 0 %>
+       <h4 class="grey-text">____</h4>
+       <%end%>
+       <% @consultations.each do |consultation| %>
+       <div class="card">
+         
+       </div>
+       <%end%>
+    </center>
+  </div>
+</div>
 
 <table>
   <thead>
@@ -27,5 +66,3 @@
 </table>
 
 <br>
-
-<%= link_to 'New Consultation', new_consultation_path %>

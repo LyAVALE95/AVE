@@ -1,0 +1,109 @@
+<div ng-app="reportApp" ng-controller="reportCtrl">
+<center>
+	<h1>Reportes</h1><br><hr>
+<div class="row">
+	<div class="col-12 col-md-3">
+	<!--<h3>{{selectedReport}}</h3>-->
+		<h4 class="pink-text"><b>Tipo</b></h4>
+		<select name="carlist" form="carform" ng-model="selectedReport">
+  		<option ng-repeat="x in reports" value="{{x.tipo}}">{{x.model}}</option>	
+		</select>
+		<br>
+		<div style="display: inline-block;">
+		<button class="btn btn-large  blue lighten-2" id="toGrp">
+  		<i class="material-icons">equalizer</i> Gráfica</button>
+  		<button class="btn btn-large red lighten-2">
+  		<i class="material-icons">archive</i> PDF</button>
+		</div><br>
+	</div>
+	<div class="col-12 col-md-9 card" id="mycontent">
+		<div ng-switch="selectedReport">
+  		<div ng-switch-when="students">
+     	<center><h4 class="teal-text"><b>Opciones</b></h4></center>
+		<select name="carlist" id="myOption" class="col-5" form="carform" ng-model="selectedTypeStudent">
+  		<option ng-repeat="x in typeStudent" value="{{x.tipo}}">{{x.model}}</option>
+		</select><br><hr>
+				<div ng-switch on="selectedTypeStudent">
+  		<div ng-switch-when="bygroup">
+     	<center><h3 class="gray-text"><b>Mis grupos </b></h3></center>
+     	<table>
+		  <thead>
+		    <tr>
+		     <th>Nombre</th>
+		     <th>Descripción</th>
+		     <th>Horario</th>
+		    </tr>
+		  </thead>
+		
+		  <tbody>
+		      <tr ng-repeat="group in myGroups">
+		        <td>{{group.name}} </td>
+		        <td>{{group.description}} </td>
+		        <td>{{group.schedule}} </td>
+		      </tr>
+		  </tbody>
+		</table>	
+  		</div>
+  		<div ng-switch-when="byalph">
+     		<h1>Grupos</h1>
+     		<p>Learn from examples.</p>
+  		</div>
+  		<div ng-switch-when="score">
+     		<h1>Calificaciones</h1>
+     		<p>Read about cars.</p>
+  		</div>
+  		</div>
+  		</div>
+  		<div ng-switch-when="groups">
+     		<h1>Grupos</h1>
+     		<p>Learn from examples.</p>
+  		</div>
+  		<div ng-switch-when="score">
+     		<h1>Calificaciones</h1>
+     		<p>Read about cars.</p>
+  		</div>
+		</div>
+	</div>	
+</div><!--
+<div class="row">
+	<div class="col-12 col-md-5 card">
+		<div id = "container" style = "width: 550px; height: 400px; margin: 0 auto"></div>
+	</div>
+	<div class="col-md-1">
+		
+	</div>
+	<div class="col-12 col-md-6 col-md-offset-1 card">
+		<ul>
+  <li ng-repeat="x in myGroups">
+    {{ x.id + ', ' + x.name }}
+  </li>
+</ul>
+  	</div>
+	</div>-->
+</center>
+</div>
+<script>
+var app = angular.module('reportApp', []);
+app.controller('reportCtrl', function($scope, $http) {
+	$scope.myData=[];
+    $scope.reports = [
+        {model : "Estudiantes", tipo : "students"},
+        {model : "Clases", tipo : "groups"},
+        {model : "Calificaciones", tipo : "score"}
+    ];
+    $scope.typeStudent = [
+        {model : "Por grupo", tipo : "bygroup"},
+        {model : "Order alfabético", tipo : "byalph"},
+        {model : "Por promedio", tipo : "byscore"}
+    ];
+    $http.get("/groups.json").then(function (response) {
+      $scope.myGroups = response.data;
+  	});
+});
+$(document).ready(function(){
+	$("#toGrp").click(function(){
+		var myOption = $("#myOption").val();
+		alert(myOption);
+	});
+});
+</script>
