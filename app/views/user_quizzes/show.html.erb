@@ -1,9 +1,14 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Score:</strong>
+<%= link_to 'Mis resultados', user_quizzes_path %>
+<h1>
+  <strong>Resultado:</strong>
   <%= @user_quiz.score %>
-</p>
+</h1>
+<hr>
+<h4>
+  <strong>Exámen:</strong>
+  <%= @user_quiz.quiz_id %>
+  <%= link_to "Ir al exámen", quiz_path(@user_quiz.quiz_id)%>
+  <a href="/quizzes/"<%= @user_quiz.quiz_id %>></a>
+</h4>
 
-<%= link_to 'Edit', edit_user_quiz_path(@user_quiz) %> |
-<%= link_to 'Back', user_quizzes_path %>

@@ -4,7 +4,7 @@ class UserQuizzesController < ApplicationController
   # GET /user_quizzes
   # GET /user_quizzes.json
   def index
-    @user_quizzes = UserQuiz.all
+    @user_quizzes = UserQuiz.where("user_id = ?",current_user.id)
   end
 
   # GET /user_quizzes/1
@@ -24,16 +24,18 @@ class UserQuizzesController < ApplicationController
   # POST /user_quizzes
   # POST /user_quizzes.json
   def create
+    @user_quiz_last = UserQuiz.where("user_id = ?",current_user.id).last
     @user_quiz = UserQuiz.new(user_quiz_params)
-
     respond_to do |format|
+     if @user_quiz.score > @user_quiz_last.score
       if @user_quiz.save
-        format.html { redirect_to @user_quiz, notice: 'User quiz was successfully created.' }
+        format.html { redirect_to @user_quiz, notice: 'Ha mejorado su calificación' }
         format.json { render :show, status: :created, location: @user_quiz }
       else
         format.html { render :new }
         format.json { render json: @user_quiz.errors, status: :unprocessable_entity }
       end
+     end
     end
   end
 

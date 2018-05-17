@@ -1,22 +1,22 @@
 <p id="notice"><%= notice %></p>
 
-<h1>User Quizzes</h1>
+<h1>Mis resultados</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Score</th>
-      <th colspan="3"></th>
+      <th>Exámen</th>
+      <th>Calificación</th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @user_quizzes.each do |user_quiz| %>
       <tr>
+        <td><%= link_to user_quiz.quiz_id, quiz_path(user_quiz.quiz_id)%></td>
         <td><%= user_quiz.score %></td>
-        <td><%= link_to 'Show', user_quiz %></td>
-        <td><%= link_to 'Edit', edit_user_quiz_path(user_quiz) %></td>
-        <td><%= link_to 'Destroy', user_quiz, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Mas información', user_quiz %></td>
       </tr>
     <% end %>
   </tbody>
