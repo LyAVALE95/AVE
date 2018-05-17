@@ -1,5 +1,4 @@
 $( document ).ready(function() {
-
   $('input.autocomplete').autocomplete({
     data: {
       "Lección 1": null,
@@ -21,11 +20,23 @@ $( document ).ready(function() {
        .mouseleave(function() {
            $( "#search-icon" ).css({ 'color': '#2e2e1f'});
        });
-});
+//});
        //Autocomplete
 
             // Radialize the colors
-/*Highcharts.setOptions({
+  var scores = new Array;
+  var tempparsedcalf;
+var getSomeData;
+ $.getJSON('/user_quizzes.json', function(data) {
+});
+console.log(tempparsedcalf);
+  //console.log(getSomeData);
+  /*var totalcount = scores.length;
+  console.log(scores.length);
+   for (i = 0; i < totalcount; i++) {
+        scores.push([json.scores[i].user1_rating]);
+    }*/
+Highcharts.setOptions({
     colors: Highcharts.map(Highcharts.getOptions().colors, function (color) {
         return {
             radialGradient: {
@@ -42,45 +53,58 @@ $( document ).ready(function() {
 });
 
  		// Build the chart
-              Highcharts.chart('container', {
-                  chart: {
-                      plotBackgroundColor: null,
-                      plotBorderWidth: null,
-                      plotShadow: false,
-                      type: 'pie'
-                  },
-                  title: {
-                      text: 'Rango de aprovechamiento por grupos, 2018 ENE-JUN'
-                  },
-                  tooltip: {
-                      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                  },
-                  plotOptions: {
-                      pie: {
-                          allowPointSelect: true,
-                          cursor: 'pointer',
-                          dataLabels: {
-                              enabled: true,
-                              format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                              style: {
-                                  color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                              },
-                              connectorColor: 'silver'
-                          }
-                      }
-                  },
-                  series: [{
-                      name: 'Share',
-                      data: [
-                          { name: 'Grupo A. ', y: 61.41 },
-                          { name: 'Grupo B', y: 11.84 },
-                          { name: 'Grupo C', y: 10.85 },
-                          { name: 'Grupo de apoyo A', y: 4.67 },
-                          { name: 'Asesorías', y: 4.18 },
-                          { name: 'Otros', y: 7.05 }
-                      ]
-                  }]
-              });
+     
+Highcharts.chart('container', {
+  chart: {
+    plotBackgroundColor: null,
+    plotBorderWidth: null,
+    plotShadow: false,
+    type: 'pie'
+  },
+  title: {
+    text: 'Browser market shares in January, 2018'
+  },
+  tooltip: {
+    pointFormat: '{series.score}: <b>{point.percentage:.1f}%</b>'
+  },
+  plotOptions: {
+    pie: {
+      allowPointSelect: true,
+      cursor: 'pointer',
+      dataLabels: {
+        enabled: true,
+        format: '<b>{point.score}</b>: {point.percentage:.1f} %',
+        style: {
+          color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+        }
+      }
+    }
+  },
+  series: [{
+    score: 'Brands',
+    colorByPoint: true,
+    data: [
+  {
+    y: 67,
+    user_id: 10,
+    quiz_id: 9,
+    score: 67,
+    created_at: '2018-05-17T06:04:31.000Z',
+    updated_at: '2018-05-17T06:04:31.000Z',
+    url: 'http://localhost:3000/user_quizzes/3.json'
+  },
+  {
+    y: 100,
+    user_id: 10,
+    quiz_id: 9,
+    score: 100,
+    created_at: '2018-05-17T06:39:35.000Z',
+    updated_at: '2018-05-17T06:39:35.000Z',
+    url: 'http://localhost:3000/user_quizzes/4.json'
+  }
+]
+  }]
+});
+        
 });
 
-*/

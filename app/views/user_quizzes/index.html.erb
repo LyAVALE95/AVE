@@ -1,8 +1,9 @@
 <p id="notice"><%= notice %></p>
-
 <h1>Mis resultados</h1>
-
-<table>
+<div class="row">
+<div id = "container" class="col-6" style = "width: 300px; height: 300px; margin: 0 auto"></div>
+<div class="col-6" >
+<table id="dataTablestb" class="display nowrap dataTable dtr-inline collapsed">
   <thead>
     <tr>
       <th>Exámen</th>
@@ -21,7 +22,7 @@
     <% end %>
   </tbody>
 </table>
-
+</div>
 <br>
 
 <%= link_to 'New User Quiz', new_user_quiz_path %>

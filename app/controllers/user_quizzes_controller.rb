@@ -5,6 +5,10 @@ class UserQuizzesController < ApplicationController
   # GET /user_quizzes.json
   def index
     @user_quizzes = UserQuiz.where("user_id = ?",current_user.id)
+    respond_to do |format|
+        format.html
+        format.json { render :scores =>  @user_quizzes }
+     end
   end
 
   # GET /user_quizzes/1
