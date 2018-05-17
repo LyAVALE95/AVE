@@ -1,0 +1,28 @@
+<center>
+	<div class="col-8 col-xs-12 col-sm-12 card red lighten-4"><h3>Mis grupos</h3></div>
+</center>
+	<div class="row">	
+	<%if @mygroups.size == 0%>
+	<h1>Aún no tiene grupos</h1>
+	<a href="/myuser">De click a este enlace para ir a su perfil</a>
+	<%else%>
+	  <ul class="collection col-12 col-md-4">
+   	  <% @mygroups.each do |g| %>
+      <li class="collection-item avatar">
+      <img src="/icons/lecture.png" alt="" class="circle">
+        <h6><%= g.name%></h6>
+        <p><%= g.description%></p>
+        <p><%= g.schedule %></p>
+        <p><%= link_to 'Mostrar', g %></p>
+      	</li>
+      	      <%end%>
+  		</ul>
+  		<div class="col-md-1"></div>
+  		<div class="col-12 col-md-5">
+  		 <%= column_chart @mygroupsa.group(:name,:average).count(:average) , stacked: true , messages: {empty: "No data"} , id: "users-chart", width: "500px", height: "400px"
+  		 %>
+  		</div>
+
+	 <%end%>
+
+</div>

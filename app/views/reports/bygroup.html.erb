@@ -1,0 +1,20 @@
+<div class="col-12">
+ <center>
+	<h1><%=@group.name%></h1><br><hr>
+	<div ng-app="myApp" ng-controller="myCtrl">
+    <select ng-model="firstname">
+    <h1>{{firstname}}</h1>
+	</div>
+	<table id="dataTable">
+		
+	</table>
+</center>
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+    $scope.firstname = "John";
+    $scope.lastname = "Doe";    
+});
+</script>

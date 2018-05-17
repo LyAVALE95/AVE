@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   end
   #root :to => redirect("/users/sign_in")
   get '/home/home', :to =>'home#home'
+  get '/home/index', :to =>'home#index'
   root :to => redirect("/home/home")
   post 'sessions' => 'session_details#create'
   post 'quizzes' => 'questions#create'
@@ -37,6 +38,8 @@ Rails.application.routes.draw do
   get '/getmygroups/:id' =>'home#getmygroups'
   get '/getmyteachers/:id' =>'home#getmyteachers'
   put '/myuserupdatedata/:id' => 'user_students#updatemyusr'
+  get '/bygroup/:id', :to =>'reports#bygroup'
+  get '/gbygroupall', :to =>'reports#gbygroupall'
     #post ':controller(/:action(/:id(.:format)))'
     #get ':controller(/:action(/:id(.:format)))'
   post 'amethods/count'

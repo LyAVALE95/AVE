@@ -1,5 +1,17 @@
 class HomeController < ApplicationController
 	def index
+		if current_user.rol == "t"
+			@myteacherid = UserTeacher.where("user_id=?",current_user.id).first
+			@myuserparters = UserStudent.where("user_teacher_id=?",@myteacherid.id)
+			
+			@myusers = UserStudent.select("user_students.*,users.id as uid")
+			.joins("join users")
+			.where("user_students.user_teacher_id=? and user_students.user_id=users.id ",@myteacherid.id)
+			@myusersbyuser = User.select("user_students.user_id,user_students.user_teacher_id ,users.*")
+			.joins("join user_students")
+			.where("user_students.user_teacher_id=? and user_students.user_id=users.id ",@myteacherid.id)
+		
+		end
 	end	
 	def welcome
 	end	

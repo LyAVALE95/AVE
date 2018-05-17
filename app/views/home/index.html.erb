@@ -42,7 +42,42 @@
     </div>
  </div>
  <div class="col-md-6 col-lg-6 col-xs-12">
- 	<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+ 	<!--<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>-->
+  <%if current_user.rol =="t"%>
+  <center><h4>Aprovechamiento (puntos)</h4></center>
+  <%= pie_chart @myuserparters.group(:score).count, id: "users-chart-score", width: "500px", height: "400px" %>
+  <% else%>
+  <ul class="collapsible purple lighten-3">
+  <li class=" lime lighten-4">
+    <div class="collapsible-header light-blue darken-4 white-text">
+      <i class="material-icons">add_box</i>
+        Lecciones
+    </div>
+    <div class="collapsible-body"><p>Las lecciones se separan por cada profesor al que pertenece el usuario</p></div>
+  </li>
+  <li class="light-green lighten-5">
+    <div class="collapsible-header  deep-orange accent-4 white-text">
+      <i class="material-icons">add_box</i>
+      Second
+    </div>
+    <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+  </li>
+   <li class=" lime lighten-4">
+    <div class="collapsible-header light-blue darken-4 white-text">
+      <i class="material-icons">add_box</i>
+        First
+    </div>
+    <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+  </li>
+  <li class="light-green lighten-5">
+    <div class="collapsible-header  deep-orange accent-4 white-text">
+      <i class="material-icons">add_box</i>
+      Second
+    </div>
+    <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+  </li>
+  </ul>
+  <%end%>
  </div>
  </div>
 <div class="row">	
