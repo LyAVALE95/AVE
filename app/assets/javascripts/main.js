@@ -24,7 +24,7 @@ $( document ).ready(function() {
        //Autocomplete
 
             // Radialize the colors
-  var scores = new Array;
+  /*var scores = new Array;
   var tempparsedcalf;
 var getSomeData;
  $.getJSON('/user_quizzes.json', function(data) {
@@ -36,6 +36,7 @@ console.log(tempparsedcalf);
    for (i = 0; i < totalcount; i++) {
         scores.push([json.scores[i].user1_rating]);
     }*/
+    /*
 Highcharts.setOptions({
     colors: Highcharts.map(Highcharts.getOptions().colors, function (color) {
         return {
@@ -104,7 +105,7 @@ Highcharts.chart('container', {
   }
 ]
   }]
-});
+});*/
         
 });
 

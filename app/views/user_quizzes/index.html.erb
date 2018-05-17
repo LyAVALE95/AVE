@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 <h1>Mis resultados</h1>
 <div class="row">
-<div id = "container" class="col-6" style = "width: 300px; height: 300px; margin: 0 auto"></div>
+<%= pie_chart @user_quizzes.group(:score).count, id: "users-chart", width: "500px", height: "400px" %>
 <div class="col-6" >
 <table id="dataTablestb" class="display nowrap dataTable dtr-inline collapsed">
   <thead>
@@ -25,4 +25,3 @@
 </div>
 <br>
 
-<%= link_to 'New User Quiz', new_user_quiz_path %>
