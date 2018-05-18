@@ -12,12 +12,15 @@
 
 <p>
   <strong>Description:</strong>
-  <%= @amethod.description %>
+  <div class="tixlist">
+  <%= @amethod.description.html_safe %>
+  </div>
 </p>
 
 <p>
   <strong>Description subject:</strong>
   <%= @amethod.description_subject %>
+ 
 </p>
 
 <p>

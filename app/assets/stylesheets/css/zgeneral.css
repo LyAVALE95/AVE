@@ -1,0 +1,4 @@
+div.tixlist ul:not(.browser-default) > li{
+	 list-style-type: initial;
+	 padding-left: 20;
+}

@@ -7,6 +7,11 @@ function goandrefresh(){
     cache_clear();
   }, 1000);
 }
+function goandrefresh3(){
+   setInterval(function() {
+    cache_clear();
+  }, 3000);
+}
 function goandrefresh2(){
 	window.location.reload(true);
 	 setInterval(function() {

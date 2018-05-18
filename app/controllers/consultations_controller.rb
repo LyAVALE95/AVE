@@ -69,6 +69,6 @@ class ConsultationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def consultation_params
-      params.require(:consultation).permit(:links, :books, :references)
+      params.fetch(:consultation,{}).permit(:links, :books, :references,:session_id)
     end
 end

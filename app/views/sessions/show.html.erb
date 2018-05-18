@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 <%= link_to 'Edit', edit_session_path(@session) %> |
-<%= link_to 'Back', sessions_path %>
+<%= link_to 'Regresar a lecciones', sessions_path, :onclick => "goandrefresh2()" %>
 <div class="row">
  <div class="col-md-10 col-sm-6"><h1> <%= @session.name%></h1>
  <h5 class="yellow-text text-darken-4">Puntaje necesario:<%= @session.price%> (Por exámen)</h5>
@@ -13,7 +13,11 @@
         </a> <br><br>
         <a class="waves-effect waves-light yellow lighten-1 modal-trigger btn-large  grey-text text-darken-3" href="#modalq"
         >
-          <b>+ Examen</b>
+          <b>+ Exámen</b>
+        </a><br><br>
+        <a class="waves-effect waves-light yellow lighten-1 modal-trigger btn-large  grey-text text-darken-3" href="#modald"
+        >
+          <b>+ Anexos</b>
         </a><%end%>        
         </div>
 </div>
@@ -28,8 +32,47 @@
   </div>
   <div id="modalq" class="modal">
     <div class="modal-content">
-      <h4>Agregar examen</h4>
+      <h4>Agregar exámen</h4>
       <%= render 'quizzes/form', quiz: @session_quiz %>
+    </div>
+    <div class="modal-footer">
+     <!-- <a href="" class="modal-action modal-close btn-danger waves-effect waves-green btn-flat">Cancelar</a>-->
+    </div>
+  </div>
+  <div id="modald" class="modal">
+    <div class="modal-content">
+      <h4>Agregar anexo</h4> 
+      <select type="" id="myusnd" name="" onchange="changedocumentop()">
+      <option value="" selected disabled>-Seleccione Opción-</option>
+      <option value="links">Enlaces</option>
+      <option value="books">Libros</option>
+      </select>
+      <%= render 'consultations/form',consultation: @consultations %>
+      <script type="text/javascript">
+    function changedocumentop() {
+      //$("#formSaveCons").css("display", "block");
+     var option = $("#myusnd").val();
+     switch (option){ 
+      case 'links':
+        $("#flinked").css("display", "block");
+        $("#fbooks").css("display", "none");
+        $("#freference").css("display", "none");
+      break;
+      case 'books':
+        $("#flinked").css("display", "none");
+        $("#fbooks").css("display", "block");
+        $("#freference").css("display", "none");
+      break;
+      case 'references1':
+        $("#flinked").css("display", "none");
+        $("#fbooks").css("display", "none");
+        $("#freference").css("display", "block");
+      break;
+      default:
+        console.log("none");
+     }
+    }
+    </script>
     </div>
     <div class="modal-footer">
      <!-- <a href="" class="modal-action modal-close btn-danger waves-effect waves-green btn-flat">Cancelar</a>-->
@@ -64,7 +107,7 @@
 
   <%end%>
   </div>
- <div class="row">
+<div class="row">
  <% @details.each do |d| %>
 <div class="col-md-6" >
 
@@ -86,4 +129,44 @@
  
 <%end %>
 </div>
+<h4 class="red-text text-accent-2">Enlaces</h4>
+<div class="row">
+ <% if @consultations_all_links.count(:id) == 0 %>
+    <center><h5 class="grey-text">____</h5></center>
+  <%end%>
+ <% @consultations_all_links.each do |l| %>
+     <div class="card horizontal col-12 col-md-6">
+       <div class="card-image">
+         
+       </div>
+       <div class="card-stacked">
+         <div class="card-content" style="display: inline-block;">
+         <img src="/icons/bookmark.png" width="80px" height="80px">
+           <span><b><%= link_to l.links, l.links %></b></span>
+         </div>
+       </div>
+     </div>
+  <%end %>
+</div>
+<hr>
+<h4 class="blue-text text-darken-3">Libros</h4>
+<div class="row">
+ <% if @consultations_all_books.count(:id) == 0 %>
+    <center><h5 class="grey-text">____</h5></center>
+  <%end%>
+ <% @consultations_all_books.each do |b| %>
+     <div class="card horizontal col-12 col-md-6">
+       <div class="card-image">
+         
+       </div>
+       <div class="card-stacked">
+         <div class="card-content" style="display: inline-block;">
+         <img src="/icons/ebook.png" width="80px" height="80px">
+           <span><b><%= b.books %></b></span>
+         </div>
+       </div>
+     </div>
+  <%end %>
+</div>
+
 

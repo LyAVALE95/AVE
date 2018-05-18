@@ -10,23 +10,27 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :links %>
+    <div class="field" style="display: none;">
+    <%= form.label :session_id,'Id' %>
+    <%= form.text_area :session_id, id: :consultation_links_sid %>
+  </div>
+  <div class="field" id="flinked" style="display: none;">
+    <%= form.label :links,'Enlace' %>
     <%= form.text_area :links, id: :consultation_links %>
   </div>
 
-  <div class="field">
-    <%= form.label :books %>
+  <div class="field" id="fbooks" style="display: none;">
+    <%= form.label :books ,'Libro' %>
     <%= form.text_area :books, id: :consultation_books %>
   </div>
 
-  <div class="field">
-    <%= form.label :references %>
+  <div class="field" id="freference" style="display: none;">
+    <%= form.label :references, 'Enlace (multimedia)' %>
     <%= form.text_area :references, id: :consultation_references %>
   </div>
-
+<br>
+    <center>
   <div class="actions">
-    <%= form.submit %>
-  </div>
+    <%= form.submit  id:'btnSave', :class => 'btn btn-warning', :value => "Guardar cambios" %>
+  </div></center>
 <% end %>

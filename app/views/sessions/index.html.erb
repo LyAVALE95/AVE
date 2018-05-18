@@ -32,11 +32,11 @@
   <ul class="collection">
    <% @sessions.each do |session| %>
       <li class="collection-item avatar">
-      <img src="pencil.png" alt="" class="circle">
-        <h6><%= session.name %></h6>
+      <img src="/pencil.png" alt="" class="circle">
+        <h6><%= session.name %></h6> 
         <p><%= session.avaible %></p>
         <p><%= session.price %></p>
-        <p><%= link_to 'Mostrar', session %><%if current_user.rol == "t"%>
+        <p><%= link_to 'Mostrar', session, :onclick => "goandrefresh3()" %><%if current_user.rol == "t"%>
         |<%= link_to 'Editar', edit_session_path(session) %>        
         |<%= link_to 'Eliminar', session, method: :delete, data: { confirm: 'Are you sure?' } %><%end%></p>
       </li>

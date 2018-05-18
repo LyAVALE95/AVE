@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<h5>Session Details</h5>
+<h5>Lecciones</h5>
 
 <table>
   <thead>
     <tr>
-      <th>Txt1</th>
-      <th>Txt2</th>
-      <th>Txt3</th>
+      <th>Título</th>
+      <th>Descripción</th>
+      <th>Contenido</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,9 +18,9 @@
         <td><%= session_detail.txt1 %></td>
         <td><%= session_detail.txt2 %></td>
         <td><%= session_detail.txt3 %></td>
-        <td><%= link_to 'Show', session_detail %></td>
-        <td><%= link_to 'Edit', edit_session_detail_path(session_detail) %></td>
-        <td><%= link_to 'Destroy', session_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Mostrar', session_detail %></td>
+        <td><%= link_to 'Editar', edit_session_detail_path(session_detail) %></td>
+        <td><%= link_to 'Eliminar', session_detail, method: :delete, data: { confirm: '¿Está seguro(a)?' } %></td>
       </tr>
     <% end %>
   </tbody>

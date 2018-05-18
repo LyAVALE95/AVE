@@ -38,6 +38,7 @@ gem 'gmaps4rails'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
 gem "chartkick"
 gem 'groupdate'
+gem 'trix'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

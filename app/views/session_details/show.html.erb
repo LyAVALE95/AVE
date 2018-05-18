@@ -8,9 +8,11 @@
   <%= @session_detail.txt2 %>
 </h4>
 
-<h6>
-  <%= @session_detail.txt3 %>
+<div class="tixlist">
+<h6> 
+  <%= @session_detail.txt3.html_safe  %>
 </h6>
+</div>
 
 <%= link_to 'Editar', edit_session_detail_path(@session_detail) %> |
 <%= link_to 'Regresar', session_details_path %>

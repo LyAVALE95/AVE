@@ -1,10 +1,34 @@
-<h1>New Consultation</h1>
-<select type="" id="myusnd" name="" onchange="lolo()">
+<h1>Nueva consulta</h1>
+<select type="" id="myusnd" name="" onchange="changedocumentop()">
 <option value="" selected disabled>-Seleccione Opción-</option>
-<option>L</option>
-<option>D</option>
-<option>2</option>
+<option value="links">Enlaces</option>
+<option value="books">Libros</option>
+<option value="references">Referencias</option>
 </select>
 <%= render 'form', consultation: @consultation %>
 
 <%= link_to 'Back', consultations_path %>
+<script type="text/javascript">
+	function changedocumentop() {
+		 var option = $("#myusnd").val();
+		 switch (option){
+		 	case 'links':
+		 		$("#flinked").css("display", "block");
+		 		$("#fbooks").css("display", "none");
+		 		$("#freference").css("display", "none");
+		 	break;
+		 	case 'books':
+		 		$("#flinked").css("display", "none");
+		 		$("#fbooks").css("display", "block");
+		 		$("#freference").css("display", "none");
+		 	break;
+		 	case 'references':
+		 		$("#flinked").css("display", "none");
+		 		$("#fbooks").css("display", "none");
+		 		$("#freference").css("display", "block");
+		 	break;
+		 	default:
+		 		console.log("none");
+		 }
+	}
+</script>

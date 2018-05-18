@@ -15,21 +15,22 @@
     <%= form.text_area :session_id, id: :session_detail_session_id %>
   </div>
   <div class="field">
-    <%= form.label :txt1 %>
+    <%= form.label :txt1,"Título" %>
     <%= form.text_area :txt1, id: :session_detail_txt1 %>
   </div>
 
   <div class="field">
-    <%= form.label :txt2 %>
+    <%= form.label :txt2,"Descripción" %>
     <%= form.text_area :txt2, id: :session_detail_txt2 %>
   </div>
 
-  <div class="field">
-    <%= form.label :txt3 %>
-    <%= form.text_area :txt3, id: :session_detail_txt3 %>
+  <div class="field tixlist">
+    <%= form.label :txt3,"Contenido" %>
+    <%= form.trix_editor :txt3, id: :session_detail_txt3 %>
   </div>
 
+   <center>
   <div class="actions">
-    <%= form.submit %>
-  </div>
+    <%= form.submit  id:'btnSave', :class => 'btn btn-warning', :value => "Guardar cambios" %>
+  </div></center>
 <% end %>

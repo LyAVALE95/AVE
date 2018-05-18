@@ -24,6 +24,9 @@ class SessionsController < ApplicationController
      #.where("session_details.session_id = 1 ",params[:id])
      @session_detail = SessionDetail.new(session_id: params[:id])#(session_detail: SessionDetail)
      @session_quiz = Quiz.new(session_id: params[:id])
+     @consultations = Consultation.new(session_id: params[:id])
+     @consultations_all_links = Consultation.where("session_id = ? and links!=''", params[:id])
+     @consultations_all_books = Consultation.where("session_id = ? and books!=''", params[:id])
      #@session_detail.save!
      #@session_detail = SessionDetail.session_detail.build
       @quizzes = Quiz.where('session_id = ?',params[:id] ) 

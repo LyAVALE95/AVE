@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180517050032) do
+ActiveRecord::Schema.define(version: 20180518023259) do
 
   create_table "algorithms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20180517050032) do
   create_table "amethods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "subject"
-    t.string "description"
+    t.text "description", limit: 4294967295
     t.string "description_subject"
     t.string "skills"
     t.datetime "created_at", null: false
@@ -104,7 +104,7 @@ ActiveRecord::Schema.define(version: 20180517050032) do
   create_table "session_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "txt1"
     t.text "txt2"
-    t.text "txt3"
+    t.text "txt3", limit: 4294967295
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "session_id"

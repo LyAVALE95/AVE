@@ -16,5 +16,6 @@ class ReportsController < ApplicationController
 		.where("user_sgs.user_id = ? and groups.id=user_sgs.group_id",current_user.id)
 		@mygroups = Group.select("user_sgs.*,groups.*").joins("join user_sgs")
 		.where("user_sgs.user_id = ? and groups.id=user_sgs.group_id",current_user.id)
+		#render json: @mygroupsa.group_by_day(:updated_at).count(:average) 	
 	end
 end
