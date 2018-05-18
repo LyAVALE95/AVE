@@ -19,7 +19,7 @@
   		</ul>
   		<div class="col-md-1"></div>
   		<div class="col-12 col-md-5">
-  		 <%= column_chart @mygroupsa.group(:name,:average).count(:average) , stacked: true , messages: {empty: "No data"} , id: "users-chart", width: "500px", height: "400px"
+  		 <%= column_chart @mygroupsa.group(:name,:average).sum(:average) , stacked: true , messages: {empty: "No data"} , id: "users-chart", width: "500px", height: "400px"
   		 %>
   		</div>
 

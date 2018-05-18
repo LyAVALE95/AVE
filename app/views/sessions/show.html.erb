@@ -144,6 +144,9 @@
          <img src="/icons/bookmark.png" width="80px" height="80px">
            <span><b><%= link_to l.links, l.links %></b></span>
          </div>
+         <div class="card-action">
+                <a href="#"><%= link_to 'Eliminar', l, method: :delete, data: { confirm: '¿Está seguro(a)?' } %></a>
+           </div>
        </div>
      </div>
   <%end %>

@@ -5,11 +5,14 @@ class GroupsController < ApplicationController
   # GET /groups.json
   def index
     @groups = Group.all
-  end
+  end 
 
   # GET /groups/1
   # GET /groups/1.json
   def show
+    @mygroups = Group.select("user_sgs.*,groups.*").joins("join user_sgs")
+    .where("user_sgs.user_id = ? and groups.id=user_sgs.group_id",current_user.id)
+    @usersbygroup = UserStudent.where("group_id=?", params[:id])
   end
 
   # GET /groups/new

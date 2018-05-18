@@ -1,32 +1,68 @@
 <p id="notice"><%= notice %></p>
-<p>
-  <strong>Name:</strong>
+<div style="display: -webkit-inline-box;">
+<h2 class="teal-text text-lighten-1">Detalles de mi grupo</h2>
+<img src="/icons/homework.png" height="80px"></div>
+<div class="row">
+<div class="col-12 col-md-6 card">
+<center><h3 class="red-text text-accent-3">
   <%= @group.name %>
-</p>
-<p>
-  <strong>Description:</strong>
+</h3></center>
+<h6>
+  <strong>Descripción:</strong>
   <%= @group.description %>
-</p>
+</h6><br>
 <p>
-  <strong>Schedule:</strong>
+  <strong>Horario:</strong>
   <%= @group.schedule %>
 </p>
 <p>
-  <strong>Rooms:</strong>
+  <strong>Salones:</strong>
   <%= @group.rooms %>
 </p>
 <p>
-  <strong>Semester:</strong>
+  <strong>Grado:</strong>
   <%= @group.semester %>
 </p>
 <p>
-  <strong>Career:</strong>
+  <strong>Carrera:</strong>
   <%= @group.career %>
 </p>
-<p>
-  <strong>Average:</strong>
-  <%= @group.average %>
+<p class="blue-text text-darken-4">
+  <strong>Promedio:</strong>
+  <%= @group.average.to_f / @usersbygroup.count(:id).to_f %>
 </p>
+</div>
+<div class="col-12 col-md-6">
+<%= column_chart  @usersbygroup.group(:name).sum(:score) ,colors: ["#ff6f00"], stacked: true , messages: {empty: "No data"} , id: "users-chart", width: "600px", height: "400px"%>
+</div>
+</div>
 
-<%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', groups_path %>
+<%= link_to 'Editar', edit_group_path(@group) %> |
+<%= link_to 'Mis grupos', "/gbygroupall" %>
+
+<hr>
+<div class="row">
+<h3 class="red-blue-text text-darken-2">Mis alumnos</h3>
+<table class="display nowrap dataTable dtr-inline collapsed" id="dataTablesUserSt" style="font-size: 20px;" width="1200px">
+  <thead>
+    <tr>
+     <th></th>
+     <th>Nombre</th>
+     <th>Carrera</th>
+     <th>Grado</th>
+     <th>Puntos</th>
+    </tr>
+  </thead>
+  <tbody>
+<% @usersbygroup.each do |st| %>
+<tr>
+  <td><%= image_tag(st.avatarn, :alt => "rss feed",:width => "40px") %></td>
+  <td><b> <%=st.lastnames%> <%=st.name%></b></td>
+  <td><%=st.career%></td>
+  <td><%=st.grade%></td>
+  <td><b><%=st.score%></b></td>
+</tr>
+<%end%> 
+</tbody>
+</table>
+</div>

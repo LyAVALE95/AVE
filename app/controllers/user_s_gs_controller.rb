@@ -24,8 +24,7 @@ class UserSGsController < ApplicationController
   # POST /user_sgs
   # POST /user_sgs.json
   def create
-    @user_sg = UserSg.new(user_sg_params)
-
+    @user_sg = UserSg.new(user_sg_params) 
     respond_to do |format|
       if @user_sg.save
         format.html { redirect_to @user_sg, notice: 'User sg was successfully created.' }
