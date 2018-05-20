@@ -53,7 +53,11 @@ class Users::SessionsController < Devise::SessionsController
         #user.reset_authentication_token! hay que agregar validacion
         # Note that the data which should be returned depends heavily of the API client needs.
         render status: 200, json: { email: user.email, authentication_token: user.authentication_token,
-          id: id , company_id: user.company_id ,rol: user.rol , name: user.name, last_name: user.last_name, company_name: user.company.name }
+          id: id  ,rol: user.rol , name: user.name, last_name: user.lastnames 
+          #Campos Comentados: , company_id: user.company_id, company_name: user.company.name
+          #user.last_name cambio a user.lastnames
+        }
+
       else
         render status: 401, json: { message: t('request_invalid_usr_pwd') }
       end

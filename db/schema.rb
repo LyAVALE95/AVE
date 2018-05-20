@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20180518023259) do
 
-  create_table "algorithms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "algorithms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
     t.string "description"
     t.integer "level"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20180518023259) do
     t.index ["amethod_id"], name: "index_algorithms_on_amethod_id"
   end
 
-  create_table "amethods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "amethods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
     t.string "subject"
     t.text "description", limit: 4294967295
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20180518023259) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "consultations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "consultations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.text "links"
     t.text "books"
     t.text "references"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20180518023259) do
     t.index ["session_id"], name: "index_consultations_on_session_id"
   end
 
-  create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
     t.string "description"
     t.string "schedule"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20180518023259) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "question_options", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "question_options", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "value"
     t.text "description"
     t.datetime "created_at", null: false
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20180518023259) do
     t.index ["question_id"], name: "index_question_options_on_question_id"
   end
 
-  create_table "questions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "questions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 20180518023259) do
     t.index ["quiz_id"], name: "index_questions_on_quiz_id"
   end
 
-  create_table "quizzes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "quizzes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "description"
     t.integer "approved"
     t.boolean "avaible"
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 20180518023259) do
     t.index ["user_teacher_id"], name: "index_quizzes_on_user_teacher_id"
   end
 
-  create_table "schools", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "schools", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
     t.text "location"
     t.string "principal_name"
@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 20180518023259) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "session_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "session_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.text "txt1"
     t.text "txt2"
     t.text "txt3", limit: 4294967295
@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 20180518023259) do
     t.index ["session_id"], name: "index_session_details_on_session_id"
   end
 
-  create_table "sessions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "sessions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
     t.boolean "avaible"
     t.bigint "price"
@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 20180518023259) do
     t.index ["user_teacher_id"], name: "index_sessions_on_user_teacher_id"
   end
 
-  create_table "user_quizzes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "user_quizzes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.float "score", limit: 24
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -135,7 +135,7 @@ ActiveRecord::Schema.define(version: 20180518023259) do
     t.index ["user_id"], name: "index_user_quizzes_on_user_id"
   end
 
-  create_table "user_sgs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "user_sgs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.bigint "user_id"
     t.bigint "school_id"
     t.bigint "group_id"
@@ -146,7 +146,7 @@ ActiveRecord::Schema.define(version: 20180518023259) do
     t.index ["user_id"], name: "index_user_sgs_on_user_id"
   end
 
-  create_table "user_students", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "user_students", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "names"
     t.string "lastnames"
     t.string "name"
@@ -172,7 +172,7 @@ ActiveRecord::Schema.define(version: 20180518023259) do
     t.index ["user_teacher_id"], name: "index_user_students_on_user_teacher_id"
   end
 
-  create_table "user_teachers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "user_teachers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "names"
     t.string "lastnames"
     t.string "name"
@@ -185,7 +185,7 @@ ActiveRecord::Schema.define(version: 20180518023259) do
     t.index ["user_id"], name: "index_user_teachers_on_user_id"
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -237,6 +237,7 @@ ActiveRecord::Schema.define(version: 20180518023259) do
   add_foreign_key "user_sgs", "users"
   add_foreign_key "user_students", "groups"
   add_foreign_key "user_students", "schools"
+  add_foreign_key "user_students", "user_quizzes"
   add_foreign_key "user_students", "user_teachers"
   add_foreign_key "user_students", "users"
   add_foreign_key "user_teachers", "users"
