@@ -29,6 +29,7 @@ class UserQuizzesController < ApplicationController
     quizide = params[:userquizz][:quiz_id]
     scoreide = params[:userquizz][:score]
     @user = User.find_by(id: params[:userquizz][:user_id])
+    @user_student = UserStudent.find_by(user_id: params[:userquizz][:user_id])
     #Busca el user_quiz, si existe
     @userquizz = UserQuiz.where(user_id: useride, quiz_id: quizide)
     
@@ -37,20 +38,22 @@ class UserQuizzesController < ApplicationController
       @user_quiz = UserQuiz.new(:user_id => params[:userquizz][:user_id],:quiz_id => params[:userquizz][:quiz_id],:score => params[:userquizz][:score])
 
       respond_to do |format|
-          if @user_quiz.save
+        if @user_quiz.save
 
-      suma = UserQuiz.select("score").where("user_id=?",params[:userquizz][:user_id])
-      sum = suma.sum { |p| p.score}
+          suma = UserQuiz.select("score").where("user_id=?",params[:userquizz][:user_id])
+          sum = suma.sum { |p| p.score}
 
-      cantidad = UserQuiz.select("id").where("user_id=?",params[:userquizz][:user_id])
-      cantQuizzes = cantidad.count
-            user.score = sum
-            format.html { redirect_to @user_quiz, notice: 'Creado nuevo user_quiz' }
-            format.json { render json: {message: t('Datos guardados (Nuevo score)')} }
-          else
-            format.html { render :new }
-            format.json { render json: @user_quiz.errors, status: :unprocessable_entity }
-          end      
+          cantidad = UserQuiz.select("id").where("user_id=?",params[:userquizz][:user_id])
+          cantQuizzes = cantidad.count
+          @user.score = sum
+          @user.update(score: sum)
+          @user_student.update(score: sum)
+          format.html { redirect_to @user_quiz, notice: 'Creado nuevo user_quiz' }
+          format.json { render json: {message: t('Datos guardados (Nuevo score)')} }
+        else
+          format.html { render :new }
+          format.json { render json: @user_quiz.errors, status: :unprocessable_entity }
+        end      
       end
     #Si encontro un registro 
     else 
@@ -69,6 +72,7 @@ class UserQuizzesController < ApplicationController
         #Lo guarda en el score del usuario
         @user.score = (sum)#Posiblemente se puede borrar, sin afectar...
         @user.update(score: sum)
+        @user_student.update(score: sum)
         
         #Muestra el resultado
         respond_to do |format|
