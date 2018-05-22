@@ -6,6 +6,13 @@ class SessionDetailsController < ApplicationController
   def index
     @session_details = SessionDetail.all
   end
+  def all
+     @session_details = SessionDetail.all
+     respond_to do |format|
+        format.json { render json: {sessions: @session_details} }
+    end
+    
+  end
 
   # GET /session_details/1
   # GET /session_details/1.json
@@ -30,7 +37,7 @@ class SessionDetailsController < ApplicationController
       if @session_detail.save
         #format.html { redirect_to @session_detail, notice: 'Session detail was successfully created.' }
         #format.json { render :show, status: :created, location: @session_detail }
-        format.html { redirect_to amethods_url, notice: 'Session detail was successfully created.' }
+        format.html { redirect_to sessions_url, notice: 'Session detail was successfully created.' }
         format.json { head :no_content, status: :created, location: @session_detail }
       else
         format.html { render :new }

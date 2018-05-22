@@ -5,6 +5,10 @@ class ConsultationsController < ApplicationController
   # GET /consultations.json
   def index
     @consultations = Consultation.all
+    respond_to do |format|
+        format.html
+        format.json { render json: {docs: @consultations} }
+    end
   end
 
   # GET /consultations/1

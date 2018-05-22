@@ -1,0 +1,45 @@
+<meta charset="UTF-8">
+<h1>Mis alumnos</h1>
+<h2>Profesor: <%= current_user.name%></h2>
+<hr><br>
+<% @mygroups.each do |g| %>
+<h3><%= g.name%></h3>
+<table class="bordered" >
+	<thead>
+    <th>Número de control</th>
+		<th>Nombre</th>
+		<th>Apellido</th>
+		<th>Puntaje</th>
+    <th>Último ingreso</th>
+	</thead>
+  <tbody>
+    <% @allmystudent.each do |u| %>
+    <%if u.group_id == g.id %>
+    <tr> 
+      <td><%= u.control_number%></td>
+      <td><%= u.name%></td>
+      <td><%= u.lastnames%></td>
+      <td><%= u.score%></td>
+      <td><%= u.updated_at.strftime("%F")%></td>
+    </tr> 
+    <%end%>
+    <%end%> 
+  </tbody>
+</table>
+<%end%>
+ <style type="text/css">
+ 	table {
+    border-collapse: collapse;
+}
+table{width: 100%;}
+table, th, td {
+	
+    border: 1px solid black;
+}
+th{
+	background-color: #efebe9;
+	/*size:16pt;*/
+	font-size: 14pt;
+}
+
+ </style>

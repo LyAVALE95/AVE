@@ -3,39 +3,73 @@
 	<h1>Reportes</h1><br>
 <div class="row card">
 	<!--<h3>{{selectedReport}}</h3>-->
-		<h4 class="pink-text"><b>Opciones</b></h4>
+		<h4 class="pink-text"><b>Tipo</b></h4>
 		<div class=" col-12 row">
-		<div class="col-3">
-		<h5>Tipo</h5>
-		<select >
-  			<option value="student">Estudiante</option>
-  			<option value="visits">Asistencia</option>
+		<select id="ctipo" onchange="changedocumentop()">
+			<option value="" selected disabled>-Seleccione Opción-</option>
+  			<option value="student">Mis estudiantes</option>
+  			<option value="visits">Asistencia diaria</option>
+  			<option value="partic">Participación</option>
 		</select>
-		</div>
-		<div class="col-2">
-		<h5>Tipo</h5>
-		<input id="date" type="date">
-
-		<select >
-  			<option value="student">Estudiante</option>
-  			<option value="visits">Asistencia</option>
+		<select id="cgroup" onchange="changedocumensub()">
+			<option value="" selected disabled>-Seleccione grupo-</option>
+			<option>Todos</option>
+			<% groups_array = @mygroups.all.map { |g| [g.name, g.id] } %>
+			<%= options_for_select(groups_array) %>
 		</select>
-		</div>
 		</div>		
 		<br>
 		<div style="display: inline-block;">
-		<button class="btn btn-large  blue lighten-2" id="toGrp">
-  		<i class="material-icons">equalizer</i> Gráfica</button>
-  		<button class="btn btn-large red lighten-2">
-  		<i class="material-icons">archive</i> PDF</button>
+		<a class="btn btn-large  blue lighten-2 white-text" id="toGrp" target="_blank">
+  		<i class="material-icons">equalizer</i> Gráfica</a>
+  		<a class="btn btn-large red lighten-2 white-text" id="topdf" download>
+  		<i class="material-icons">archive</i> PDF</a>
+  		<a class="btn btn-large red lighten-1 white-text" id="topdfsee" target="_blank">
+  		<i class="material-icons">visibility</i> PDF</a>
 		</div><br>
 </div>
-<div class="row">
-	<div class="col-12 card" id="mycontent">
 
-	</div>	
-</div>
 </center>
 </div>
-<script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#cgroup").hide();
+});
+$("#cgroup").hide();
+	function changedocumentop() {
+		$("#cgroup").hide();
+		 var option = $("#ctipo").val();
+		 switch (option){
+		 	case 'student':		 			 
+		 		$("#cgroup").show(1000);		
+		 	break;
+		 	case 'books':
+		 		$("#flinked").css("display", "none");
+		 	break;
+		 	case 'references':
+		 		$("#flinked").css("display", "none");
+		 	break;
+		 	default:
+		 		console.log("none");
+		 }
+	}
+		function changedocumensub() {
+		 var option = $("#cgroup").val();
+		 switch (option){
+		 	case 'Todos':
+		 		$("#topdf").attr('href','/gbygroupall.pdf');
+		 		$("#topdfsee").attr('href','/gbygroupall.pdf');	 
+		 		$("#toGrp").attr('href','/gbygroupall');	 		
+		 	break;
+		 	case '':
+		 	break;
+		 	default:
+		 		var pdf = "/gbygroup/" + option;
+		 		var graph = "/groups/"+ option;
+		 		$("#topdf").attr('href','/gbygroupall.pdf');
+		 		$("#topdfsee").attr('href','/gbygroupall.pdf');	 
+		 		$("#toGrp").attr('href',graph);
+		 		console.log("none");
+		 }
+	}
 </script>

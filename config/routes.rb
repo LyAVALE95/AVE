@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   put '/myuserupdatedata/:id' => 'user_students#updatemyusr'
   get '/bygroup/:id', :to =>'reports#bygroup'
   get '/gbygroupall', :to =>'reports#gbygroupall'
+  get '/sessionsall', :to =>'session_details#all'
     #post ':controller(/:action(/:id(.:format)))'
     #get ':controller(/:action(/:id(.:format)))'
   post 'amethods/count'
