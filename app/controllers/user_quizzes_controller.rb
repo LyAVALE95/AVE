@@ -57,12 +57,11 @@ class UserQuizzesController < ApplicationController
       end
     #Si encontro un registro 
     else 
-      if @userquizz.first.score != nil
+      if @userquizz.first.score == nil
         @userquizz.first.score = 0
-        @userquizz.update(score: 0)
       end
       #Si el score actual es mayor a el que tenia antes lo asigna
-      if @userquizz.first.score < params[:userquizz][:score].to_f 
+      if @userquizz.first.score <= params[:userquizz][:score].to_f 
         @userquizz.update(score: params[:userquizz][:score])
         #Hace la suma y saca el promedio 
         suma = UserQuiz.select("score").where("user_id=?",params[:userquizz][:user_id])

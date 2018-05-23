@@ -30,15 +30,20 @@ class SessionsController < ApplicationController
         .joins('join user_teachers').where('user_teachers.id=user_students.user_teacher_id and user_teachers.user_id=sessions.user_id')
 
       #Ahora trae solo los que estan disponibles para este usuario
-      @sessions = Session.select("sessions.*").from("user_quizzes, sessions, quizzes, users").where("sessions.id = quizzes.session_id and (user_quizzes.quiz_id = quizzes.id and user_quizzes.user_id = users.id and users.id = ?) and user_quizzes.score >= sessions.price ",params[:id])
+      @sessions = Session.select("sessions.*").from("user_quizzes, sessions, quizzes, users").where("sessions.id = quizzes.session_id and (user_quizzes.quiz_id = quizzes.id and user_quizzes.user_id = users.id and users.id = ?) and user_quizzes.score >= sessions.price and sessions.user_id=?",params[:id],@user_teachers.first.user_id)
       #Compara que el id de las lecciones disponibles sean igual a la consulta de todas las lecciones, si son iguales, les asigna 1 (Disponible)
+      cant = ""
       @sesiones.each do |o|
+        o.avaible = 0
+      end
+      @sesiones.each do |o|
+        cant = cant + "- o.id " + o.id.to_s + "avaible:" + o.avaible.to_s
         @sessions.each do |u|
+          cant = cant + " u.id " + u.id.to_s + "AntAvaible:" + o.avaible.to_s
           if u.id == o.id
             o.avaible = 1
-          else
-            o.avaible = 0
           end
+          cant = cant + "DespAvaible:" + o.avaible.to_s
         end 
       end
       respond_to do |format|

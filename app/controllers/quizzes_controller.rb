@@ -15,6 +15,21 @@ class QuizzesController < ApplicationController
     end
   end
 
+  def listexam
+    #@quizzes = Quiz.all
+    if params[:rol] == 't'
+    @quizzes = Quiz.where("user_id = ?",params[:id])
+    else
+       @quizzes = Quiz.select('quizzes.*, user_teachers.id as tid,user_teachers.user_id,user_students.user_teacher_id')
+      .joins('join user_students').where('user_students.user_id = ?',params[:id])
+      .joins('join user_teachers').where('user_teachers.id=user_students.user_teacher_id and user_teachers.user_id=quizzes.user_id')
+    end
+    respond_to do |format|
+      format.html 
+      format.json { render json: @quizzes }
+    end
+  end
+
   # GET /quizzes/1
   # GET /quizzes/1.json
   def show
