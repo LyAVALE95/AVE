@@ -64,10 +64,10 @@ $("#cgroup").hide();
 		 	case '':
 		 	break;
 		 	default:
-		 		var pdf = "/gbygroup/" + option;
+		 		var pdf = "/bygroup/" + option + ".pdf";
 		 		var graph = "/groups/"+ option;
-		 		$("#topdf").attr('href','/gbygroupall.pdf');
-		 		$("#topdfsee").attr('href','/gbygroupall.pdf');	 
+		 		$("#topdf").attr('href',pdf);
+		 		$("#topdfsee").attr('href',pdf);	 
 		 		$("#toGrp").attr('href',graph);
 		 		console.log("none");
 		 }

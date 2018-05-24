@@ -34,3 +34,13 @@
     <%= form.submit  id:'btnSave', :class => 'btn btn-warning', :value => "Guardar cambios" %>
   </div></center>
 <% end %>
+<script type="text/javascript">
+  $(document).ready(function(){
+    if($("#consultation_links").text()!= ""){
+      $("#flinked").css("display","block");
+    }
+    if($("#consultation_books").text()!= ""){
+      $("#fbooks").css("display","block");
+    }
+  });  
+</script>

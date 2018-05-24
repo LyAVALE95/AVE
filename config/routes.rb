@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :exercises
   resources :user_sgs
   resources :user_quizzes
   resources :schools
@@ -41,6 +42,7 @@ Rails.application.routes.draw do
   get '/bygroup/:id', :to =>'reports#bygroup'
   get '/gbygroupall', :to =>'reports#gbygroupall'
   get '/sessionsall', :to =>'session_details#all'
+  get '/algoritmo', :to =>'exercises#algoritmo'
     #post ':controller(/:action(/:id(.:format)))'
     #get ':controller(/:action(/:id(.:format)))'
   post 'amethods/count'

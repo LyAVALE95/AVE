@@ -5,6 +5,9 @@ class ReportsController < ApplicationController
 	  respond_to do |format|
           format.html 
           format.json {  @usersbygroup }
+          format.pdf do
+          render pdf: "Mi grupo"
+      	  end
       end
 	end
 	def index

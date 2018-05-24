@@ -5,6 +5,8 @@ class ConsultationsController < ApplicationController
   # GET /consultations.json
   def index
     @consultations = Consultation.all
+    @links = Consultation.where("links!=''")
+    @books = Consultation.where("books!=''") 
     respond_to do |format|
         format.html
         format.json { render json: {docs: @consultations} }
@@ -13,7 +15,7 @@ class ConsultationsController < ApplicationController
 
   # GET /consultations/1
   # GET /consultations/1.json
-  def show
+  def show  
   end
 
   # GET /consultations/new
@@ -46,7 +48,7 @@ class ConsultationsController < ApplicationController
   def update
     respond_to do |format|
       if @consultation.update(consultation_params)
-        format.html { redirect_to @consultation, notice: 'Consultation was successfully updated.' }
+        format.html { redirect_to "/consultations", notice: 'Consultation was successfully updated.' }
         format.json { render :show, status: :ok, location: @consultation }
       else
         format.html { render :edit }

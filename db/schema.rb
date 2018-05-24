@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180518023259) do
+ActiveRecord::Schema.define(version: 20180522131632) do
 
   create_table "algorithms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 20180518023259) do
     t.datetime "updated_at", null: false
     t.bigint "session_id"
     t.index ["session_id"], name: "index_consultations_on_session_id"
+  end
+
+  create_table "exercises", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_students_id"
+    t.bigint "user_teachers_id"
+    t.index ["user_students_id"], name: "index_exercises_on_user_students_id"
+    t.index ["user_teachers_id"], name: "index_exercises_on_user_teachers_id"
   end
 
   create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -221,6 +230,8 @@ ActiveRecord::Schema.define(version: 20180518023259) do
 
   add_foreign_key "algorithms", "amethods"
   add_foreign_key "consultations", "sessions"
+  add_foreign_key "exercises", "user_students", column: "user_students_id"
+  add_foreign_key "exercises", "user_teachers", column: "user_teachers_id"
   add_foreign_key "question_options", "questions"
   add_foreign_key "questions", "quizzes"
   add_foreign_key "quizzes", "sessions"
