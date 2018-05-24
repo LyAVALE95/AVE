@@ -9,6 +9,9 @@ class ExercisesController < ApplicationController
   def algoritmo
     
   end
+  def ex1
+    
+  end
 
   # GET /exercises/1
   # GET /exercises/1.json
