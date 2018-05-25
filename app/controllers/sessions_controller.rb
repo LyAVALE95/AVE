@@ -9,11 +9,11 @@ class SessionsController < ApplicationController
   def index
     #@sessions = Session.all
     if current_user.rol == 't'
-      @sessions = Session.where("user_id = ?",current_user.id)
+      @sessions = Session.where("user_id = ?",current_user.id).order("price")
     else
       @sessions = Session.select('sessions.*, user_teachers.id as tid,user_teachers.user_id,user_students.user_teacher_id')
       .joins('join user_students').where('user_students.user_id = ?',current_user.id)
-      .joins('join user_teachers').where('user_teachers.id=user_students.user_teacher_id and user_teachers.user_id=sessions.user_id')
+      .joins('join user_teachers').where('user_teachers.id=user_students.user_teacher_id and user_teachers.user_id=sessions.user_id').order("price")
     end
   end
 

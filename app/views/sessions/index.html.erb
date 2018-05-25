@@ -1,7 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Lecciones (Temas)</h1>
+<%if current_user.rol == "t"%>
 <%= link_to 'Nueva Leccion', new_session_path,:class => 'btn yellow btn-warning' %>
+<%end%>
 <!--<table>
   <thead>
     <tr>
@@ -32,12 +34,22 @@
   <ul class="collection">
    <% @sessions.each do |session| %>
       <li class="collection-item avatar">
+      <%if current_user.rol == "t"%>
       <img src="/pencil.png" alt="" class="circle">
-        <h6><%= session.name %></h6> 
+      <h6><%= link_to "Ver " + session.name, session, :onclick => "goandrefresh3()" %></h6>
+      <%else%>
+        <%if session.price && session.price.to_i <= current_user.score.to_i%>
+         <img src="/pencil.png" alt="" class="circle">
+         <h6><%= link_to "Ver " + session.name, session, :onclick => "goandrefresh3()" %></h6>        
+        <%else%>
+         <img src="/lock.png" alt="" class="circle">
+        <h6 class="grey-text text-darken-1"><strike><%= session.name %></strike></h6>       
+        <%end%>
+      <%end%>
         <p><%= session.avaible %></p>
         <p><%= session.price %></p>
-        <p><%= link_to 'Mostrar', session, :onclick => "goandrefresh3()" %><%if current_user.rol == "t"%>
-        |<%= link_to 'Editar', edit_session_path(session) %>        
+        <p><%if current_user.rol == "t"%>
+        <%= link_to 'Editar', edit_session_path(session) %>        
         |<%= link_to 'Eliminar', session, method: :delete, data: { confirm: 'Are you sure?' } %><%end%></p>
       </li>
     <% end %>

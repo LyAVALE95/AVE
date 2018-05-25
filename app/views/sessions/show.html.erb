@@ -3,7 +3,7 @@
 <%= link_to 'Regresar a lecciones', sessions_path, :onclick => "goandrefresh2()" %>
 <div class="row">
  <div class="col-md-10 col-sm-6"><h1> <%= @session.name%></h1>
- <h5 class="yellow-text text-darken-4">Puntaje necesario:<%= @session.price%> (Por exámen)</h5>
+ <h5 class="yellow-text text-darken-4">Puntaje necesario:<%= @session.price%></h5>
  </div>
         <div class="col-md-2 col-sm-4">
         <%if current_user.rol == "t"%>

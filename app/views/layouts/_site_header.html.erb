@@ -24,12 +24,15 @@
             <li class="nav-item">
                 <a class="nav-link" href="/sessions">Lecciones</a>
             </li>
+            <%if current_user.rol == "t"%>
             <li class="nav-item">
                 <a class="nav-link" href="/quizzes">Cuestionarios</a>
             </li>
+
               <li class="nav-item">
                 <a class="nav-link" href="/reports" onclick="goandrefresh3()">Reportes</a> 
             </li>
+             <%end%>
             <%if current_user.rol=="s"%>
             <li class="nav-item">
                 <a class="nav-link" href="/user_quizzes">Mis resultados</a>
