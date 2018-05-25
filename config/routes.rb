@@ -44,6 +44,8 @@ Rails.application.routes.draw do
   get '/sessionsall', :to =>'session_details#all'
   get '/algoritmo', :to =>'exercises#algoritmo'
   get '/ex1', :to =>'exercises#ex1'
+  get '/ex2', :to =>'exercises#ex2'
+  get '/ex3', :to =>'exercises#ex3'
     #post ':controller(/:action(/:id(.:format)))'
     #get ':controller(/:action(/:id(.:format)))'
   post 'amethods/count'

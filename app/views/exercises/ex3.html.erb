@@ -1,9 +1,11 @@
-    <script type="text/javascript" src="malg1.js"></script>
-    <h4 class="red-text text-accent-1">Lección 1</h4>
-    <h2>Realizar la tabla inicial del algoritmo</h2>
+    <script type="text/javascript" src="malg3.js"></script>
+    <h4 class="red-text text-accent-1">Lección 3</h4>
+    <h2>Realizar el balance y ajuste en la tabla inicial</h2>
     <div ng-app="productsTableApp">
           <div ng-controller="ProductsController">
-           <h4>1. Se deben de agregar la cantidad exacta de fábricas y bodegas.</h4>
+           <h5>1. En base al cálculo (balance) entre el total de demanda y ofertas, se determina si agregar una fábrica o bodega ficticia.</h5>
+           <h5>2. Si hay una mayor cantidad en las bodegas, se agrega una fábrica ficticia.</h5>
+           <h5>3. Si hay una mayor cantidad en las fábricas, se agrega una bodega ficticia.</h5>
             <br>
                 <input class="btnD btn btn-info pink"  type="button" value="+Bodega" ng-click="addColumn()"/>
                 <input class="btnD btn btn-info lime" type="button" value="+Fábrica" ng-click="addRow()"/>
@@ -29,19 +31,18 @@
                   <br>
                 <input class="btnDP btn btn-success" type="button"  value="Hecho" ng-click="completeTable()"/>
                 <input class="btnD3 btn btn-warning" id="goback" type="button"  value="Regresar" ng-click="goBack()"/>
-               <!-- <input class="btnD2 btn btn-success"  type="button" onclick="completeTableJS()" value="Continuar"/>-->                
-                  <hr>
-   
-                             <br>
-                <hr>
+               <!-- <input class="btnD2 btn btn-success"  type="button" onclick="completeTableJS()" value="Continuar"/>-->
+                <input class="btnD3 btn btn-success" id="dobalance" ng-click="doAssigment()"  type="button"  value="Asignación"/>                
+                  <hr>   
+                <br>
+                <hr>                  
                 <div id = "PleccionR"> </div>
-
-
               </div>
      </div>
 
 <script type="text/javascript">
   $(document).ready(function(){
       $( "#goback").hide();
+      $( "#dobalance").hide();
   });
 </script>

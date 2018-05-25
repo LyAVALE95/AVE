@@ -9,8 +9,11 @@ class ExercisesController < ApplicationController
   def algoritmo
     
   end
-  def ex1
-    
+  def ex1 
+  end
+  def ex2
+  end
+  def ex3
   end
 
   # GET /exercises/1
