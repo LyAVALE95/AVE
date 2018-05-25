@@ -19,13 +19,13 @@
           </tr>
           </thead>
                     <tr ng-repeat="datum in data">
-                        <td width="120px"> <button style="visibility: {{showD}}; width: {{widthD}}" class="btnD btn btn-danger red" data-ng-click="removeRow($index)">Eliminar fábrica</button></td>
+                        <td width="120px"> <button style="visibility: {{showD}}; width: {{widthD}}" class="btnD btn btn-danger red" data-ng-click="removeRow($index)">- Fábrica</button></td>
                         <th width="50px"> F{{$index}}: </th>
                         <td ng-repeat="field in datum">
                             <input style="background-color: {{field.cellcolor}}; width: 100px;"
                              ng-change="{{metodoinput}}"
                              ng-model="field.valor"/>
-                        <button width="120px" style="visibility: {{showD}}; width: {{widthD}}" class="btnD btn btn-danger red" ng-click="removeColumn($index)">Eliminar Bodega</button>
+                        <button width="120px" style="visibility: {{showD}}; width: {{widthD}}" class="btnD btn btn-danger red" ng-click="removeColumn($index)">- Bodega</button>
                        </td>
                     </tr>
                 </table>

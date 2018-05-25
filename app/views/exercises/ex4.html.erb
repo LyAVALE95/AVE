@@ -1,11 +1,15 @@
-    <script type="text/javascript" src="malg3.js"></script>
-    <h4 class="red-text text-accent-1">Lección 3</h4>
-    <h2>Realizar el balance y ajuste en la tabla inicial</h2>
+    <script type="text/javascript" src="malg4.js"></script>
+    <h4 class="red-text text-accent-1">Lección 4</h4>
+    <h2>Asignación con el método AVE</h2>
     <div ng-app="productsTableApp">
           <div ng-controller="ProductsController">
-           <h5>1. En base al cálculo (balance) entre el total de demanda y ofertas, se determina si agregar una fábrica o bodega ficticia.</h5>
-           <h5>2. Si hay una mayor cantidad en las bodegas, se agrega una fábrica ficticia.</h5>
-           <h5>3. Si hay una mayor cantidad en las fábricas, se agrega una bodega ficticia.</h5>
+           <h5>1. Inspeccionar la bodega con oferta.</h5>
+           <h6>1.1. Si la demanda de la bodega es igual a 0, se pasa de todas las casillas relacionadas con esta bodega. <h6>
+           <h5>2. Seleccionar la casilla con el menor costo (en caso de minimización).</h5>
+           <h5>2. Seleccionar la casilla con el mayor costo (en caso de maximización).</h5>
+           <h5>3. Tomar la demanda de la fábrica relacionada con esa casilla.</h5>
+           <h6>3.1. Si la demanda de la fábrica es igual a 0, se pasa de esta casilla (regresando al punto 2 mas ignorando esta casilla).</h6>
+
             <br>
                 <input class="btnD btn btn-info pink"  type="button" value="+Bodega" ng-click="addColumn()"/>
                 <input class="btnD btn btn-info lime" type="button" value="+Fábrica" ng-click="addRow()"/>

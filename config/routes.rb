@@ -46,6 +46,7 @@ Rails.application.routes.draw do
   get '/ex1', :to =>'exercises#ex1'
   get '/ex2', :to =>'exercises#ex2'
   get '/ex3', :to =>'exercises#ex3'
+  get '/ex4', :to =>'exercises#ex4'
     #post ':controller(/:action(/:id(.:format)))'
     #get ':controller(/:action(/:id(.:format)))'
   post 'amethods/count'

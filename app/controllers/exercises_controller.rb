@@ -15,6 +15,8 @@ class ExercisesController < ApplicationController
   end
   def ex3
   end
+  def ex4
+  end
 
   # GET /exercises/1
   # GET /exercises/1.json
