@@ -48,33 +48,54 @@
   <%= pie_chart @myuserparters.group(:score).count, id: "users-chart-score", width: "500px",messages: {empty: "Aún no tiene alumnos"}, height: "400px" %>
   <% else%>
   <ul class="collapsible purple lighten-3">
-  <li class=" lime lighten-4">
-    <div class="collapsible-header light-blue darken-4 white-text">
+  <li class="lime accent-1">
+    <div class="collapsible-header pink darken-4 white-text">
       <i class="material-icons">add_box</i>
         Lecciones
     </div>
-    <div class="collapsible-body"><p>Las lecciones se separan por cada profesor al que pertenece el usuario</p></div>
+    <div class="collapsible-body"><h6>Las lecciones se separan por cada profesor al que pertenece el usuario.</h6>
+    <p>Cada lección añade puntaje por medio de los cuestionarios relacionados a esta.</p>
+    <p>Cada lección tiene un costo, que depende de los puntos del alumno para estar disponibles o no.</p>
+    </div>
   </li>
-  <li class="light-green lighten-5">
+  <li class="lime lighten-4">
     <div class="collapsible-header  deep-orange accent-4 white-text">
       <i class="material-icons">add_box</i>
-      Second
+      Cuestionarios
     </div>
-    <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+    <div class="collapsible-body"><h6>Añaden puntaje del 0 al 100 (Porcentual) al puntaje de los usuarios.</h6></div>
   </li>
-   <li class=" lime lighten-4">
-    <div class="collapsible-header light-blue darken-4 white-text">
+   <li class="lime accent-1">
+    <div class="collapsible-header pink darken-4 white-text">
       <i class="material-icons">add_box</i>
-        First
+        Ejercicios
     </div>
-    <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+    <div class="collapsible-body"><h6>Se componen por módulos globales que aportan práctica al usuario (no están restringidos).</h6>
+    <p>Actualmente se componen por 4 lecciones básicas para aprender la asignación AVE.</p>
+    <p>Se restringe a la minimización.</p>
+    </div>
   </li>
-  <li class="light-green lighten-5">
+  <li class="lime lighten-4">
     <div class="collapsible-header  deep-orange accent-4 white-text">
       <i class="material-icons">add_box</i>
-      Second
+      Documentación
     </div>
-    <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+    <div class="collapsible-body"><h6>Integra enlaces y libros.</h6></div>
+  </li>
+   <li class="lime accent-1">
+    <div class="collapsible-header pink darken-4 white-text">
+      <i class="material-icons">add_box</i>
+        Mi avance
+    </div>
+    <div class="collapsible-body"><h6>Actualmente (Primera versión) se integra extrictamente por puntaje en base a la realización de cuestionarios.</h6>
+    </div>
+  </li>
+  <li class="lime lighten-4">
+    <div class="collapsible-header  deep-orange accent-4 white-text">
+      <i class="material-icons">add_box</i>
+      Algoritmo
+    </div>
+    <div class="collapsible-body"><h6>Permite la solución del algoritmo AVE.</h6></div>
   </li>
   </ul>
   <%end%>

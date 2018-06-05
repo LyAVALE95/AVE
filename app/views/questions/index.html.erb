@@ -14,9 +14,9 @@
     <% @questions.each do |question| %>
       <tr>
         <td><%= question.description %></td>
-        <td><%= link_to 'Show', question %></td>
-        <td><%= link_to 'Edit', edit_question_path(question) %></td>
-        <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Mostrar', question %></td>
+        <td><%= link_to 'Editar', edit_question_path(question) %></td>
+        <td><%= link_to 'Eliminar', question, method: :delete, data: { confirm: '¿Esta seguro(a)?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +24,4 @@
 
 <br>
 
-<%= link_to 'New Question', new_question_path %>
+<%= link_to 'Nueva pregunta', new_question_path %>

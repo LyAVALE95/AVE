@@ -34,7 +34,7 @@ class GroupsController < ApplicationController
       if @group.save
         @group_SU = UserSg.new(user_id: current_user.id, school_id: current_user.school_id,group_id: @group.id)
         @group_SU.save!
-        format.html { redirect_to "/myuser", notice: 'Group was successfully created.' }
+        format.html { redirect_to "/myuser", notice: 'El grupo ha sido creado exitosamente.' }
         format.json { render :show, status: :created, location: @group }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class GroupsController < ApplicationController
   def update
     respond_to do |format|
       if @group.update(group_params)
-        format.html { redirect_to "/myuser", notice: 'Group was successfully updated.' }
+        format.html { redirect_to "/myuser", notice: 'El grupo ha sido actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @group }
       else
         format.html { render :edit }
@@ -62,7 +62,7 @@ class GroupsController < ApplicationController
   def destroy
     @group.destroy
     respond_to do |format|
-      format.html { redirect_to groups_url, notice: 'Group was successfully destroyed.' }
+      format.html { redirect_to groups_url, notice: 'El grupo ha sido eliminado exitosamente.' }
       format.json { head :no_content }
     end
   end
