@@ -29,7 +29,7 @@ class SchoolsController < ApplicationController
     respond_to do |format|
       if @school.save
         current_user.update_attributes(school_id: @school.id)
-        format.html { redirect_to @school, notice: 'School was successfully created.' }
+        format.html { redirect_to @school, notice: 'La escuela ha sido creada exitosamente.' }
         format.json { render :show, status: :created, location: @school }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class SchoolsController < ApplicationController
   def update
     respond_to do |format|
       if @school.update(school_params)
-        format.html { redirect_to "/myuser", notice: 'School was successfully updated.' }
+        format.html { redirect_to "/myuser", notice: 'La escuela ha sido actualizada exitosamente.' }
         format.json { render :show, status: :ok, location: @school }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class SchoolsController < ApplicationController
   def destroy
     @school.destroy
     respond_to do |format|
-      format.html { redirect_to schools_url, notice: 'School was successfully destroyed.' }
+      format.html { redirect_to schools_url, notice: 'La escuela ha sido eliminada exitosamente.' }
       format.json { head :no_content }
     end
   end

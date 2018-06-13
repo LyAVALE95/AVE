@@ -1,0 +1,42 @@
+ <meta charset="UTF-8">
+<h1>Mis alumnos</h1>
+<h2>Profesor: <%= current_user.name%></h2>
+<hr><br>
+<h3><%= @group.name%></h3>
+<table class="bordered" >
+	<thead>
+    <th>Número de control</th>
+		<th>Nombre</th>
+		<th>Apellido</th>
+		<th>Puntaje</th>
+    <th>Último ingreso</th>
+	</thead>
+  <tbody>
+    <% @usersbygroup.each do |u| %>
+    <tr> 
+      <td><%= u.control_number%></td>
+      <td><%= u.name%></td>
+      <td><%= u.lastnames%></td>
+      <td><%= u.score%></td>
+      <td><%= u.updated_at.strftime("%F")%></td>
+    </tr> 
+    <%end%> 
+  </tbody>
+</table>
+
+ <style type="text/css">
+ 	table {
+    border-collapse: collapse;
+}
+table{width: 100%;}
+table, th, td {
+	
+    border: 1px solid black;
+}
+th{
+	background-color: #efebe9;
+	/*size:16pt;*/
+	font-size: 14pt;
+}
+
+ </style>

@@ -1,0 +1,52 @@
+    <script type="text/javascript" src="malg4.js"></script>
+    <h4 class="red-text text-accent-1">Lección 4</h4>
+    <h2>Asignación con el método AVE</h2>
+    <div ng-app="productsTableApp">
+          <div ng-controller="ProductsController">
+           <h5>1. Inspeccionar la bodega con oferta.</h5>
+           <h6>1.1. Si la demanda de la bodega es igual a 0, se pasa de todas las casillas relacionadas con esta bodega. <h6>
+           <h5>2. Seleccionar la casilla con el menor costo (en caso de minimización).</h5>
+           <h5>2. Seleccionar la casilla con el mayor costo (en caso de maximización).</h5>
+           <h5>3. Tomar la demanda de la fábrica relacionada con esa casilla.</h5>
+           <h6>3.1. Si la demanda de la fábrica es igual a 0, se pasa de esta casilla (regresando al punto 2 mas ignorando esta casilla).</h6>
+
+            <br>
+                <input class="btnD btn btn-info pink"  type="button" value="+Bodega" ng-click="addColumn()"/>
+                <input class="btnD btn btn-info lime" type="button" value="+Fábrica" ng-click="addRow()"/>
+ <br>
+ <div id = "Pleccion"> </div>
+ <br>
+                <table id="DataFab" class=" table-bordered">
+                <thead>
+          <tr>
+          </tr>
+          </thead>
+                    <tr ng-repeat="datum in data">
+                        <td width="120px"> <button style="visibility: {{showD}}; width: {{widthD}}" class="btnD btn btn-danger red" data-ng-click="removeRow($index)"> - Fábrica</button></td>
+                        <th width="50px"> F{{$index}}: </th>
+                        <td ng-repeat="field in datum">
+                            <input style="background-color: {{field.cellcolor}}; width: 100px;"
+                             ng-change="{{metodoinput}}"
+                             ng-model="field.valor"/>
+                        <button width="120px" style="visibility: {{showD}}; width: {{widthD}}" class="btnD btn btn-danger red" ng-click="removeColumn($index)"> - Bodega</button>
+                       </td>
+                    </tr>
+                </table>
+                  <br>
+                <input class="btnDP btn btn-success" type="button"  value="Hecho" ng-click="completeTable()"/>
+                <input class="btnD3 btn btn-warning" id="goback" type="button"  value="Regresar" ng-click="goBack()"/>
+               <!-- <input class="btnD2 btn btn-success"  type="button" onclick="completeTableJS()" value="Continuar"/>-->
+                <input class="btnD3 btn btn-success" id="dobalance" ng-click="doAssigment()"  type="button"  value="Asignación"/>                
+                  <hr>   
+                <br>
+                <hr>                  
+                <div id = "PleccionR"> </div>
+              </div>
+     </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+      $( "#goback").hide();
+      $( "#dobalance").hide();
+  });
+</script>

@@ -1,31 +1,42 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Documentos</h1>
-<%= link_to 'Nuevo documento', new_consultation_path,:class => 'btn yellow btn-warning' %>
 <div class="row">
-  <div class="col-3">
-    <center><h4 class="teal-text text-darken-1">Enlaces</h4>
-       <%if @consultations.count == 0 %>
+  <div class="col-4">
+    <h4 class="teal-text text-darken-1">Enlaces</h4>
+       <%if @links.count == 0 %>
        <h4 class="grey-text">____</h4>
        <%end%>
-       <% @consultations.each do |consultation| %>
-       <div class="card">
-         
+       <% @links.each do |l| %>
+        <div class="card-stacked">
+         <div class="card-content" style="display: inline-block;">
+         <img src="/icons/bookmark.png" width="40px" height="40px">
+           <span><b><%= link_to l.links, l.links %></b></span>
+         </div>
+         <div class="card-action">
+              <%= link_to 'Editar', edit_consultation_path(l),:onclick=>"goandrefresh3()" %>
+                <a href="#"><%= link_to 'Eliminar', l, method: :delete, data: { confirm: '¿Está seguro(a)?' } %></a>
+           </div>
        </div>
        <%end%>
-    </center>
   </div>
-    <div class="col-4">
-    <center><h4 class="red-text text-darken-1">Libros</h4>
-       <%if @consultations.count == 0 %>
+     <div class="col-4">
+    <h4 class="blue-text text-darken-3">Libros</h4>
+       <%if @books.count == 0 %>
        <h4 class="grey-text">____</h4>
        <%end%>
-       <% @consultations.each do |consultation| %>
-       <div class="card">
-         
+       <% @books.each do |l| %>
+        <div class="card-stacked">
+         <div class="card-content" style="display: inline-block;">
+         <img src="/icons/ebook.png" width="40px" height="40px">
+           <span><b><%= link_to l.books, l.books %></b></span>
+         </div>
+         <div class="card-action">
+                <%= link_to 'Editar', edit_consultation_path(l),:onclick=>"goandrefresh3()" %>
+                <a href="#"><%= link_to 'Eliminar', l, method: :delete, data: { confirm: '¿Está seguro(a)?' } %></a>
+           </div>
        </div>
        <%end%>
-    </center>
   </div>
     <div class="col-4">
     <center><h4 class="lime-text text-darken-1">Referencias</h4>
@@ -41,28 +52,5 @@
   </div>
 </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Links</th>
-      <th>Books</th>
-      <th>References</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @consultations.each do |consultation| %>
-      <tr>
-        <td><%= consultation.links %></td>
-        <td><%= consultation.books %></td>
-        <td><%= consultation.references %></td>
-        <td><%= link_to 'Show', consultation %></td>
-        <td><%= link_to 'Edit', edit_consultation_path(consultation) %></td>
-        <td><%= link_to 'Destroy', consultation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
 <br>

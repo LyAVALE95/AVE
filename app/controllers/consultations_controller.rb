@@ -5,11 +5,17 @@ class ConsultationsController < ApplicationController
   # GET /consultations.json
   def index
     @consultations = Consultation.all
+    @links = Consultation.where("links!=''")
+    @books = Consultation.where("books!=''") 
+    respond_to do |format|
+        format.html
+        format.json { render json: {docs: @consultations} }
+    end
   end
 
   # GET /consultations/1
   # GET /consultations/1.json
-  def show
+  def show  
   end
 
   # GET /consultations/new
@@ -28,7 +34,7 @@ class ConsultationsController < ApplicationController
 
     respond_to do |format|
       if @consultation.save
-        format.html { redirect_to "/consultations", notice: 'Consultation was successfully created.' }
+        format.html { redirect_to "/consultations", notice: 'El anexo ha sido creado correctamente.' }
         format.json { render :show, status: :created, location: @consultation }
       else
         format.html { render :new }
@@ -42,7 +48,7 @@ class ConsultationsController < ApplicationController
   def update
     respond_to do |format|
       if @consultation.update(consultation_params)
-        format.html { redirect_to @consultation, notice: 'Consultation was successfully updated.' }
+        format.html { redirect_to "/consultations", notice: 'El anexo ha sido actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @consultation }
       else
         format.html { render :edit }
@@ -56,7 +62,7 @@ class ConsultationsController < ApplicationController
   def destroy
     @consultation.destroy
     respond_to do |format|
-      format.html { redirect_to consultations_url, notice: 'Consultation was successfully destroyed.' }
+      format.html { redirect_to consultations_url, notice: 'El anexo ha sido eliminado exitosamente.' }
       format.json { head :no_content }
     end
   end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :exercises
   resources :user_sgs
   resources :user_quizzes
   resources :schools
@@ -40,6 +41,7 @@ Rails.application.routes.draw do
   put '/myuserupdatedata/:id' => 'user_students#updatemyusr'
   get '/bygroup/:id', :to =>'reports#bygroup'
   get '/gbygroupall', :to =>'reports#gbygroupall'
+
   
   #Ferb:
   get '/preguntas/:id', :to => 'questions#preguntas' #Trae las preguntas del quizz' especificando el id del quizz' (quizz_id)
@@ -48,6 +50,14 @@ Rails.application.routes.draw do
   post '/UserQuiz', :to => 'user_quizzes#UserQuiz'  #Agrega o modifica la tabla de user_quiz cada que revisan un examen en la app.
   get '/sessionsUser/:id', :to => 'sessions#sessionsUser'
   post '/listexam', :to => 'quizzes#listexam'
+  
+  get '/sessionsall', :to =>'session_details#all'
+  get '/algoritmo', :to =>'exercises#algoritmo'
+  get '/ex1', :to =>'exercises#ex1'
+  get '/ex2', :to =>'exercises#ex2'
+  get '/ex3', :to =>'exercises#ex3'
+  get '/ex4', :to =>'exercises#ex4'
+  get '/algoritmop', :to =>'exercises#algoritmop'
     #post ':controller(/:action(/:id(.:format)))'
     #get ':controller(/:action(/:id(.:format)))'
   post 'amethods/count'

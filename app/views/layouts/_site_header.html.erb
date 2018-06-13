@@ -24,12 +24,15 @@
             <li class="nav-item">
                 <a class="nav-link" href="/sessions">Lecciones</a>
             </li>
+            <%if current_user.rol == "t"%>
             <li class="nav-item">
                 <a class="nav-link" href="/quizzes">Cuestionarios</a>
             </li>
+
               <li class="nav-item">
-                <a class="nav-link" href="/reports" onclick="goandrefresh2()">Reportes</a>
+                <a class="nav-link" href="/reports" onclick="goandrefresh3()">Reportes</a> 
             </li>
+             <%end%>
             <%if current_user.rol=="s"%>
             <li class="nav-item">
                 <a class="nav-link" href="/user_quizzes">Mis resultados</a>
@@ -38,10 +41,19 @@
             <li class="nav-item">
                 <a class="nav-link" href="/gbygroupall">Mis grupos</a>
             </li>
+             <%end%>
              <li class="nav-item">
                 <a class="nav-link" href="/consultations">Documentos</a>
             </li>
-            <%end%>
+            <li class="nav-item">
+                <a class="nav-link" href="/exercises">Ejercicios</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/algoritmo" onclick="goandrefresh3()"><b>Algoritmo</b></a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" href="/myuser" onclick="goandrefresh3()">Mi perfil</a>
+            </li>           
             <!-- Dropdown -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opciones</a>
@@ -49,16 +61,16 @@
                     <center><h5 class="red-text text-accent-1">Menu</h5></center>
           <hr>
            <ul>
-          <li><a href="/exercises"><i class="material-icons">apps</i>Ejercicios</a></li>
-          <li><a href="/exercises"><i class="material-icons">border_color</i>Algoritmo</a></li>
-          <li><a href="/sessions"><i class="material-icons">bookmark_border</i>Lecciones</a></li>
-          <li><a href="/quizzes" ><i class="material-icons">fitness_center</i>Cuestionarios</a></li>
+          <li><a href="/exercises" class="grey-text"><i class="material-icons">apps</i>Ejercicios</a></li>
+          <li><a href="/exercises" class="grey-text"><i class="material-icons">border_color</i>Algoritmo</a></li>
+          <li><a href="/sessions" class="grey-text"><i class="material-icons">bookmark_border</i>Lecciones</a></li>
+          <li><a href="/quizzes" class="grey-text"><i class="material-icons">fitness_center</i>Cuestionarios</a></li>
           <li><a href="/reports" class="grey-text text-darken-1"><i class="material-icons">equalizer</i>Reportes</a></li>
-          <li><a href="/exercises"><i class="material-icons">account_circle</i>Mi cuenta</a></li>
-          <li><a href="/exercises"><i class="material-icons">build</i>Configuracion</a></li>
-          <li><a href="/exercises"><i class="material-icons">movie</i>Material</a></li>
-          <li><a href="/exercises"><i class="material-icons">archive</i>Documentacion</a></li>
-          <li><a href="/exercises" class="red-text"><i class="material-icons red-text">input</i><%= link_to "Salir", destroy_user_session_path, :method => :delete, :class=>"red-text" %></a></li>
+          <li><a href="/exercises" class="grey-text"><i class="material-icons">account_circle</i>Mi cuenta</a></li>
+          <li><a href="/exercises" class="grey-text"><i class="material-icons">build</i>Configuracion</a></li>
+          <li><a href="/exercises" class="grey-text"><i class="material-icons">movie</i>Material</a></li>
+          <li><a href="/exercises" class="grey-text"><i class="material-icons">archive</i>Documentacion</a></li>
+          <li><a href="/exercises" class="red-text"><br><br><%= link_to "Salir", destroy_user_session_path, :method => :delete, :class=>"red-text",:style=> "font-size: 20px" %></a></li>
         </ul>
                 </div>
             </li>
@@ -75,8 +87,9 @@
               <a href="/myuser" onclick="goandrefresh2()"><%= image_tag(@myuser.avatarn, :alt => "rss feed",:width => "40px") %></a>
                <ul class="basicinfo">
                 <li><%= link_to "Salir", destroy_user_session_path, :method => :delete, :class=>"red-text text-darken-3" %></li> 
-                <li><a href="/"><%= @myuser.name %></a></li>
-                <li><a href="/"> <%= current_user.score %></a></li>     
+                <li><a href="/myuser" class="grey-text"><%= @myuser.name %></a></li>
+                <%if current_user.rol == "s"%>
+                <li><a href="/myuser" class="grey-text"> <%= current_user.score %></a></li><%end%>     
                 </ul>
             </form>
     </div>

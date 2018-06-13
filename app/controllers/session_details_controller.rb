@@ -6,6 +6,15 @@ class SessionDetailsController < ApplicationController
   def index
     @session_details = SessionDetail.all
   end
+  def all
+     @session_details = SessionDetail.select("session_details.*")
+     .joins("join sessions")
+     .where("sessions.user_id = 19 and session_details.session_id = sessions.id")
+     respond_to do |format|
+        format.json { render json: {sessions: @session_details} }
+    end
+    
+  end
 
   # GET /session_details/1
   # GET /session_details/1.json
@@ -30,7 +39,7 @@ class SessionDetailsController < ApplicationController
       if @session_detail.save
         #format.html { redirect_to @session_detail, notice: 'Session detail was successfully created.' }
         #format.json { render :show, status: :created, location: @session_detail }
-        format.html { redirect_to amethods_url, notice: 'Session detail was successfully created.' }
+        format.html { redirect_to sessions_url, notice: 'La lección ha sido creada exitosamente.' }
         format.json { head :no_content, status: :created, location: @session_detail }
       else
         format.html { render :new }
@@ -44,7 +53,7 @@ class SessionDetailsController < ApplicationController
   def update
     respond_to do |format|
       if @session_detail.update(session_detail_params)
-        format.html { redirect_to @session_detail, notice: 'Session detail was successfully updated.' }
+        format.html { redirect_to @session_detail, notice: 'La lección ha sido actualizada exitosamente.' }
         format.json { render :show, status: :ok, location: @session_detail }
       else
         format.html { render :edit }
@@ -58,7 +67,7 @@ class SessionDetailsController < ApplicationController
   def destroy
     @session_detail.destroy
     respond_to do |format|
-      format.html { redirect_to session_details_url, notice: 'Session detail was successfully destroyed.' }
+      format.html { redirect_to session_details_url, notice: 'La lección ha sido eliminada exitosamente.' }
       format.json { head :no_content }
     end
   end

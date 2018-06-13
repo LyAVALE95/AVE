@@ -131,7 +131,7 @@ class UserQuizzesController < ApplicationController
       @myuserst = UserStudent.where("user_id = ?",current_user.id).first
       @mygroup = Group.where("id = ?",@myuserst.group_id).first
       @scoresum = @user_quiz.score.to_f + @myuserst.score.to_f
-      @scoresumtot = (@scoresum + @mygroup.average.to_f) 
+      @scoresumtot = (@user_quiz.score.to_f + @mygroup.average.to_f) 
       current_user.update(score: @scoresum.to_s )
       @myuserst.update(score:@scoresum.to_s)
       @mygroup.update(average:@scoresumtot.to_s)

@@ -15,56 +15,56 @@
     <div class="card-content grey lighten-4">
       <div id="test4">
         <div class="field">
-           <%= f.label :email %><br />
+           <%= f.label :email,'Correo electrónico' %><br />
            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
           </div>
         
           <div class="field">
-            <%= f.label :password %>
+            <%= f.label :password, 'Contraseña' %>
             <% if @minimum_password_length %>
-            <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <em>(<%= @minimum_password_length %> Caracteres como mínimo)</em>
             <% end %><br />
             <%= f.password_field :password, autocomplete: "off" %>
           </div>
         
           <div class="field">
-            <%= f.label :password_confirmation %><br />
+            <%= f.label :password_confirmation,'Confirmación de contraseña' %><br />
             <%= f.password_field :password_confirmation, autocomplete: "off" %>
           </div>
         </div>
       <div id="test5">
         <div class="field">
-           <%= f.label :name %><br />
+           <%= f.label :name,'Nombre' %><br />
            <%= f.text_field :name, autofocus: true %>
           </div>
         
           <div class="field">
-            <%= f.label :lastnames %>
+            <%= f.label :lastnames,'Apellidos' %>
             <%= f.text_field :lastnames, autocomplete: "off" %>
           </div>
         
           <div class="field">
-            <%= f.label :control_number %><br />
+            <%= f.label :control_number,'Número de control' %><br />
             <%= f.text_field :control_number %>
           </div>
       </div>
       <div id="test6">    
               <div class="field">
-           <%= f.label :carrer %><br />
+           <%= f.label :carrer,'Carrera' %><br />
            <%= f.text_field :carrer, autofocus: true %>
           </div>
         
           <div class="field">
-            <%= f.label :grade %>
+            <%= f.label :grade,'Grado' %>
             <%= f.text_field :grade, autocomplete: "off" %>
           </div>
         
           <div class="field">
-            <%= f.label :rol %><br />
-          <%= f.select :rol, options_for_select([["Teacher", "t"], ["Student", "s"]]) %>          </div>
+            <%= f.label :rol,'Tipo' %><br />
+          <%= f.select :rol, options_for_select([["Maestro", "t"], ["Estudiante", "s"]]) %>          </div>
       </div>
         <div class="actions">
-    <center><%= f.submit "Sign up", class: 'btn-danger' %></center>
+    <center><%= f.submit "Registrarse", class: 'btn-danger' %></center>
   </div></div>
     </div>
   </div>

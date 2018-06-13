@@ -1,4 +1,4 @@
-$( document ).ready(function() {
+$( document ).ready(function() {  
   $('input.autocomplete').autocomplete({
     data: {
       "Lección 1": null,

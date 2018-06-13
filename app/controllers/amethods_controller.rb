@@ -6,6 +6,10 @@ class AmethodsController < ApplicationController
   $cmethods = 0
   def index
     @amethods = Amethod.all
+    respond_to do |format|
+        format.html 
+        format.json { render json: {sessions: @amethods} }
+    end
     @session_details = SessionDetail.all
     @session_detail = SessionDetail.new()
   end

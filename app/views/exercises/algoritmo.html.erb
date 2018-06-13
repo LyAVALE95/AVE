@@ -1,0 +1,44 @@
+    <script type="text/javascript" src="malg.js"></script><script type="text/javascript" src="alg.js"></script>
+    <h1>Algoritmo AVE</h1>
+  <h4>Se ha desarrollado este método de asignación para la solución de problemas de transporte. </h4>
+    <div ng-app="productsTableApp">
+          <div ng-controller="ProductsController">
+            <h5>Método para la medición de costos de transporte en base a la capacidad de entrega y solicitud.</h5>
+ <!-- <a href="/algoritmop" onclick="getAlg()">Imprimir</a>-->
+
+                <input class="btnD btn btn-info pink"  type="button" value="+Bodega" ng-click="addColumn()"/>
+                <input class="btnD btn btn-info lime" type="button" value="+Fábrica" ng-click="addRow()"/>
+ <br>
+ <div id = "Pleccion"> </div>
+ <br>
+                <table id="DataFab" class=" table-bordered">
+                <thead>
+          <tr>
+          </tr>
+          </thead>
+                    <tr ng-repeat="datum in data">
+                        <td width="120px"> <button style="visibility: {{showD}}; width: {{widthD}}" class="btnD btn btn-danger red" data-ng-click="removeRow($index)">- Fábrica</button></td>
+                        <th width="50px"> F{{$index}}: </th>
+                        <td ng-repeat="field in datum">
+                            <input style="background-color: {{field.cellcolor}}; width: 100px;"
+                             ng-change="{{metodoinput}}"
+                             ng-model="field.valor"/>
+                        <button width="120px" style="visibility: {{showD}}; width: {{widthD}}" class="btnD btn btn-danger red" ng-click="removeColumn($index)">- Bodega</button>
+                       </td>
+                    </tr>
+                </table>
+                  <br>
+                <input class="btnDP btn btn-success" type="button"  value="Hecho" onclick="completeTableJS()" ng-click="completeTable()"/>
+                <input class="btnD3 btn btn-warning" type="button"  value="Regresar" ng-click="goBack()"/>
+               <!-- <input class="btnD2 btn btn-success"  type="button" onclick="completeTableJS()" value="Continuar"/>-->
+                <input class="btnD3 btn btn-success"  type="button" ng-click="doAssigment()" value="Asignación"/>
+                  <hr>
+               <br>
+                <hr>
+                <div id = "PleccionR"> </div>
+
+
+              </div>
+     </div>
+
+
