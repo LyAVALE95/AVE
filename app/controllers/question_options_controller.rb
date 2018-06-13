@@ -7,6 +7,15 @@ class QuestionOptionsController < ApplicationController
     @question_options = QuestionOption.all
   end
 
+  #Ferb:
+  def respuestas
+    @question_option = QuestionOption.where("question_id = ?",params[:id])
+
+    respond_to do |format|
+      format.json { render json: @question_option }
+    end
+  end
+
   # GET /question_options/1
   # GET /question_options/1.json
   def show

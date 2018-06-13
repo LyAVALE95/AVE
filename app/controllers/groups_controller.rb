@@ -7,6 +7,39 @@ class GroupsController < ApplicationController
     @groups = Group.all
   end 
 
+  #Ferb:
+  def buscarPromedio
+    user = User.find_by(id: params[:id])
+    #inicializar variables
+    sumaTotal = 0
+
+    #Busca el maestro con el id de user'
+    user_teacher = UserTeacher.find_by(user_id: params[:id])
+    #Busca cada estudiante que tenga el maestro encontrado
+    usuarios = User.select("users.score").from("user_students,users").where(" user_students.user_teacher_id = ? and user_students.user_id = users.id ",user_teacher.id)
+
+    #Buscar quiz?id de cada estudiante
+      #Obtener estudiantes
+    user_studentss = UserStudent.select("*").from("user_students").where("user_students.user_teacher_id=?",user_teacher.id)
+      #saca el promedio de cada estudiante y lo suma a sumaTotal
+    user_studentss.each do |u|
+
+      user_quizes = UserQuiz.select("user_quizzes.score").where("user_id=?",u.user_id)
+
+      sum = user_quizes.sum { |p| p.score}
+      sumaTotal = sumaTotal + (sum.to_f/user_quizes.count.to_f)
+    end 
+    promedio = sumaTotal.to_f/user_studentss.count.to_f
+    #Suma los resultados anteriores
+    group = Group.find_by(id: user_studentss.first.group_id)
+    respond_to do |format|
+      format.json { render json: {average: promedio, cantalumnos: user_studentss.count, description: group.description} }
+    end
+    #saca el promedio
+    #promedio = sum.to_f/usuarios.count
+    #@group = Group.where("id = ?",user.group_id)
+  end
+
   # GET /groups/1
   # GET /groups/1.json
   def show
