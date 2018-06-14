@@ -41,6 +41,16 @@ Rails.application.routes.draw do
   put '/myuserupdatedata/:id' => 'user_students#updatemyusr'
   get '/bygroup/:id', :to =>'reports#bygroup'
   get '/gbygroupall', :to =>'reports#gbygroupall'
+
+  
+  #Ferb:
+  get '/preguntas/:id', :to => 'questions#preguntas' #Trae las preguntas del quizz' especificando el id del quizz' (quizz_id)
+  get '/respuestas/:id', :to => 'question_options#respuestas' #Trae las respuestas de la pregunta especificada con el id de la question' (question_id)
+  get '/buscarPromedio/:id', :to => 'groups#buscarPromedio' #Trae el promedio del grupo que el profesor tenga registrado (group_id)
+  post '/UserQuiz', :to => 'user_quizzes#UserQuiz'  #Agrega o modifica la tabla de user_quiz cada que revisan un examen en la app.
+  get '/sessionsUser/:id', :to => 'sessions#sessionsUser'
+  post '/listexam', :to => 'quizzes#listexam'
+  
   get '/sessionsall', :to =>'session_details#all'
   get '/algoritmo', :to =>'exercises#algoritmo'
   get '/ex1', :to =>'exercises#ex1'
