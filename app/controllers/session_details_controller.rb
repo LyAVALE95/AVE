@@ -1,5 +1,5 @@
 class SessionDetailsController < ApplicationController
-  before_action :set_session_detail, only: [:show, :edit, :update, :destroy]
+  before_action :set_session_detail, only: [ :edit, :update, :destroy]
 
   # GET /session_details
   # GET /session_details.json
@@ -15,10 +15,28 @@ class SessionDetailsController < ApplicationController
     end
     
   end
+  def allsessions
+     @session_details = SessionDetail.select("session_details.*")
+     .joins("join sessions")
+     .where("session_details.session_id = ?", params[:id])
+     respond_to do |format|
+        format.json { render json: {sessions: @session_details} }
+    end
+    
+  end
 
   # GET /session_details/1
   # GET /session_details/1.json
   def show
+     @session_detailpag = SessionDetail.find(params[:id])
+      @session_detail = SessionDetail.find_by(session_id: params[:id])
+      @session_detailjson  = Session.select("sessions.*,session_details.*")
+     .joins("join session_details")
+     .where("session_details.session_id = ?", params[:id])
+      respond_to do |format|
+        format.html { @session_detailpag }
+        format.json { render json: {sessions: @session_detail} }
+      end
   end
 
   # GET /session_details/new
