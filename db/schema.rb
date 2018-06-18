@@ -45,8 +45,7 @@ ActiveRecord::Schema.define(version: 20180522131632) do
     t.index ["session_id"], name: "index_consultations_on_session_id"
   end
 
-
-  create_table "exercises", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "exercises", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_students_id"
@@ -55,8 +54,7 @@ ActiveRecord::Schema.define(version: 20180522131632) do
     t.index ["user_teachers_id"], name: "index_exercises_on_user_teachers_id"
   end
 
-  create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-
+  create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
     t.string "description"
     t.string "schedule"

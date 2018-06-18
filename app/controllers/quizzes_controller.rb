@@ -15,14 +15,25 @@ class QuizzesController < ApplicationController
     end
   end
 
+  #iOS
   def listexam
-    #@quizzes = Quiz.all
     if params[:rol] == 't'
-    @quizzes = Quiz.where("user_id = ?",params[:id])
+      @quizzes = Quiz.where("user_id = ?",params[:id])
+      @quizzes.each do |u|
+        u.avaible = 1
+      end 
     else
-       @quizzes = Quiz.select('quizzes.*, user_teachers.id as tid,user_teachers.user_id,user_students.user_teacher_id')
-      .joins('join user_students').where('user_students.user_id = ?',params[:id])
-      .joins('join user_teachers').where('user_teachers.id=user_students.user_teacher_id and user_teachers.user_id=quizzes.user_id')
+      @user_student = UserStudent.find_by(user_id: params[:id])
+      @user_teacher = UserTeacher.find_by(id: @user_student.user_teacher_id)
+      @quizzes = Quiz.select('quizzes.*').where('user_id = ?', @user_teacher.user_id)
+      @quizzes.each do |u|
+        @session = Session.find_by(id: u.session_id)
+        if @user_student.score.to_i >= @session.price.to_i
+          u.avaible = 1
+        else
+          u.avaible = 0
+        end
+      end
     end
     respond_to do |format|
       format.html 

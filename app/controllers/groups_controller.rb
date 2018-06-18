@@ -7,12 +7,11 @@ class GroupsController < ApplicationController
     @groups = Group.all
   end 
 
-  #Ferb:
+  #iOS:
   def buscarPromedio
     user = User.find_by(id: params[:id])
     #inicializar variables
     sumaTotal = 0
-
     #Busca el maestro con el id de user'
     user_teacher = UserTeacher.find_by(user_id: params[:id])
     #Busca cada estudiante que tenga el maestro encontrado
@@ -35,9 +34,6 @@ class GroupsController < ApplicationController
     respond_to do |format|
       format.json { render json: {average: promedio, cantalumnos: user_studentss.count, description: group.description} }
     end
-    #saca el promedio
-    #promedio = sum.to_f/usuarios.count
-    #@group = Group.where("id = ?",user.group_id)
   end
 
   # GET /groups/1
