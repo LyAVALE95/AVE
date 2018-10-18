@@ -1,18 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <h1 class="pink-text text-lighten-1">
-  <%= @session_detailpag.txt1 %>
+  <%= @session_detail.txt1 %>
 </h1>
 
 <h4 class="teal-text text-darken-3">
-  <%= @session_detailpag.txt2 %>
+  <%= @session_detail.txt2 %>
 </h4>
 
 <div class="tixlist">
 <h6> 
-  <%= @session_detailpag.txt3.html_safe  %>
+  <%= @session_detail.txt3.html_safe  %>
 </h6>
 </div>
 
-<%= link_to 'Editar', edit_session_detail_path(@session_detailpag) %> |
+<%= link_to 'Editar', edit_session_detail_path(@session_detail) %> |
 <%= link_to 'Regresar', session_details_path %>

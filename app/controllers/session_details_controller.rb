@@ -28,14 +28,12 @@ class SessionDetailsController < ApplicationController
   # GET /session_details/1
   # GET /session_details/1.json
   def show
-     @session_detailpag = SessionDetail.find(params[:id])
+      #@session_detailpag = SessionDetail.find(params[:id])
       @session_detail = SessionDetail.find_by(session_id: params[:id])
-      @session_detailjson  = Session.select("sessions.*,session_details.*")
-     .joins("join session_details")
-     .where("session_details.session_id = ?", params[:id])
       respond_to do |format|
-        format.html { @session_detailpag }
-        format.json { render json: {sessions: @session_detail} }
+        format.html { 
+          @session_detail = SessionDetail.find(params[:id]) }
+        format.json { render json: @session_detail }
       end
   end
 

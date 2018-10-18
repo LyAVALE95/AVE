@@ -12,6 +12,9 @@ var casillas_asignadas = 0;
 var tablehead="<th width='50px'></th>";
   var algdev = ""; var step = 0;
   var tfg = 0, bfg=0;
+  var burned_assigRow = -1;
+  var burned_assigColumn = -1;
+  var stopall = false;
   var modiMaded = 0;
 //Total de fabricas y bodegas 
 
@@ -235,6 +238,16 @@ var tablehead="<th width='50px'></th>";
         
         function doOptimization(columns,rows){//First step to Optimization.
           var passed = false;var opttries=0;
+          if(stopall == true){}
+          else{
+          for(var c=0;c<columns-1;c++){
+          for(var r=0;r<rows-1;r++){
+            if($scope.data[r][c].costo || $scope.data[r][c].costo == 0){
+              if($scope.data[r][c].costo.toString().trim()=="")
+                {$scope.data[r][c].costo == null;console.log("I made clean");} 
+            }
+          }
+          }
           casillas_asignadas = LookForAssigned(columns,rows);
           console.log("Optimization");              
           opttries++;
@@ -243,12 +256,13 @@ var tablehead="<th width='50px'></th>";
           addStep('<b style="color:#16b73b;">Es una solución no degenerada</b>')
           addStep('<hr><h3>Método MODI</h3>');
           addStep("Se continuará con la implementación del método MODI. Se agregaran campos extra para obtener los elementos para las formulas del algoritmo MODI.");
-          doModi();
+          if(stopall == false){doModi();}
           }
           else{addStep('<b style="color:#ea1221;">Es una solución degenerada</b>');
           var dif_ca = (rows + columns -1) - casillas_asignadas;   
-          doassignZero(columns,rows,dif_ca); 
-          }                     
+          if(stopall == false){doassignZero(columns,rows,dif_ca);}
+          }   
+         }                  
         }
         function LookForAssigned(columns,rows){
           var temp_assigned = 0;
@@ -264,12 +278,15 @@ var tablehead="<th width='50px'></th>";
             }
           }
           console.log("ASIGNADAS: " + temp_assigned);
+          if(temp_assigned<3){stopall=true;}
           return temp_assigned;
         }
         function doassignZero(columns,rows,dif_ca){
           var continue_cell = 0;
           var continue_try = 0;
+          //cleanZero(columns,rows);
           console.log("Do 0 c" + columns +" / r"+ rows + ". DIF: " + dif_ca);
+          console.log("QUEMADAS: r" + burned_assigRow + " c:" + burned_assigColumn);
           var c,r,ci,ri;
           for(var i=1; i<=dif_ca;i++){            
           for(c=0;c<columns;c++){
@@ -290,14 +307,19 @@ var tablehead="<th width='50px'></th>";
                 for(ri=0;ri<rows;ri++){
                   if($scope.data[ri][c].costo)
                   {console.log($scope.data[ri][c].costo);cell_available=1;}
-                } 
-                if(cell_available==1){
+                }                 
+
+                if(cell_available==1 && 
+                  (burned_assigRow < r && burned_assigColumn < c )){
                   console.log("r" + r +"/c"+c);
                   $scope.data[r][c].costo = 0.0;
                   var continue_cell = 1;
-                  //break;
+                  console.log("Se agrego 0 en r:" + r + ", c: " + c);
                   r=rows;
                 }
+                /*if(burned_assigRow == r && burned_assigColumn == c )
+                {burned_assigRow = -1; burned_assigColumn = -1; }*/
+
                 if(continue_cell == 1){c=columns;          
                  addStep("Se agrego una casilla con 0");
                   if(modiMaded==0){addTable();}else{addTableOpt();}}
@@ -305,7 +327,7 @@ var tablehead="<th width='50px'></th>";
               }    
             }          
           }
-        }
+        }          
           doOptimization(columns,rows);
         }
         function cleanZero(columns,rows){
@@ -318,17 +340,21 @@ var tablehead="<th width='50px'></th>";
               if($scope.data[r][c].costo)
               {console.log(" r" + r +" / c"+ c + ":" + $scope.data[r][c].costo );
               }
-              else if($scope.data[r][c].costo == 0){$scope.data[r][c].costo = null;}
+              else if($scope.data[r][c].costo == 0){
+                burned_assigRow = r; burned_assigColumn = c; 
+                $scope.data[r][c].costo = null;}
               else{                              
               }    
             }          
           }
         
-          doOptimization(columns,rows);
+          //doOptimization(columns,rows);
         }
         function doModi(){
-          //R+C+CCA = 0                  
-          if(modiMaded<5){  
+          //R+C+CCA = 0  
+          if(stopall == true){}
+          else{                
+          if(modiMaded<20){  
           addStep("Primero implementaremos la formula para las casillas asignadas, a fin de obtener los valores de columnas y renglones en las casillas auxiliares.<br><center><b>R + C + C.C.A = 0 </b><br>CCA=Costo de la casilla asignada</center>");
           if (modiMaded == 0){ addRowColumn();}modiMaded++;
           var rows; var columns;
@@ -350,20 +376,34 @@ var tablehead="<th width='50px'></th>";
             $scope.data[0][columns].valor = 0;
           }
           addTableOpt();
-          assignAssigned(columns,rows);
-          addStep("A continuación, implementaremos la formula para las casillas NO asignadas, a fin de verificar nuestra solución.<br><center><b>R + C + C.C.V = ? </b><br>CCA=Costo de la casilla vacía</center>");
-          var continueModi= assignNotAssigned(columns,rows);
+          if(stopall == false){assignAssigned(columns,rows);}
+          var continueModi;
+          if(stopall == false){addStep("A continuación, implementaremos la formula para las casillas NO asignadas, a fin de verificar nuestra solución.<br><center><b>R + C + C.C.V = ? </b><br>CCA=Costo de la casilla vacía</center>");}
+          if(stopall == false){continueModi= assignNotAssigned(columns,rows);}
           if(continueModi == 0){
             addStep("<hr><center><h3 style='color:#52c8e5;'>Este es el resultado final. Es una solución óptima.</h3></center><hr>");
             addTableOpt();
+            stopall = true;
           }
           else{
-            addStep("<center>Se continuará con el cruce del arrollo, para ajustar el resultado.</center>")
-            doRiverCross(columns,rows); //not yet
+            if(stopall == false){addStep("<center>Se continuará con el cruce del arrollo, para ajustar el resultado.</center>")
+            doRiverCross(columns,rows); }//not yet
           }
           //alert('Columns: ' + columns + ' ,Rows:' +rows);
           //R+C+CCV = ?
-          }else{addStep("Es un ejercicio muy largo");}
+          }else{
+             var rows; var columns;
+             $scope.data.forEach(function($row){columns =  $row.length - 1;});rows =  $scope.data.length - 1;
+            addStep("Es un ejercicio muy largo");
+                for(c=0;c<=columns;c++){
+                    for(r=0;r<=rows;r++){
+                      if(c==columns || r==rows){$scope.data[r][c].valor = "";}
+                    }
+                  }
+                //cleanZero(columns-1,rows-1);
+                //doOptimization(columns-1,rows-1);
+            }
+         }
         }
         /*MODI EN CASILLAS ASIGNADAS*/
         function assignAssigned(columns,rows){
@@ -405,12 +445,12 @@ var tablehead="<th width='50px'></th>";
                   if(assignedtries>5){c=columns;r=rows; console.log("Oportunidades agotadas");
                   for(c=0;c<=columns;c++){
                     for(r=0;r<=rows;r++){
-                      if(c==columns || r==rows){ $scope.data[r][c].valor = "";}
+                      if(c==columns || r==rows){$scope.data[r][c].valor = "";}
                     }
                   }
                 cleanZero(columns-1,rows-1);
                 doOptimization(columns-1,rows-1);
-              }else{ c=-1;}
+              }else{ c=-1; console.log("Asignar de nuevo");}
               //doassignZero(columns-1,rows-1);
              
             }}
@@ -458,281 +498,115 @@ var tablehead="<th width='50px'></th>";
           }
           return correction;
         }
-        function doRiverCross(columns,rows){
-          console.log("Do crossRiver");
-          $scope.sequence=[];
-          console.log("Tamano INICIAL: " +$scope.sequence.length);  
-          var searchWay = "C";//Row
-          var searchStartR = "R";//right
-          var searchStartC = "D";//Up
-          var antr=-1, antc=-1;
-          var triesinwayR = 0;
-          var triesinwayC = 0;
-          var insertsinwayR = 0;
-          var insertsinwayC = 0;
-          var Ipoped = 0;
-          for(var c=0;c<columns-1;c++){
+      function doRiverCross(columns,rows){
+      //This is a correction of the original River cross, now based on lists.
+      var searchWay = "C";//Pivote of Search Direction
+      var continue_doRiver = true;//To keep the cycle on
+      successRC = false;//To make sure the River Cross
+      $scope.sequence=[];
+      $scope.scopetempA=[];//Now the unique, Asc
+      $scope.scopetempD=[];
+      $scope.tempA=[];//Now unique way, Asc. To save the List of comp.
+      $scope.tempD=[];
+      $scope.tempSuck=[];//The garbage and undesireds cells.
+      var auxr=-1, auxc=-1;
+      //First make clean of empty cells.
+      for(var c=0;c<columns-1;c++){
             for(var r=0;r<rows-1;r++){
               if($scope.data[r][c].costo || $scope.data[r][c].costo == 0){
                 if($scope.data[r][c].costo.toString().trim()=="")
                   {$scope.data[r][c].costo == null;console.log("I made clean");} 
               }
             }
-          }
-          for(var c=0;c<columns-1;c++){
-            for(var r=0;r<rows-1;r++){
-              if($scope.data[r][c].costo || $scope.data[r][c].costo == 0){
-                console.log($scope.data[r][c].costo);              
-              }
-              else if(!$scope.data[r][c].costo || $scope.data[r][c].costo == null)
-              {
-                var rowV= $scope.data[r][columns].valor;
-                var columnV = $scope.data[rows][c].valor;
-                var CCA = $scope.data[r][c].valor;
-                var result = parseFloat(rowV) + parseFloat(columnV) + parseFloat(CCA);
-                if (result<0){    
-                //Get friendly neightborhoods
-                console.log(rows + "/" + columns);
-                  var auxr=r,auxc=c,ponder="+";
-                  var auxcrecord , auxrrecord;
-                  addStep("R:" + r + "C:" +c);
-                do{
-                  console.log("Tamano: " +$scope.sequence.length);            
-                  if(searchWay == "R"){//Search in row
-                    console.log("Is a row search" + searchStartR);
-                    var auxsearchStartR = searchStartR;
-                  do{
-                      if(searchStartR == "R"){//Search to right   
-                      console.log("Searching right r" + auxr +"/ c"+ auxc + ":"+ columns);                    
-                        if(auxc<columns-2){auxc=auxc+1;}else{auxc=auxc-1;searchStartR="L";triesinwayR++;}                                                
-                      }
-                      else{//Search to left
-                         console.log("Searching left r" + auxr + ":" + auxrrecord +"/ c"+ auxc + ":"+ auxcrecord);
-                         if(auxc==0){auxc=auxc+1;searchStartR="R";triesinwayR++;}else{
-                          if(antc==auxc-1 && auxc>1){auxc=auxc-2;}else{auxc=auxc-1;}
-                        }
-                      }
-                      //console.log("auxc " + auxc + ":" + (columns-2));
-                      //console.log($scope.data[auxr][auxc].costo);
-                      var mycost = "";
-                      console.log("Antr: " + antr + ", auxr:" + auxr);
-                      console.log("!!! Antc: " + antc + ", auxc:" + auxc);
-                      if($scope.data[auxr][auxc].costo  || $scope.data[auxr][auxc].costo == 0) {
-                       if($scope.data[auxr][auxc].costo.toString().trim()!=""){                                              
-                       mycost = $scope.data[auxr][auxc].costo.toString();
-                       console.log("My cost: " + mycost);}}else{mycost="";console.log("0!!!");}
-                    }while(mycost=="" && !(auxc==c && auxr==r));
-                    ponder = "+";
-                    var costocell = -1;
-                    var Ipop = false;
-                    console.log("ANTR:" + antr + ", AUXR:" + auxr);
-                     if(antr==auxr){insertsinwayR++;
-                          if(insertsinwayR>1){
-                            Ipop = true;Ipoped++;
-                            console.log("@@@@POP@@@ R" + $scope.sequence[$scope.sequence.length-1].r + " C"+
-                              $scope.sequence[$scope.sequence.length-1].c);
-                            $scope.sequence.pop();
-                            insertsinwayR = insertsinwayR-1;
-                            console.log("INSERTADOS EN RENGLÓN: " + insertsinwayR);  
-                          }
-                        }else{ insertsinwayR = 0;}
-                     if(antc!=auxc){insertsinwayC = 0;}
-                    if(($scope.data[auxr][auxc].costo || $scope.data[auxr][auxc].costo == 0) 
-                    )
-                    {
-                      //if($scope.data[auxr][auxc].costo.toString().trim()!=""){
-                    costocell = $scope.data[auxr][auxc].costo;
-                    var newPath = {'r':auxr, 'c': auxc,'p':ponder, 'costo':costocell,'val':$scope.data[r][c].valor};
-                     searchWay = "C";
-                     auxcrecord = auxc; auxrrecord = auxr;  
-                      if(antc!=auxc){
-                        console.log(newPath);
-                        antc=auxc;antr=auxr;               
-                        $scope.sequence.push(newPath);console.log("auxr/r" + auxr +"/"+ r + " auxc/c" + auxc +"/"+ c);
-                      }
-
-                    }
-                    //Get and came back to the original way
-                    if($scope.sequence.length > 1){
-                      var antlastcolumn = parseFloat($scope.sequence[$scope.sequence.length-2].rows);
-                      var lastcolumn = parseFloat($scope.sequence[$scope.sequence.length-1].r);
-                      console.log("ARAL: " + antlastcolumn + ", RAL:"+ lastcolumn);
-                    }
-                    console.log("INSERT WAY R:" + insertsinwayR);
-                     /*if(triesinwayR>=2 && $scope.sequence.length >1){
-                    $scope.sequence.pop();searchStartR=auxsearchStartR;
-                    triesinwayR = 0;searchWay="C";
-                    auxr= parseFloat($scope.sequence[$scope.sequence.length-1].r);
-                    auxc= parseFloat($scope.sequence[$scope.sequence.length-1].c);
-                    }*/
-                    
-                  }
-                   if(searchWay == "C"){//Search in column
-                    console.log("Is a column search" + searchStartC);
-                    var auxsearchStartC = searchStartC;
-                  do{
-                      var searchcolumn = 0;
-                      if(searchStartC == "D"){//Search to down
-                        if(auxr<rows-2){auxr=auxr+1;}
-                        //else if(auxr==antr){auxr++;}
-                        else{auxr=auxr-1; searchStartC="U";searchcolumn++;triesinwayC++;} 
-                      }
-                      else{//Search to up
-                        console.log("Search UP: ANTR"+antr+", auxr" + auxr + ". ROWS" +rows);
-                        var antepastr = -1;
-                        if($scope.sequence.length>2)
-                        {antepastr = $scope.sequence[$scope.sequence.length-2].r;}
-                        if(auxr+1==antr && (auxr+2<rows-1))
-                        {auxr=auxr+2;searchStartC="D";}  
-                        else if(auxr==0){auxr=auxr+1; searchStartC="D";triesinwayC++;}                                              
-                        else{auxr=auxr-1;}
-                      }
-                      var mycost = "";
-                      //console.log("ANTC:" + antc + ", AUXC:" + auxc);
-                      if($scope.data[auxr][auxc].costo || $scope.data[auxr][auxc].costo == 0 ) 
-                      { 
-                        console.log($scope.data[auxr][auxc].costo.toString());
-                        console.log("ANTC: " + antc + ", AUXC:" + auxc);
-                        console.log("!!!!! Antr: " + antr + ", auxr:" + auxr);
-                        if($scope.data[auxr][auxc].costo.toString().trim()!=""){                                                                  
-                        mycost = $scope.data[auxr][auxc].costo.toString();
-                        console.log("My cost: " + mycost);
-                      }}else{mycost="";}    
-                      //if(auxr==r && auxc==c){break;}                                      
-                    }while(mycost=="");
-                    ponder = "-";
-                    var costocell = -1;
-                    var Ipop = false; 
-                     if(antc==auxc){
-                        if($scope.sequence.length==1){
-                            Ipop = true;Ipoped++;
-                            $scope.sequence.pop();  
-                            insertsinwayC = insertsinwayC - 1;
-                            console.log("INSERTADOS EN COLUMNA: " + insertsinwayC);                              
-                          }
-                          insertsinwayC++;
-                          if(insertsinwayC>1 && $scope.sequence.length>1){
-                            Ipop = true;Ipoped++;
-                             console.log("@@@@POP@@@ R" + $scope.sequence[$scope.sequence.length-1].r + " C"+
-                              $scope.sequence[$scope.sequence.length-1].c);
-                            $scope.sequence.pop();  
-                            insertsinwayC = insertsinwayC - 1;
-                            console.log("INSERTADOS EN COLUMNA: " + insertsinwayC);                              
-                          }
-                        }
-                        else{ insertsinwayC = 0; }
-                        if(antr!=auxr){insertsinwayR = 0;} 
-                    if(($scope.data[auxr][auxc].costo || $scope.data[auxr][auxc].costo == 0) 
-                    ){
-                     costocell = $scope.data[auxr][auxc].costo;
-                    var newPath = {'r':auxr, 'c': auxc,'p':ponder, 'costo':costocell,'val':$scope.data[r][c].valor};
-                      searchWay = "R"; triesinwayC=0;    
-                    auxcrecord = auxc; auxrrecord = auxr; 
-                    if(antr!=auxr){
-                      console.log(newPath); 
-                      antc=auxc;antr=auxr;               
-                      $scope.sequence.push(newPath);
-                    }
-                  }
-                    //Get and came back to the original way
-                    if($scope.sequence.length > 2){
-                      var antlastcolumn = parseFloat($scope.sequence[$scope.sequence.length-3].c);
-                      var lastcolumn = parseFloat($scope.sequence[$scope.sequence.length-1].c);
-                      console.log("ACAL: " + antlastcolumn + ", CAL:"+ lastcolumn);
-                      if(Ipop==true){
-                        if(antlastcolumn>lastcolumn){
-                          searchStartR = "L";
-                          //if(auxc>0){auxc=auxc-1;}
-                        }
-                        else if(antlastcolumn<lastcolumn){
-                          searchStartR = "R";
-                          //if(auxc<columns-2){auxc++;}
-                        }
-                      }
-                    } 
-
-                  /*if(triesinwayC>=2 && $scope.sequence.length >1){
-                    $scope.sequence.pop();searchStartC=auxsearchStartC;
-                    triesinwayC = 0;searchWay="R";
-                    auxr= parseFloat($scope.sequence[$scope.sequence.length-1].r);
-                    auxc= parseFloat($scope.sequence[$scope.sequence.length-1].c);
-                  }*/
-                    
-                    console.log("auxr/r" + auxr +"/"+ r + " auxc/c" + auxc +"/"+ c);
-                    //$scope.sequence.push(newPath);
-                  }
-                  //if( searchWay == "C"){ searchWay = "R";}else{ searchWay = "C";}   
-                  //Quebradero fregón
-                  console.log("R; " + auxr +"/" + r + " C; " + auxc + "/"+c+
-                  ",L: " + $scope.sequence.length);
-                  if($scope.sequence.length > 2){
-                  if(auxr == r && auxc==c){} 
-                  if(auxr == r && auxc==c-1){auxc++;}   
-                  if(auxr == r && auxc==c+1){auxc=auxc-1;} 
-                  if(auxc == c && auxr==r-1){auxr++;}   
-                  if(auxc == c && auxr==r+1){auxr=auxr-1;}
-                   var antantc = $scope.sequence[$scope.sequence.length-2].c;
-                   var tantc = $scope.sequence[$scope.sequence.length-1].c;                   
-                   var antantr = $scope.sequence[$scope.sequence.length-2].r;
-                   var tantr = $scope.sequence[$scope.sequence.length-1].r;
-                    if(antantc==tantc && antantr == tantr){
-                      console.log("!!!!!!iguales!!!!!");
-                      $scope.sequence.pop();$scope.sequence.pop();
-                    }
-                  }
-                  if($scope.sequence.length > 0){
-                  //Just a correction
-                  console.log("CORRECTION AUX " + auxr +", r: "+ r);
-                  if(auxr==r+1){searchStartC = "U";}
-                  if(auxr==r-1){searchStartC = "D";}
-                  }                                            
-                  if($scope.sequence.length > 10){
-                    auxr=r; auxc=c;
-                  }
-
-                }while( auxr!=r || auxc!=c || $scope.sequence.length == 0);
-                 if(antr==auxr){insertsinwayR++;
-                          if(insertsinwayR>1 && $scope.sequence.length>1){
-                            console.log("@@@@POP@@@ R" + $scope.sequence[$scope.sequence.length-1].r + " C"+
-                            $scope.sequence[$scope.sequence.length-1].c);
-                            $scope.sequence.pop();
-                            insertsinwayR = insertsinwayR-1;
-                            console.log("INSERTADOS EN RENGLÓN: " + insertsinwayR);  
-                          }
-                  }
-                   if(antc==auxc){insertsinwayC++;
-                          if(insertsinwayC>1){
-                            console.log("@@@@POP@@@ R" + $scope.sequence[$scope.sequence.length-1].r + " C"+
-                            $scope.sequence[$scope.sequence.length-1].c);
-                            $scope.sequence.pop();  
-                            insertsinwayC = insertsinwayC - 1;
-                            console.log("INSERTADOS EN COLUMNA: " + insertsinwayC);                              
-                          }
-                  }
-                  var newPath = {'r':r, 'c': c,'p':'+', 'costo':"",'val':$scope.data[r][c].valor};
-                  $scope.sequence.push(newPath);
-                  r=rows;
-                  c=columns;
-                  //El cuadrito
-                    /*var c1 = $scope.data[r][c];             
-                  addStep(" R" + r + "C" +c + ": <b style='color:red;'>" +
-                  rowV + " (R) + " + columnV + " (C)+ " + CCA + " (CCA) = " + result + "</b>"  );*/
-                 }
-                //Print optional
-                addStep("Está es la secuencia de translación con el método del cruce del arroyo.");
-                addTableSmall($scope.sequence);
-                if($scope.sequence.length < 70){modifyTable($scope.sequence,columns,rows);//addTableSmall($scope.sequence);
-                }
-                else{addStep("Muy largo");}
-                /*$scope.sequence.forEach(function($box){
-                     //addTableSmall($box.r,$box.c,$box.costo,$box.p);
-                  });*/
-               
-              }
+      }
+      //Now search our desired values and fill the tempA. ASC 
+      for(var r=0;r<rows-1;r++){for(var c=0;c<columns-1;c++){
+      if($scope.data[r][c].costo || $scope.data[r][c].costo == 0){
+        console.log("to tempA:" + $scope.data[r][c].costo);
+        var newPath = {'r':r, 'c': c};
+        $scope.tempA.push(newPath);console.log(newPath);              
+      }
+      else if(!$scope.data[r][c].costo || $scope.data[r][c].costo == null)
+      {
+      var rowV= $scope.data[r][columns].valor;
+      var columnV = $scope.data[rows][c].valor;
+      var CCA = $scope.data[r][c].valor;
+      var result = parseFloat(rowV) + parseFloat(columnV) + parseFloat(CCA);
+      if(auxc<0 && result<0){auxr=r; auxc=c;console.log("CROWNED:" + r + "/"+ c);}}//Just evaluate the first negative value.
+      }}
+      //Now, just ASC to Start.
+        //Search Column.
+          do{
+          var founded = false; //to evaluate if we got the next path in column.
+          var avaible_cell = true; //To have something to determinate if the cell is in tempA already or in Suck.
+          var searchC = -1;var SearchR =-1;//The column goal and R.
+          if($scope.scopetempA.length==0){searchC=auxc;SearchR=auxr;}
+          else{searchC=$scope.scopetempA[$scope.scopetempA.length-1].c;
+          SearchR=$scope.scopetempA[$scope.scopetempA.length-1].r;}
+          console.log("FOUND: " + SearchR + "/" + searchC + ", sw:"+searchWay);
+          //The ScopeA to ev if is not already taked
+          var cellC=-1, cellR=-1;//This is a temporal var to find the temp cell
+    
+          for(var s=0; s<$scope.tempA.length;s++){
+            //console.log("Look in tempA: " + $scope.tempA[s].r + "/" +$scope.tempA[s].c);
+            var founded = false;
+            if(searchWay=="C"){console.log("¿" + $scope.tempA[s].c  + "=" + searchC );
+              if($scope.tempA[s].c==searchC){founded=true;cellC=$scope.tempA[s].c;cellR=$scope.tempA[s].r;}
+            }else{console.log("¿" + $scope.tempA[s].r  + "=" + SearchR );
+              if($scope.tempA[s].r==SearchR){founded=true;cellC=$scope.tempA[s].c;cellR=$scope.tempA[s].r;}
             }
+            if(founded==true){  
+            avaible_cell=true;            
+            for(var i=0; i<$scope.scopetempA.length;i++){
+              console.log($scope.scopetempA[i].r + "=" + cellR+ "?");
+              console.log($scope.scopetempA[i].c + "=" + cellC+ "?");
+              if($scope.scopetempA[i].r==cellR && $scope.scopetempA[i].c==cellC)
+                {avaible_cell=false;}
+            }
+            //The ScopeA to ev if is not already taked in SUCK
+            for(var i=0; i<$scope.tempSuck.length;i++){
+              console.log($scope.tempSuck[i].r + "=" + cellR+ "?SUCK");
+              console.log($scope.tempSuck[i].c + "=" + cellC+ "?SUCK");
+              if($scope.tempSuck[i].r==cellR && $scope.tempSuck[i].c==cellC)
+                {avaible_cell=false;}
+            }
+            //if(){}
+            if(avaible_cell==true){
+              console.log("LONG TEMPA:"+ $scope.tempA.length);
+              founded=true;s=$scope.tempA.length;//Turn off the search and go to pushit
+              var newPath = {'r':cellR, 'c': cellC};
+              $scope.scopetempA.push(newPath);console.log("Added to scopetempA:" + cellR + "/" + cellC);
+            }else{founded=false;}
+           }          
           }
+         
+         if(searchWay=="C"){searchWay="R";}else{searchWay="C";}//Change the pivote way
 
+         if(founded==false){
+          if($scope.scopetempA.length==0){searchWay="R";}
+          $scope.scopetempA.pop();//sacarlo de la busqueda
+          var newPath = {'r':SearchR, 'c': searchC};console.log("FOUNDED BAD");
+          $scope.tempSuck.push(newPath);}
+          else{if(searchWay=="R" && $scope.scopetempA.length>2 && cellR==auxr){continue_doRiver=false;}} 
+        }while(continue_doRiver==true);
+    
+        //Fill the sequence Array and Pounder it
+        var ponder="-";//Starts in negative at the first cell
+        for(var i=0;i<$scope.scopetempA.length;i++){
+          var ir=$scope.scopetempA[i].r;var ic=$scope.scopetempA[i].c;
+          var newPath = {'r':ir, 'c': ic,'p':ponder, 'costo':$scope.data[ir][ic].costo,'val':$scope.data[ir][ic].valor};
+          $scope.sequence.push(newPath);
+          if(ponder=="-"){ponder="+";}else{ponder="-";}
         }
+        //Add the last 
+        var newPath = {'r':auxr, 'c': auxc,'p':"+", 'costo':"",'val':$scope.data[auxr][auxc].valor};
+        $scope.sequence.push(newPath);
+        addStep("Está es la secuencia de translación con el método del cruce del arroyo.");
+        addTableSmall($scope.sequence);
+        if($scope.sequence.length >3){modifyTable($scope.sequence,columns,rows);//addTableSmall($scope.sequence);
+        }
+        else{addStep("Muy corto");}    
+      }
         /*Obtenemos el renglon o columna con mas casillas asignadas*/
         function getFullest(columns,rows){
           var higgest = 0; var CR="";var i=0;
@@ -781,7 +655,7 @@ var tablehead="<th width='50px'></th>";
             $scope.data[$box.r][$box.c].costo=parseFloat($scope.data[$box.r][$box.c].costo)+firsto;}
           }else{
             var rest = parseFloat($scope.data[$box.r][$box.c].costo)-firsto;
-            if(rest==0){$scope.data[$box.r][$box.c].costo=""}else{
+            if(rest==0){$scope.data[$box.r][$box.c].costo=null;}else{
             $scope.data[$box.r][$box.c].costo=rest;}
           }
         });
@@ -792,8 +666,9 @@ var tablehead="<th width='50px'></th>";
             }
           }
         addTableOpt();
-        doOptimization(columns-1,rows-1);}else{//addTableOpt(); 
-          addStep("No encontró secuencia");
+        doOptimization(columns-1,rows-1);
+        }else{//addTableOpt(); 
+        addStep("No encontró secuencia");
         addTableOpt();}
       }
        /*angular.forEach($scope.data,function(value,index){
@@ -900,6 +775,7 @@ var tablehead="<th width='50px'></th>";
     //algdev = algdev +"<table id='DataFab' class='table table-bordered'><thead><tr></tr></thead><tr class='headerColumn'></tr><tr ng-repeat= datum in"+ $scope.data +  "><th width='50px'>F $index </th><td ng-repeat='field in datum'><p type='text' style='background-color: field.cellcolor' ng-model=field.costo'>"+$scope.data.costo+"</p></td></tr></table>"; 
   }
 function addTableOpt(){
+  if(stopall == false){
     var rows; var columns;tablehead="<th width='50px'></th>";
      $scope.data.forEach(function($row){
      columns =  $row.length - 1;
@@ -929,6 +805,7 @@ function addTableOpt(){
     }
     algdev = algdev + "</table>";
     //algdev = algdev +"<table id='DataFab' class='table table-bordered'><thead><tr></tr></thead><tr class='headerColumn'></tr><tr ng-repeat= datum in"+ $scope.data +  "><th width='50px'>F $index </th><td ng-repeat='field in datum'><p type='text' style='background-color: field.cellcolor' ng-model=field.costo'>"+$scope.data.costo+"</p></td></tr></table>"; 
+   }
   }
   //Esta es la impresión del cuadrito
   function addTableSmall($global){

@@ -9,7 +9,7 @@ class ConsultationsController < ApplicationController
     @books = Consultation.where("books!=''") 
     respond_to do |format|
         format.html
-        format.json { render json: {docs: @consultations} }
+        format.json { render json:  @consultations }
     end
   end
 
